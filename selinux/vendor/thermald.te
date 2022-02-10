@@ -1,0 +1,2 @@
+allow thermald hwservicemanager:binder call;
+allow thermald hwservicemanager_prop:file { read getattr open };

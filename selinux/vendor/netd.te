@@ -1,0 +1,23 @@
+allow netd dhcp6c:fd { use };
+allow netd dhcp6c:udp_socket { read write getopt setopt };
+allow netd kernel:system {module_request};
+allow netd wifi_data_file:file { create open write read setattr getattr ioctl unlink };
+allow netd wifi_data_file:dir { write add_name search remove_name };
+allow netd sysfs_netd:file { create open write read };
+allow netd sysfs_netd:dir { search read };
+allow netd sysfs_netd:lnk_file { read };
+allow netd netd:capability { net_bind_service sys_resource sys_admin };
+allow netd self:rawip_socket { ioctl };
+allowxperm netd self:rawip_socket ioctl { SIOCGIFHWADDR };
+allow netd netd_service:service_manager { add };
+#allow netd netd:bpf { map_create };
+allow netd system_security_cacerts_file:dir { add_name };
+#allow netd to read vendor.net. property
+get_prop(netd, vendor_radio_prop)
+
+#for pppd
+allow netd sprd_networkcontrol:unix_stream_socket { connectto };
+allow netd ppp_exec:file { getattr execute read open execute_no_trans map };
+allow netd serial_device:chr_file { getattr read write open ioctl};
+allow netd ppp_device:chr_file { read write open ioctl};
+

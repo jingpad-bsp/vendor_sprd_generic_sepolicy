@@ -1,0 +1,2 @@
+#ZRAM
+allow init swap_block_device:blk_file write;

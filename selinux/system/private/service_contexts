@@ -1,0 +1,5 @@
+# add for srmi
+srmi                                      u:object_r:srmi_service:s0
+
+#for led notification
+ledsrv                                    u:object_r:led_service:s0

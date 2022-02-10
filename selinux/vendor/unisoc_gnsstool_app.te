@@ -1,0 +1,121 @@
+type unisoc_gnsstool_app, domain;
+app_domain(unisoc_gnsstool_app)
+net_domain(unisoc_gnsstool_app)
+typeattribute unisoc_gnsstool_app mlstrustedsubject;
+
+#typeattribute unisoc_gnsstool_app system_writes_vendor_properties_violators;
+set_prop(unisoc_gnsstool_app, vendor_camera_prop)
+set_prop(unisoc_gnsstool_app, vendor_wcnd_prop)
+set_prop(unisoc_gnsstool_app, vendor_sys_prop)
+set_prop(unisoc_gnsstool_app, vendor_radio_prop)
+get_prop(unisoc_gnsstool_app, vendor_default_prop);
+set_prop(unisoc_gnsstool_app, vendor_eng_prop)
+get_prop(unisoc_gnsstool_app, vendor_sys_prop)
+allow unisoc_gnsstool_app activity_service:service_manager { find };
+allow unisoc_gnsstool_app autofill_service:service_manager { find };
+allow unisoc_gnsstool_app location_service:service_manager { find };
+allow unisoc_gnsstool_app hal_extRadio_hwservice:hwservice_manager { find };
+allow unisoc_gnsstool_app rild:binder { call };
+allow unisoc_gnsstool_app surfaceflinger_service:service_manager { find };
+allow unisoc_gnsstool_app audio_service:service_manager { find };
+allow unisoc_gnsstool_app vendor_radio_prop:file { open read getattr };
+allow unisoc_gnsstool_app property_socket:sock_file { write };
+allow unisoc_gnsstool_app init:unix_stream_socket {connectto };
+allow unisoc_gnsstool_app media_session_service:service_manager { find };
+allow unisoc_gnsstool_app phasecheckserver:unix_stream_socket { connectto read write };
+allow unisoc_gnsstool_app hal_log_default:unix_stream_socket {  connectto read write };
+allow unisoc_gnsstool_app vendor_hwui_prop:file { open read getattr };
+allow unisoc_gnsstool_app vendor_gpu_prop:file { open read getattr };
+allow unisoc_gnsstool_app prod_file:dir { search };
+allow unisoc_gnsstool_app vendor_wcnd_prop:file { open read getattr };
+allow unisoc_gnsstool_app srtd:unix_stream_socket {  connectto read write };
+allow unisoc_gnsstool_app log_service:unix_stream_socket {  connectto read write };
+allow unisoc_gnsstool_app wifi_service:service_manager { find };
+allow unisoc_gnsstool_app audioserver_service:service_manager { find };
+allow unisoc_gnsstool_app mediaserver_service:service_manager { find };
+allow unisoc_gnsstool_app performance_fw_service:service_manager { find };
+allow unisoc_gnsstool_app cameraserver_service:service_manager { find };
+
+
+#from sprd_engineermode_app
+allow unisoc_gnsstool_app cmd_services:unix_stream_socket { connectto read write };
+allow unisoc_gnsstool_app ylog_prop:property_service { set };
+allow unisoc_gnsstool_app debug_prop:property_service { set };
+allow unisoc_gnsstool_app slogmodem:unix_stream_socket { connectto read write };
+allow unisoc_gnsstool_app slogmodem:dir { search getattr read open };
+allow unisoc_gnsstool_app slogmodem:file { getattr };
+set_prop(unisoc_gnsstool_app, ylog_prop)
+set_prop(unisoc_gnsstool_app, debug_prop)
+set_prop(unisoc_gnsstool_app, vendor_eng_prop)
+get_prop(unisoc_gnsstool_app, vendor_systemdebuggerd_prop);
+
+#allow unisoc_gnsstool_app ylog_file:dir { getattr read open };
+
+allow unisoc_gnsstool_app activity_service:service_manager { find };
+allow unisoc_gnsstool_app display_service:service_manager { find };
+allow unisoc_gnsstool_app network_management_service:service_manager { find };
+allow unisoc_gnsstool_app connectivity_service:service_manager { find };
+allow unisoc_gnsstool_app appops_service:service_manager { find };
+allow unisoc_gnsstool_app uimode_service:service_manager { find };
+allow unisoc_gnsstool_app accessibility_service:service_manager { find };
+allow unisoc_gnsstool_app input_method_service:service_manager { find };
+allow unisoc_gnsstool_app surfaceflinger_service:service_manager { find };
+allow unisoc_gnsstool_app graphicsstats_service:service_manager { find };
+allow unisoc_gnsstool_app user_service:service_manager { find };
+allow unisoc_gnsstool_app autofill_service:service_manager { find };
+allow unisoc_gnsstool_app radio_service:service_manager { find };
+allow unisoc_gnsstool_app input_service:service_manager { find };
+allow unisoc_gnsstool_app hal_extRadio_hwservice:hwservice_manager { find };
+allow unisoc_gnsstool_app audio_service:service_manager { find };
+allow unisoc_gnsstool_app notification_service:service_manager { find };
+allow unisoc_gnsstool_app content_service:service_manager { find };
+allow unisoc_gnsstool_app mount_service:service_manager { find };
+allow unisoc_gnsstool_app bluetooth_manager_service:service_manager { find };
+allow unisoc_gnsstool_app textservices_service:service_manager { find };
+allow unisoc_gnsstool_app wifi_service:service_manager { find };
+allow unisoc_gnsstool_app power_service:service_manager { find };
+
+allow unisoc_gnsstool_app system_prop:property_service { set };
+allow unisoc_gnsstool_app radio_prop:property_service { set };
+allow unisoc_gnsstool_app ctl_default_prop:property_service { set };
+
+allow unisoc_gnsstool_app rild:binder { call };
+allow unisoc_gnsstool_app sysfs:file { read open getattr };
+allow unisoc_gnsstool_app sysfs_extdata:dir { search };
+allow unisoc_gnsstool_app sysfs_extdata:file { read open getattr};
+
+allow unisoc_gnsstool_app wcnd:unix_stream_socket { connectto read write };
+allow unisoc_gnsstool_app engpc:unix_stream_socket { connectto read write };
+
+#allow unisoc_gnsstool_app apr_data_file:dir { search getattr read open remove_name add_name write };
+#allow unisoc_gnsstool_app apr_data_file:file { read open getattr unlink write create append };
+
+allow unisoc_gnsstool_app gnss_file:file { read open getattr unlink };
+allow unisoc_gnsstool_app gnss_file:dir {  search };
+allow unisoc_gnsstool_app hal_log_default:unix_stream_socket {  connectto read write };
+allow unisoc_gnsstool_app ylog_prop:file {  read open getattr };
+allow unisoc_gnsstool_app ylog_prop:property_service {  set };
+#allow unisoc_gnsstool_app ylog_file:dir {  search };
+allow unisoc_gnsstool_app rild:unix_stream_socket {  connectto read write };
+allow unisoc_gnsstool_app registry_service:service_manager { find };
+allow unisoc_gnsstool_app audioserver_service:service_manager { find };
+allow unisoc_gnsstool_app sysfs_devices_system_cpu:file { write };
+allow unisoc_gnsstool_app phasecheckserver:unix_stream_socket { connectto };
+allow unisoc_gnsstool_app clipboard_service:service_manager { find };
+#allow unisoc_gnsstool_app wifi_prop:property_service { set };
+allow unisoc_gnsstool_app media_session_service:service_manager { find };
+allow unisoc_gnsstool_app logd_prop:property_service {  set };
+allow unisoc_gnsstool_app logd_prop:file { read open getattr };
+allow unisoc_gnsstool_app log_tag_prop:property_service { set };
+allow unisoc_gnsstool_app cameraserver_service:service_manager { find };
+allow unisoc_gnsstool_app hal_extthermal_hwservice:hwservice_manager { find };
+allow unisoc_gnsstool_app hal_thermal_ext:binder { call };
+allow unisoc_gnsstool_app hal_combined_default:binder { call };
+allow unisoc_gnsstool_app fm_device:chr_file { ioctl open read write };
+allow unisoc_gnsstool_app trust_service:service_manager { find };
+allow unisoc_gnsstool_app unisoc_gnsstool_app:tcp_socket { connect create getattr };
+allow unisoc_gnsstool_app fwmarkd_socket:sock_file { write };
+allow unisoc_gnsstool_app search_service:service_manager { find };
+allow unisoc_gnsstool_app log_service:unix_stream_socket { connectto read write };
+allow unisoc_gnsstool_app vendor_default_prop:file { open read getattr };
+allow unisoc_gnsstool_app performance_fw_service:service_manager { find };

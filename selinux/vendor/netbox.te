@@ -1,0 +1,36 @@
+allow netbox sysfs_extdata:file { write open read getattr};
+allow netbox sysfs_extdata:dir { read open search};
+
+# add for tiny_firewall.sh
+allow netbox shell_exec:file { getattr read open execute_no_trans };
+allow netbox netbox:udp_socket { create ioctl };
+allow netbox netbox:capability { net_raw net_admin };
+allow netbox system_file:file { lock execute_no_trans };
+allow netbox netbox:rawip_socket { create getopt setopt };
+allow netbox toolbox_exec:file { getattr execute read open execute_no_trans };
+
+# add for netbox.sh
+allow netbox shell_exec:file { getattr map execute };
+#allow netbox sysfs:file { write open };
+allow netbox net_data_file:dir { search };
+allow netbox net_data_file:file { read  open getattr };
+allow netbox toolbox_exec:file { map };
+allow netbox sysfs_netbox:file { write open };
+
+# add for data_rps.sh
+allow netbox toolbox_exec:file { getattr execute read open execute_no_trans };
+#allow netbox sysfs_devices_system_cpu:file { write getattr setattr};
+allow netbox proc_net:file { write open read getattr };
+allow netbox sysfs_net:dir { read open search };
+allow netbox sysfs_net:file { getattr write open read };
+#allow netbox sysfs:file { read };
+
+# add for ip_monitor.sh
+allow netbox system_file:file { execute_no_trans };
+allow netbox netbox:netlink_route_socket { create read nlmsg_read write getattr bind setopt };
+allow netbox netbox:netlink_xfrm_socket { create setopt bind getattr read };
+
+allow netbox nsfs:file { read open };
+
+allow netbox sysfs_devices_system_cpu:file { write };
+allow netbox sysfs_ipa:file { write open };

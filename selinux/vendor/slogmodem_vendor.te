@@ -1,0 +1,71 @@
+type slogmodem_vendor, domain, mlstrustedsubject;
+type slogmodem_vendor_exec, exec_type,file_type, vendor_file_type;
+type slogmodem_vendor_data, file_type, data_file_type;
+type slogmodem_vendor_config_file, file_type, data_file_type;
+
+
+init_daemon_domain(slogmodem_vendor)
+
+allow slogmodem_vendor property_socket:sock_file { read write };
+allow slogmodem_vendor spipe_device:chr_file { read write open };
+allow slogmodem_vendor slog_device:chr_file { ioctl open read write map};
+allow slogmodem_vendor slog_device:file { open read };
+allow slogmodem_vendor audio_device:chr_file { ioctl open read write };
+allow slogmodem_vendor etb_device:chr_file { ioctl open read };
+
+allow slogmodem_vendor init:unix_stream_socket connectto;
+# MODEM state channel
+allow slogmodem_vendor modem_control:unix_stream_socket { connectto read write };
+#allow slogmodem_vendor download:unix_stream_socket { connectto read write };
+allow slogmodem_vendor wcnd:unix_stream_socket { connectto read write };
+allow slogmodem_vendor refnotify:unix_stream_socket { connectto read write };
+allow slogmodem_vendor ctl_default_prop:property_service set;
+#allow slogmodem_vendor system_prop:property_service set;
+allow slogmodem_vendor proc:file { open read getattr write };
+allow slogmodem_vendor proc_pmicmem:file { open read getattr write };
+#allow slogmodem_vendor slogmodem_vendor:capability {dac_read_search dac_override};
+allow slogmodem_vendor block_device:dir search;
+allow slogmodem_vendor mmcblk_device:blk_file { open read };
+allow slogmodem_vendor slogmodem_vendor:netlink_kobject_uevent_socket { create read bind getopt };
+allow slogmodem_vendor tty_device:chr_file { open read write };
+
+allow slogmodem_vendor storage_file:dir { search write unlink add_name };
+allow slogmodem_vendor storage_file:lnk_file { open read write create getattr unlink };
+allow slogmodem_vendor mnt_media_rw_file:dir { search open read write };
+allow slogmodem_vendor vfat:dir { add_name remove_name rmdir unlink getattr create search open read write };
+allow slogmodem_vendor vfat:file { rename getattr create open read write unlink};
+allow slogmodem_vendor exfat:dir { add_name remove_name rmdir unlink getattr create search open read write };
+allow slogmodem_vendor exfat:file { rename getattr create open read write unlink};
+allow slogmodem_vendor slogmodem_vendor_data:dir { add_name getattr create search open read remove_name rmdir write unlink };
+allow slogmodem_vendor slogmodem_vendor_data:file { create getattr open read rename write unlink append };
+#allow slogmodem_vendor ylog_file:dir { add_name getattr create search open read remove_name rmdir write unlink };
+#allow slogmodem_vendor ylog_file:file { create getattr open read rename write unlink };
+allow slogmodem_vendor fuse:dir { add_name create getattr open read remove_name rmdir search unlink write };
+allow slogmodem_vendor fuse:file { create getattr open read rename unlink write };
+allow slogmodem_vendor slogmodem_vendor_config_file:dir { add_name search write unlink remove_name};
+allow slogmodem_vendor slogmodem_vendor_config_file:file { create getattr open read write unlink };
+allow slogmodem_vendor tmpfs:dir {search};
+allow slogmodem_vendor rootfs:dir { read open };
+allow slogmodem_vendor debugfs_sipc:file { open write read getattr };
+allow slogmodem_vendor debugfs_sipc:dir { search getattr open read };
+allow slogmodem_vendor gnss_file:dir { open read search };
+allow slogmodem_vendor gnss_file:file { getattr open read };
+allow slogmodem_vendor sysfs:file { open read };
+allow slogmodem_vendor sysfs_iq:file { open read };
+#allow slogmodem_vendor media_data_file:dir { open read search getattr };
+#allow slogmodem_vendor media_data_file:file { open read };
+
+# sdcardfs access
+allow slogmodem_vendor sdcardfs:dir { add_name create getattr open read remove_name rmdir search unlink write };
+allow slogmodem_vendor sdcardfs:file { create getattr open read rename unlink write };
+
+#allow slogmodem_vendor media_rw_data_file:file { create open setattr getattr read write unlink };
+#allow slogmodem_vendor media_rw_data_file:dir { add_name create open setattr getattr read write unlink search remove_name rmdir };
+allow slogmodem_vendor proc_cmdline:file { open read getattr};
+set_prop(slogmodem_vendor, vendor_radio_prop)
+set_prop(slogmodem_vendor, vendor_engpc_prop)
+set_prop(slogmodem_vendor, vendor_modem_prop)
+set_prop(slogmodem_vendor, vendor_product_prop)
+set_prop(slogmodem_vendor, vendor_sys_prop)
+set_prop(vendor_init, vendor_product_prop)
+set_prop(vendor_init, vendor_modem_prop)

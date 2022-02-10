@@ -1,0 +1,84 @@
+type hal_gnss_ext_default,domain;
+hal_server_domain(hal_gnss_ext_default, hal_gnss)
+type hal_gnss_ext_default_exec, exec_type, vendor_file_type,file_type;
+init_daemon_domain(hal_gnss_ext_default)
+
+
+
+allow hal_gnss_ext_default hal_extGnss_hwservice:hwservice_manager {find add};
+
+#add for tcp_socket/udp_socket
+typeattribute hal_gnss_ext_default hal_wifi_supplicant_server;
+typeattribute hal_gnss_ext_default hal_wifi_supplicant;
+#neverallow { hal_wifi_supplicant_server -hal_wifi_supplicant } domain:process fork;
+net_domain(hal_gnss_ext_default);
+
+#at read and write
+allow hal_gnss_ext_default tty_device:chr_file {open read write ioctl};
+
+#socket
+allow hal_gnss_ext_default dnsproxyd_socket:sock_file {write};
+allow hal_gnss_ext_default netd:unix_stream_socket {connectto};
+allow hal_gnss_ext_default fwmarkd_socket:sock_file {write};
+allow hal_gnss_ext_default port:tcp_socket {name_connect};
+#allow hal_gnss_ext_default hal_gnss_ext_default:udp_socket {ioctl create setopt bind read write getopt connect};
+allow hal_gnss_ext_default hal_gnss_ext_default:tcp_socket {ioctl create setopt bind read write getopt connect};
+
+#log
+#allow hal_gnss_ext_default system_data_file:dir {write add_name create setattr};
+
+#load certificate
+allow hal_gnss_ext_default gnss_file:file {open read getattr setattr};
+
+#sysfs
+allow hal_gnss_ext_default sysfs_gnss:dir { open read search};
+allow hal_gnss_ext_default sysfs_gnss:file { write open read ioctl};
+allowxperm hal_gnss_ext_default sysfs_gnss:file ioctl { 0x540b };
+allow hal_gnss_ext_default sysfs_gnss:lnk_file { read };
+
+#gnss mem dump for datadump.mem
+allow hal_gnss_ext_default kernel:dir { search write add_name remove_name open create };
+allow hal_gnss_ext_default kernel:file { open read write create append };
+allow hal_gnss_ext_default prod_file:dir { search write add_name remove_name open create };
+allow hal_gnss_ext_default prod_file:file { open read write create append };
+#end dumap
+allow hal_gnss_ext_default prod_file:file { read setattr getattr open };
+#============= hal_gnss_ext_default ============== 2017-08-02-13-24-29 added by genSepolicy script
+allow hal_gnss_ext_default gnss_file:file write;
+allow hal_gnss_ext_default gpsd:unix_stream_socket connectto;
+allow hal_gnss_ext_default serial_device:chr_file { read write ioctl open };
+allow hal_gnss_ext_default slogmodem_vendor:unix_stream_socket connectto;
+allow hal_gnss_ext_default hal_cplog_connmgr_default:unix_stream_socket connectto;
+allow hal_gnss_ext_default vndbinder_device:chr_file { read write ioctl open };
+allow hal_gnss_ext_default wcn_device:chr_file { read write ioctl open };
+
+#============= hal_gnss_ext_default ============== 2017-08-02-16-46-00 added by genSepolicy script
+allow hal_gnss_ext_default gnss_file:dir search;
+allow hal_gnss_ext_default prod_file:dir search;
+
+allow hal_gnss_ext_default gnss_file:dir { write add_name };
+allow hal_gnss_ext_default gnss_file:file create;
+#wcnd
+allow hal_gnss_ext_default wcnd:unix_stream_socket connectto;
+
+#libgps
+allow hal_gnss_ext_default block_device:dir search;
+allow hal_gnss_ext_default mmcblk_device:blk_file {read open getattr};
+
+#mnt_vendor_file
+allow hal_gnss_ext_default mnt_vendor_file:file {read open write setattr getattr};
+
+#lcsmgt
+allow hal_gnss_ext_default media_prop:file {read open getattr};
+allow hal_gnss_ext_default vendor_radio_prop:file {read open getattr};
+
+#map
+allow hal_gnss_ext_default media_prop:file { map };
+allow hal_gnss_ext_default vendor_radio_prop:file { map };
+allow hal_gnss_ext_default vndbinder_device:chr_file { map };
+
+#property
+allow hal_gnss_ext_default property_socket:sock_file {write};
+allow hal_gnss_ext_default init:unix_stream_socket { connectto };
+allow hal_gnss_ext_default vendor_sys_prop:property_service { set };
+allow hal_gnss_ext_default sensors_device:chr_file {rwx_file_perms};

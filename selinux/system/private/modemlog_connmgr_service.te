@@ -1,0 +1,2 @@
+typeattribute modemlog_connmgr_service coredomain;
+init_daemon_domain(modemlog_connmgr_service)

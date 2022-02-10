@@ -1,0 +1,6 @@
+allow init sysfs_wake_lock:file { open };
+# add coredump dir
+allow init coredump_file:dir { ioctl };
+allowxperm init coredump_file:dir ioctl { 0x6613 0x6615 };
+#for mount sdcard
+allow init mnt_media_rw_file:dir { mounton };

@@ -1,0 +1,2 @@
+typeattribute embmsd coredomain;
+init_daemon_domain(embmsd)

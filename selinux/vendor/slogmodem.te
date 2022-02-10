@@ -1,0 +1,72 @@
+
+allow slogmodem property_socket:sock_file { read write };
+allow slogmodem spipe_device:chr_file { read write open };
+allow slogmodem slog_device:chr_file { ioctl open read write map};
+allow slogmodem slog_device:file { open read };
+allow slogmodem audio_device:chr_file { ioctl open read write };
+allow slogmodem etb_device:chr_file { ioctl open read };
+allow slogmodem loader_device:chr_file { ioctl open read write };
+
+allow slogmodem system_data_file:dir { write };
+allow slogmodem init:unix_stream_socket connectto;
+allow slogmodem modemlog_connmgr_service:unix_stream_socket { connectto read write };
+
+allow slogmodem ctl_default_prop:property_service set;
+#allow slogmodem system_prop:property_service set;
+
+#allow slogmodem proc:file { open read getattr write };
+allow slogmodem proc_mini_dump:file { open read getattr write };
+allow slogmodem proc_pubcpiram:file { open read getattr write };
+allow slogmodem proc_aoniram:file { open read getattr write };
+allow slogmodem proc_pmicmem:file { open read getattr write };
+
+allow slogmodem block_device:dir search;
+allow slogmodem mmcblk_device:blk_file { open read };
+allow slogmodem slogmodem:netlink_kobject_uevent_socket { create read bind getopt };
+allow slogmodem tty_device:chr_file { open read write };
+#allow slogmodem slogmodem:capability {dac_read_search dac_override};
+allow slogmodem storage_file:dir { search write unlink add_name };
+allow slogmodem storage_file:lnk_file { open read write create getattr unlink };
+allow slogmodem mnt_media_rw_file:dir { search open read write };
+allow slogmodem vfat:dir { add_name remove_name rmdir unlink getattr create search open read write };
+allow slogmodem vfat:file { rename getattr create open read write unlink};
+allow slogmodem exfat:dir { add_name remove_name rmdir unlink getattr create search open read write };
+allow slogmodem exfat:file { rename getattr create open read write unlink};
+allow slogmodem ylog_file:dir { add_name getattr create search open read remove_name rmdir write unlink };
+allow slogmodem ylog_file:file { append create getattr open read rename write unlink };
+allow slogmodem ylog_file:fifo_file { getattr};
+allow slogmodem fuse:dir { add_name create getattr open read remove_name rmdir search unlink write };
+allow slogmodem fuse:file { create getattr open read rename unlink write };
+allow slogmodem slogmodem_config_file:dir { add_name search write unlink remove_name};
+allow slogmodem slogmodem_config_file:file { create getattr open read write unlink };
+allow slogmodem tmpfs:dir {search};
+allow slogmodem rootfs:dir { read open };
+allow slogmodem debugfs_sipc:file { open write read getattr };
+allow slogmodem debugfs_sipc:dir { search getattr open read };
+allow slogmodem sysfs_iq:file { open read };
+#allow slogmodem gnss_file:dir { open read search };
+#allow slogmodem gnss_file:file { getattr open read };
+#allow slogmodem sysfs:file { open read };
+#allow slogmodem media_data_file:dir { open read search getattr };
+#allow slogmodem media_data_file:file { open read };
+
+# sdcardfs access
+allow slogmodem sdcardfs:dir { add_name create getattr open read remove_name rmdir search unlink write };
+allow slogmodem sdcardfs:file { create getattr open read rename unlink write };
+
+allow slogmodem media_rw_data_file:file { create open setattr getattr read write unlink };
+allow slogmodem media_rw_data_file:dir { add_name create open setattr getattr read write unlink search remove_name rmdir };
+allow slogmodem proc_cmdline:file { open read getattr};
+allow slogmodem vendor_default_prop:file { open getattr map read };
+allow shell slogmodem_config_file:dir { search };
+allow shell slogmodem:unix_stream_socket { connectto };
+allow init mmcblk_device:blk_file {setattr};
+allow slogmodem ufsblk_device:blk_file { open read write };
+
+get_prop(slogmodem, vendor_radio_prop)
+get_prop(slogmodem, vendor_engpc_prop)
+get_prop(slogmodem, vendor_modem_prop)
+get_prop(slogmodem, vendor_product_prop)
+get_prop(slogmodem, vendor_sys_prop)
+set_prop(vendor_init, vendor_product_prop)
+set_prop(vendor_init, vendor_modem_prop)

@@ -1,0 +1,7 @@
+# For hwfeature
+genfscon proc /sprd_hwfeature   u:object_r:hwfeature:s0
+genfscon sysfs /module/sprd_hwfeature  u:object_r:hwfeature:s0
+genfscon sysfs /firmware/devicetree/base/hwfeature u:object_r:hwfeature:s0
+
+#For Cellular MODEM I/Q Capture/Playback
+genfscon sysfs /module/sprd_iq/parameters/iq_size u:object_r:sysfs_iq:s0

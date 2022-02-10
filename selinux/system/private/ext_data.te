@@ -1,0 +1,2 @@
+typeattribute ext_data coredomain;
+init_daemon_domain(ext_data)

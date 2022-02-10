@@ -1,0 +1,5 @@
+# add for srmi
+type srmi_service,              service_manager_type;
+
+#for led notification
+type led_service, system_server_service, service_manager_type;

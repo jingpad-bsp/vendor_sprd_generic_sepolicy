@@ -1,0 +1,5 @@
+type ylog, domain, mlstrustedsubject;
+type ylog_exec, exec_type,file_type, system_file_type;
+
+
+

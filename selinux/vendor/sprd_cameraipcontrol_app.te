@@ -1,0 +1,33 @@
+type sprd_cameraipcontrol_app, domain;
+
+app_domain(sprd_cameraipcontrol_app)
+
+allow sprd_cameraipcontrol_app binder_device:chr_file { ioctl };
+allow sprd_cameraipcontrol_app system_file:file { getattr read map };
+allow sprd_cameraipcontrol_app system_server:binder { call transfer };
+allow sprd_cameraipcontrol_app zygote:fd { use };
+allow sprd_cameraipcontrol_app system_data_file:lnk_file { read };
+allow sprd_cameraipcontrol_app app_data_file:dir { search write remove_name add_name };
+allow sprd_cameraipcontrol_app surfaceflinger:unix_stream_socket { read };
+allow sprd_cameraipcontrol_app surfaceflinger:binder { call transfer };
+allow sprd_cameraipcontrol_app servicemanager:binder { call };
+allow sprd_cameraipcontrol_app gpu_device:chr_file { ioctl map read write };
+allow sprd_cameraipcontrol_app app_data_file:file { rename create write open getattr setattr unlink};
+allow sprd_cameraipcontrol_app tmpfs:file { read write };
+allow sprd_cameraipcontrol_app system_server:fd { use };
+allow sprd_cameraipcontrol_app system_server:unix_stream_socket { read write };
+allow sprd_cameraipcontrol_app hal_graphics_allocator_default:fd { use };
+allow sprd_cameraipcontrol_app surfaceflinger:fd { use };
+allow sprd_cameraipcontrol_app hal_graphics_composer_default:fd { use };
+allow sprd_cameraipcontrol_app activity_service:service_manager { find };
+allow sprd_cameraipcontrol_app activity_task_service:service_manager { find };
+#allow sprd_cameraipcontrol_app gpu_service:service_manager { find };
+allow sprd_cameraipcontrol_app surfaceflinger_service:service_manager { find };
+allow sprd_cameraipcontrol_app autofill_service:service_manager { find };
+allow sprd_cameraipcontrol_app audio_service:service_manager { find };
+#allow sprd_cameraipcontrol_app ashmem_device_service:service_manager { find };
+
+set_prop(sprd_cameraipcontrol_app, vendor_camera_prop)
+get_prop(sprd_cameraipcontrol_app, vendor_camera_prop)
+set_prop(sprd_cameraipcontrol_app, system_prop)
+get_prop(sprd_cameraipcontrol_app, system_prop)

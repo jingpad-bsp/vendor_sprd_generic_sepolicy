@@ -1,0 +1,7 @@
+# add for srmi
+allow system_app srmi_service:service_manager { add };
+
+allow system_app sysfs_leds:dir { search };
+allow system_app vendor_default_prop:file{ open read getattr map };
+allow system_app log_service:unix_stream_socket { connectto read write };
+allow system_app rild:binder { transfer };

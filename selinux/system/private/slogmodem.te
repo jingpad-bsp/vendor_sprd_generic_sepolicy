@@ -1,0 +1,2 @@
+typeattribute slogmodem coredomain;
+init_daemon_domain(slogmodem)

@@ -1,0 +1,3 @@
+type slogmodem, domain, mlstrustedsubject;
+type slogmodem_exec, exec_type,file_type, system_file_type;
+

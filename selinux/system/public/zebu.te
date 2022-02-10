@@ -1,0 +1,138 @@
+type zebu, domain, mlstrustedsubject;
+type zebu_exec, exec_type,file_type, system_file_type;
+
+ifelse(TINY, `zebu',
+#typeattribute zebu appdomain; system/sepolicy/public/domain.te +1207
+# tmpfs_domain(zebu);
+# Allow pulling the SELinux policy
+allow { zebu shell } selinuxfs:dir r_dir_perms;
+allow { zebu shell } selinuxfs:file r_file_perms;
+
+allow { zebu shell } ctl_stop_prop:property_service { set };
+allow { zebu shell } ctl_start_prop:property_service { set };
+allow zebu resourcecache_data_file:dir { search };
+
+allow zebu servicemanager:binder { call };
+allow zebu shell_exec:file { getattr read execute open };
+allow zebu system_file:file { execute_no_trans };
+allow zebu system_prop:property_service { set };
+allow zebu toolbox_exec:file { getattr execute read open };
+allow zebu app_data_file:dir { search write remove_name };
+#allow zebu app_data_file:file { unlink };
+allow zebu logd:unix_stream_socket { connectto };
+allow zebu logd_socket:sock_file { write };
+allow zebu logdr_socket:sock_file { write };
+allow zebu system_server:binder { call transfer };
+allow zebu toolbox_exec:file { execute_no_trans };
+#allow zebu zebu:capability { dac_override };
+allow zebu zebu:capability2 { block_suspend };
+allow zebu zygote_exec:file { getattr execute };
+allow zebu ashmem_device:chr_file { execute };
+allow zebu init:unix_stream_socket { connectto };
+allow zebu kmsg_device:chr_file { write open getattr ioctl };
+allow zebu logcat_exec:file { getattr execute read open };
+allow zebu proc_uptime:file { read open };
+allow zebu property_socket:sock_file { write };
+allow zebu shell_exec:file { getattr read execute open };
+allow zebu sysfs_wake_lock:file { write open };
+allow zebu toolbox_exec:file { getattr execute read open execute_no_trans };
+allow zebu zebu_exec:file { getattr execute read open execute_no_trans };
+allow zebu zebu:process { execmem };
+
+allow { zebu shell } dalvikcache_data_file:dir { getattr search};
+allow { zebu shell } dalvikcache_data_file:file { getattr read open lock };
+allow { zebu shell } logcat_exec:file { execute_no_trans };
+allow { zebu shell } zygote_exec:file { read open execute_no_trans };
+
+allow { zebu shell } dalvikcache_data_file:lnk_file { read getattr };
+allow zebu kernel:system { syslog_mod };
+allow { zebu shell } proc_kmsg:file { read open getattr };
+allow { zebu shell } zebu_file:dir { rw_dir_perms create_dir_perms };
+allow { zebu shell } zebu_file:file { rw_file_perms getattr map create_file_perms };
+#allow zebu shell_data_file:dir { search };
+#allow zebu shell_data_file:file { open };
+allow zebu shell_data_file:file { getattr read write };
+allow zebu system_file:dir { read open };
+allow zebu zebu:capability2 { syslog };
+
+# allow zebu access to services
+allow zebu servicemanager:service_manager { find list };
+allow zebu activity_service:service_manager { find };
+# don't allow zebu to access GateKeeper service
+# TODO: why is this so broad? Tightening candidate? It needs at list:
+# - dumpstate_service (so it can receive dumpstate progress updates)
+# allow zebu {
+#   service_manager_type
+#   -gatekeeper_service
+#   -incident_service
+#   -installd_service
+#   -netd_service
+#   -virtual_touchpad_service
+#   -vold_service
+#   -vr_hwc_service
+#   -stats_service
+#   -dumpstate_service
+# }:service_manager find;
+
+allow adbd adbd:process { setcurrent };
+allow adbd rootfs:file { entrypoint read };
+
+allow servicemanager zebu:dir { search };
+allow servicemanager zebu:file { read open };
+allow servicemanager zebu:process { getattr };
+
+allow system_server zebu:binder { call };
+allow system_server zebu:fd { use };
+allow system_server zebu:fifo_file { write };
+
+allow su console_device:chr_file { write read ioctl getattr };
+#allow su ffs_prop:property_service { set };
+#allow su kernel:system { syslog_read }; system/sepolicy/public/app.te +512
+allow su kmsg_device:chr_file { read open };
+#allow su toolbox_exec:file { getattr execute read open execute_no_trans }; system/sepolicy/public/domain.te +998
+allow su toolbox_exec:file { getattr read open };
+
+#allow su adb_keys_file:dir { search };
+allow su adb_keys_file:file { read };
+allow su adbd:fd { use };
+allow su adbd:unix_stream_socket { write read };
+allow su device_logging_prop:file { read open getattr };
+allow su devpts:chr_file { read write open };
+#allow su dhcp6c_exec:file { getattr };
+allow su e2fs_exec:file { getattr };
+#allow su functionfs:file { ioctl };
+allow su ims_bridged_exec:file { getattr };
+allow su init:unix_stream_socket { connectto };
+#allow su mdnsd_exec:file { getattr };
+allow su property_socket:sock_file { write };
+allow su rootfs:dir { read open };
+#allow su su:capability { dac_override };
+allow su system_data_file:dir { getattr };
+allow su system_file:dir { read open };
+#allow su toolbox_exec:file { execute execute_no_trans };
+allow su zebu_exec:file { getattr read open };
+
+#allow shell kernel:security { setenforce };
+#allow shell kernel:system { syslog_read };
+allow shell kmsg_device:chr_file { read open };
+#allow shell vendor_toolbox_exec:file { execute };
+allow shell vendor_toolbox_exec:file { getattr };
+allow kernel device:chr_file { ioctl };
+allow kernel init_exec:lnk_file { getattr };
+allow kernel rootfs:chr_file { read write ioctl };
+allow kernel tmpfs:chr_file { read };
+allow { kernel ueventd vendor_init } unlabeled:file { open read append write getattr };
+allow kernel system_file:dir { read open };
+allow kernel toolbox_exec:file { read open execute getattr };
+allow kernel rootfs:file { execute };
+allow kernel zebu_exec:file { read open execute getattr };
+allow init debugfs:dir { mounton };
+# allow init device:chr_file { read write };
+allow init kernel:file { write };
+allow init sysfs_wake_lock:file { write };
+allow zebu kernel:process { sigchld };
+# allow zebu zebu_tmpfs:file { execute };
+allow kernel kmsg_device:chr_file { read };
+# allow zebu zebu:capability { dac_read_search };
+# allow kernel system_file:file { execute_no_trans };
+,)

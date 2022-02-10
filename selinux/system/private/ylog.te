@@ -1,0 +1,2 @@
+typeattribute ylog coredomain;
+init_daemon_domain(ylog)

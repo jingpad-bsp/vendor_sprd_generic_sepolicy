@@ -1,0 +1,3 @@
+# Allow access to tombstones
+allow adbd tombstone_data_file:dir { read open getattr search };
+allow adbd tombstone_data_file:file{ read open getattr };

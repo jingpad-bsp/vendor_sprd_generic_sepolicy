@@ -1,0 +1,14 @@
+# allow map_user to read/write/ioctl dev
+allow hal_face map_device:chr_file { open read write ioctl map };
+
+# allow sysfs_uid to read
+allow hal_face_default sysfs:file { open read };
+
+#for vdsp
+allow hal_face_default vndbinder_device:chr_file { read write ioctl open map};
+allow hal_face_default vndservicemanager:binder { call };
+
+get_prop(hal_face, vendor_camera_prop)
+get_prop(hal_face, vendor_faceid_prop)
+set_prop(hal_face, vendor_faceid_prop)
+

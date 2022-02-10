@@ -1,0 +1,5 @@
+
+# add for coredump
+# allow crash_dump coredump_file:dir { write add_name };
+allow crash_dump vendor_default_prop:file { open getattr map };
+allow crash_dump vold:process ptrace;

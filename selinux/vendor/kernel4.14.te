@@ -1,0 +1,17 @@
+ifelse(KERNEL_PATH, `kernel4.14',
+allow servicemanager ylog:dir { search };
+allow servicemanager ylog:file { read open };
+allow servicemanager ylog:process { getattr };
+
+allow mediaprovider vendor_sys_prop:file { getattr open map };
+
+allow secure_element vendor_sys_prop:file { map };
+
+allow traceur_app vendor_sys_prop:file { getattr };
+
+allow untrusted_app_25 runtime_event_log_tags_file:file { map };
+
+allow vndservicemanager runtime_event_log_tags_file:file { map };
+
+allow system_server vendor_configs_file:file { map };
+,)

@@ -1,0 +1,100 @@
+type sprd_logmanager_app, domain;
+
+
+app_domain(sprd_logmanager_app)
+net_domain(sprd_logmanager_app)
+typeattribute sprd_logmanager_app mlstrustedsubject;
+allow sprd_logmanager_app cmd_services:unix_stream_socket { connectto read write };
+allow sprd_logmanager_app ylog_prop:property_service { set };
+allow sprd_logmanager_app debug_prop:property_service { set };
+allow sprd_logmanager_app slogmodem_vendor:unix_stream_socket { connectto read write };
+allow sprd_logmanager_app hal_cplog_connmgr_default:unix_stream_socket { connectto read write };
+allow sprd_logmanager_app slogmodem_vendor:dir { search getattr read open };
+allow sprd_logmanager_app slogmodem_vendor:file { getattr };
+set_prop(sprd_logmanager_app, ylog_prop)
+set_prop(sprd_logmanager_app, debug_prop)
+
+set_prop(sprd_logmanager_app, vendor_camera_prop)
+get_prop(sprd_logmanager_app, vendor_wcnd_prop)
+set_prop(sprd_logmanager_app, vendor_wcnd_prop)
+
+#allow sprd_logmanager_app ylog_file:dir { getattr read open };
+
+allow sprd_logmanager_app activity_service:service_manager { find };
+allow sprd_logmanager_app display_service:service_manager { find };
+allow sprd_logmanager_app network_management_service:service_manager { find };
+allow sprd_logmanager_app connectivity_service:service_manager { find };
+allow sprd_logmanager_app appops_service:service_manager { find };
+allow sprd_logmanager_app uimode_service:service_manager { find };
+allow sprd_logmanager_app accessibility_service:service_manager { find };
+allow sprd_logmanager_app input_method_service:service_manager { find };
+allow sprd_logmanager_app surfaceflinger_service:service_manager { find };
+allow sprd_logmanager_app graphicsstats_service:service_manager { find };
+allow sprd_logmanager_app user_service:service_manager { find };
+allow sprd_logmanager_app autofill_service:service_manager { find };
+allow sprd_logmanager_app radio_service:service_manager { find };
+allow sprd_logmanager_app input_service:service_manager { find };
+allow sprd_logmanager_app hal_extRadio_hwservice:hwservice_manager { find };
+allow sprd_logmanager_app audio_service:service_manager { find };
+allow sprd_logmanager_app notification_service:service_manager { find };
+allow sprd_logmanager_app content_service:service_manager { find };
+allow sprd_logmanager_app mount_service:service_manager { find };
+allow sprd_logmanager_app bluetooth_manager_service:service_manager { find };
+allow sprd_logmanager_app textservices_service:service_manager { find };
+allow sprd_logmanager_app wifi_service:service_manager { find };
+allow sprd_logmanager_app power_service:service_manager { find };
+
+allow sprd_logmanager_app system_prop:property_service { set };
+allow sprd_logmanager_app radio_prop:property_service { set };
+allow sprd_logmanager_app ctl_default_prop:property_service { set };
+
+allow sprd_logmanager_app rild:binder { call };
+allow sprd_logmanager_app sysfs:file { read open getattr };
+
+allow sprd_logmanager_app wcnd:unix_stream_socket { connectto read write };
+allow sprd_logmanager_app engpc:unix_stream_socket { connectto read write };
+
+#allow sprd_logmanager_app apr_data_file:dir { search getattr read open remove_name add_name write };
+#allow sprd_logmanager_app apr_data_file:file { read open getattr unlink write create append };
+allow sprd_logmanager_app activity_task_service:service_manager {  find };
+allow sprd_logmanager_app gnss_file:file { read open getattr unlink };
+allow sprd_logmanager_app gnss_file:dir {  search };
+allow sprd_logmanager_app hal_log_default:unix_stream_socket {  connectto read write };
+allow sprd_logmanager_app ylog_prop:file {  read open getattr };
+allow sprd_logmanager_app ylog_prop:property_service {  set };
+#allow sprd_logmanager_app ylog_file:dir {  search };
+allow sprd_logmanager_app rild:unix_stream_socket {  connectto read write };
+allow sprd_logmanager_app registry_service:service_manager { find };
+allow sprd_logmanager_app audioserver_service:service_manager { find };
+allow sprd_logmanager_app sysfs_devices_system_cpu:file { write };
+allow sprd_logmanager_app clipboard_service:service_manager { find };
+#allow sprd_logmanager_app wifi_prop:property_service { set };
+allow sprd_logmanager_app media_session_service:service_manager { find };
+allow sprd_logmanager_app logd_prop:property_service {  set };
+allow sprd_logmanager_app logd_prop:file { read open getattr };
+allow sprd_logmanager_app log_tag_prop:property_service { set };
+allow sprd_logmanager_app cameraserver_service:service_manager { find };
+allow sprd_logmanager_app hal_extthermal_hwservice:hwservice_manager { find };
+allow sprd_logmanager_app hal_thermal_ext:binder { call };
+allow sprd_logmanager_app hal_combined_default:binder { call };
+allow sprd_logmanager_app fm_device:chr_file { ioctl open read write };
+allow sprd_logmanager_app trust_service:service_manager { find };
+allow sprd_logmanager_app sprd_logmanager_app:tcp_socket { connect create getattr };
+allow sprd_logmanager_app fwmarkd_socket:sock_file { write };
+allow sprd_logmanager_app search_service:service_manager { find };
+allow sprd_logmanager_app srtd:unix_stream_socket {  connectto read write };
+allow sprd_logmanager_app mlogservice:unix_stream_socket {  connectto read write };
+ifelse(USE_PROJECT_SEC, `true',
+allow sprd_logmanager_app security_service:service_manager { find };
+,)
+get_prop(sprd_logmanager_app, vendor_systemdebuggerd_prop);
+get_prop(sprd_logmanager_app, vendor_default_prop);
+get_prop(sprd_logmanager_app, vendor_radio_prop);
+get_prop(sprd_logmanager_app, vendor_sys_prop);
+get_prop(sprd_logmanager_app, vendor_engpc_prop);
+get_prop(sprd_logmanager_app, vendor_modem_prop);
+get_prop(sprd_logmanager_app, media_prop);
+set_prop(sprd_logmanager_app, vendor_eng_prop)
+
+allow sprd_logmanager_app mlogservice:unix_stream_socket {  connectto read write };
+

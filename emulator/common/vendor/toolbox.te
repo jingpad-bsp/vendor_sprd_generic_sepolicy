@@ -1,0 +1,7 @@
+#ZRAM
+allow toolbox zram_block_device:blk_file { open read write getattr };
+allow toolbox swap_block_device:blk_file { open read write getattr };
+
+#for coredump
+allow toolbox system_data_file:dir { relabelfrom };
+allow toolbox coredump_file:dir { relabelto relabelfrom };

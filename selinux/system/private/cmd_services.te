@@ -1,0 +1,4 @@
+typeattribute cmd_services coredomain;
+init_daemon_domain(cmd_services)
+
+

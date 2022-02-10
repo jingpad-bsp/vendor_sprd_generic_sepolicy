@@ -1,0 +1,427 @@
+#############################
+
+# socko & odmko images
+/socko(/.*)?      u:object_r:vendor_file:s0
+/odmko(/.*)?      u:object_r:vendor_file:s0
+/mnt/vendor/socko(/.*)?      u:object_r:vendor_file:s0
+/mnt/vendor/odmko(/.*)?      u:object_r:vendor_file:s0
+
+# productinfo files
+#
+/mnt/vendor/productinfo(/.*)?      u:object_r:prod_file:s0
+/productinfo(/.*)?      u:object_r:prod_file:s0
+#############################
+# device files
+
+/mnt/vendor/vl53l0_xtak_calibration.file      u:object_r:prod_file:s0
+/mnt/vendor/vl53l0_offset_calibration.file    u:object_r:prod_file:s0
+
+#for FileSystem
+
+/system/bin/fsck.exfat     u:object_r:fsck_exec:s0
+
+/dev/socket/embmsd       u:object_r:embmsd_socket:s0
+/dev/spipe_lte9      u:object_r:volte_vtsp_device:s0
+
+#gpu dev files
+/dev/pvr_sync           u:object_r:gpu_device:s0
+/dev/dri/card0          u:object_r:gpu_device:s0
+/dev/dri/renderD128     u:object_r:gpu_device:s0
+/dev/gsp                u:object_r:graphics_device:s0
+
+/(vendor|system/vendor)/bin/srtd       u:object_r:srtd_exec:s0
+/dev/socket/srtserver    u:object_r:srt_socket:s0
+
+/(vendor|system/vendor)/bin/hw/urild u:object_r:rild_exec:s0
+/(vendor|system/vendor)/bin/modem_control u:object_r:modem_control_exec:s0
+/(vendor|system/vendor)/bin/refnotify u:object_r:refnotify_exec:s0
+/(vendor|system/vendor)/bin/slogmodem u:object_r:slogmodem_exec:s0
+/(vendor|system/vendor)/bin/iqfeed u:object_r:iqfeed_exec:s0
+/(vendor|system/vendor)/bin/cp_diskserver u:object_r:cp_diskserver_exec:s0
+/(vendor|system/vendor)/bin/connmgr     u:object_r:wcnd_exec:s0
+/(vendor|system/vendor)/bin/gpsd             u:object_r:gpsd_exec:s0
+/(vendor|system/vendor)/bin/wifi_mac_gen u:object_r:wifi_mac_gen_exec:s0
+/(vendor|system/vendor)/bin/mlogservice u:object_r:mlogservice_exec:s0
+#for volte
+/data/vendor/mcue(/.*)?       u:object_r:vce_data_file:s0
+/mnt/vendor/wcn(/.*)?	u:object_r:cali_save_file:s0
+
+/system/bin/dhcp6c      u:object_r:dhcp6c_exec:s0
+/system/bin/ext_data    u:object_r:netd_exec:s0
+/(vendor|system/vendor)/bin/charge      u:object_r:charge_exec:s0
+/(vendor|system/vendor)/bin/autotest    u:object_r:autotest_exec:s0
+/(vendor|system/vendor)/bin/engpc       u:object_r:engpc_exec:s0
+/data/vendor/local/englog(/.*)?    u:object_r:engpc_data:s0
+
+#for sprd sensorhub
+/mnt/vendor/sensorhub(/.*)? u:object_r:sensorhub_data_file:s0
+
+/dev/sprd_jpg           u:object_r:sprd_img_device:s0
+
+#audio sub-system selinux config
+#add for /data/vendor/local/media
+/data/vendor/local/media(/.*)? u:object_r:sprd_audio_file:s0
+
+#gnss
+/dev/power_ctl       u:object_r:wcn_device:s0
+/dev/gnss_dbg        u:object_r:wcn_device:s0
+/dev/slog_gnss           u:object_r:slog_device:s0
+/dev/gnss_pmnotify_ctl        u:object_r:wcn_device:s0
+/sys/devices/virtual/misc/gnss_common_ctl(/.*)?  u:object_r:sysfs_gnss:s0
+
+/data/vendor/gnss(/.*)? u:object_r:gnss_file:s0
+/vendor/bin/gpsd    u:object_r:gpsd_exec:s0
+
+/dev/sttygnss0   u:object_r:tty_device:s0
+/dev/spipe_gnss0   u:object_r:spipe_device:s0
+/dev/spipe_gnss1   u:object_r:spipe_device:s0
+
+#lmfs
+/(vendor|system/vendor)/bin/lmfs     u:object_r:lmfs_exec:s0
+/dev/block/mmcblk0       u:object_r:mmcblk_device:s0
+/dev/block/mmcblk0p4     u:object_r:mmcblk_device:s0
+/dev/block/mmcblk0p26    u:object_r:mmcblk_device:s0
+/dev/block/mmcblk0p32    u:object_r:mmcblk_device:s0
+
+#video sub-system
+/dev/sprd_vsp           u:object_r:video_device:s0
+/dev/log(/.*)?         u:object_r:log_device:s0
+
+# Misc data
+/data/misc/dhcp6c(/.*)? u:object_r:dhcp6c_data_file:s0
+
+#for minidump
+/data/vendor/minidump(/.*)?   u:object_r:sysdumpdb_data:s0
+
+#for slogmodem
+/dev/sdiag_lte          u:object_r:slog_device:s0
+/dev/slog_lte           u:object_r:slog_device:s0
+/dev/slog_pm            u:object_r:slog_device:s0
+/dev/iq_mem             u:object_r:slog_device:s0
+/dev/tmc_etb 		u:object_r:etb_device:s0
+/dev/spipe_wcn[0-9]*     u:object_r:spipe_device:s0
+/dev/spipe_lte[0-9]*     u:object_r:spipe_device:s0
+/dev/spipe_pm0           u:object_r:spipe_device:s0
+/dev/sctl_pm             u:object_r:spipe_device:s0
+/sys/kernel/debug/sipc(/.*)?  u:object_r:debugfs_sipc:s0
+
+#modem_control
+/dev/stty_lte[0-9]*     u:object_r:tty_device:s0
+/dev/block/mmcblk0p[0-9]* u:object_r:mmcblk_device:s0
+/dev/sprd_bm             u:object_r:bm_device:s0
+/dev/dmc_mpu             u:object_r:mpu_device:s0
+
+# WCN subsystem
+/dev/ttyGS[0-9]         u:object_r:serial_device:s0
+/dev/ttyM[0-9]          u:object_r:serial_device:s0
+/dev/ttyBT0       u:object_r:tty_device:s0
+/dev/fm                  u:object_r:fm_device:s0
+/dev/slog_wcn0            u:object_r:slog_device:s0
+#/dev/spipe_wcn[0-9]*     u:object_r:spipe_device:s0
+#/dev/power_ctl       u:object_r:wcn_device:s0
+#/dev/download        u:object_r:wcn_device:s0
+
+#for refnotify
+/dev/rtc0               u:object_r:refnotify_device:s0
+
+# For power hidl hal
+/dev/cluster0_freq_min    u:object_r:power_device:s0
+/dev/cluster0_freq_max    u:object_r:power_device:s0
+/dev/cluster1_freq_min    u:object_r:power_device:s0
+/dev/cluster1_freq_max    u:object_r:power_device:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.power@1\.3-service   u:object_r:hal_power_default_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.power@4\.0-service   u:object_r:hal_power_default_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.thermal@1\.0-service          u:object_r:hal_thermal_ext_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.power\.stats@1\.0-service\.mock   u:object_r:hal_power_stats_default_exec:s0
+
+# For ext gnss hidl hal
+/(vendor|system/vendor)/bin/hw/android\.hardware\.gnss@1\.1-service u:object_r:hal_gnss_default_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.gnss@2\.0-service u:object_r:hal_gnss_ext_default_exec:s0
+
+#for busmonitor data
+/sys/devices/soc/soc:pub/30040000.bm-perf/bm-performance(/.*)? u:object_r:sysfs_devices_system_cpu:s0
+/sys/devices/platform/soc/soc:pub/30040000.bm-perf/bm-performance(/.*)? u:object_r:sysfs_devices_system_cpu:s0
+
+#for ddr dfs
+/sys/devices/platform/scene-frequency/devfreq/scene-frequency(/.*) u:object_r:sysfs_ddr_dfs:s0
+
+#camera module
+/dev/sprd_sensor              u:object_r:camera_device:s0
+/dev/sprd_rotation            u:object_r:camera_device:s0
+/dev/sprd_isp                 u:object_r:camera_device:s0
+/dev/sprd_scale               u:object_r:camera_device:s0
+/dev/sprd_image               u:object_r:camera_device:s0
+/dev/sprd_cpp                 u:object_r:camera_device:s0
+/dev/stmvl53l0_ranging        u:object_r:camera_device:s0
+
+#EngineerMode for behavior
+/data/userinfo(/.*)? u:object_r:userinfo_file:s0
+
+#add for EngineerMode to set mipi
+/sys/class/modem/debug-log/channel   u:object_r:sysfs_mipi:s0
+#add for EngineerMode to set ipa
+/sys/devices/virtual/thermal/thermal_zone0/thm_enable  u:object_r:sysfs_ipa:s0
+
+#for iodebug
+/sys/kernel/debug/iodebug(/.*)? u:object_r:debugfs_tracing:s0
+/sys/kernel/debug/pinctrl/402a0000.pinctrl/pins_debug  u:object_r:debugfs_pinctrl:s0
+
+/vendor/bin/thermald        u:object_r:thermald_exec:s0
+/data/vendor/thermald(/.*)?      u:object_r:thermald_data_file:s0
+
+#for sprd_debugger
+/(vendor|system/vendor)/bin/systemDebuggerd	u:object_r:systemDebuggerd_exec:s0
+
+#aprd vendor
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.aprd@1\.0-service u:object_r:hal_aprd_default_exec:s0
+#/data/apr.conf u:object_r:apr_data_file:s0
+#/data/apr(/.*)?		u:object_r:self_system_data_file:s0
+
+#vowifi ipsec server
+/system/bin/ju_ipsec_server u:object_r:racoon_exec:s0
+
+#cameraserver
+/data/misc/cameraserver(/.*)?   u:object_r:camera_data_file:s0
+/data/vendor/cameraserver(/.*)? u:object_r:vendor_camera_data_file:s0
+
+#sync from 6e2ef80cd50a772c4f7f07092374528274752099
+
+#charge test file
+/data/.battery_nv               u:object_r:self_system_data_file:s0
+
+
+#for mlog
+/data/vendor/mlog(/.*)? u:object_r:mlog_file:s0
+
+#for slogmodem
+/data/vendor/local/slogmodem(/.*)? u:object_r:slogmodem_config_file:s0
+/data/vendor/ylog(/.*)?   u:object_r:slogmodem_data:s0
+
+/dev/autotst            u:object_r:autotest_device:s0
+
+/dev/block/mmcblk0boot0  u:object_r:mmcblk_device:s0
+/dev/block/mmcblk0boot1  u:object_r:mmcblk_device:s0
+/dev/block/mmcblk1boot0  u:object_r:mmcblk_device:s0
+/dev/block/mmcblk1boot1  u:object_r:mmcblk_device:s0
+/dev/block/mmcblk1p[0-9]* u:object_r:mmcblk_device:s0
+/dev/block/platform/sdio_emmc/by-name/boot  u:object_r:boot_block_device:s0
+/dev/block/platform/sdio_emmc/by-name/recovery  u:object_r:recovery_block_device:s0
+/dev/block/platform/sdio_emmc/by-name/userdata  u:object_r:mmcblk_device:s0
+#for metadata
+/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/metadata   u:object_r:metadata_block_device:s0
+/dev/pipe                u:object_r:audio_device:s0
+/dev/rt5512              u:object_r:audio_device:s0
+/dev/slog_w             u:object_r:slog_device:s0
+/dev/socket/countserver u:object_r:count_socket:s0
+/dev/socket/rild2        u:object_r:rild_socket:s0
+/dev/socket/rild3        u:object_r:rild_socket:s0
+/dev/spipe_w[0-9]*       u:object_r:spipe_device:s0
+/dev/sprd_coda7l        u:object_r:video_device:s0
+/dev/sprd_efuse_otp      u:object_r:efuse_device:s0
+/dev/sprd_otp_ap_efuse      u:object_r:ap_efuse_device:s0
+/dev/sprd_vpp           u:object_r:video_device:s0
+/dev/sttybt0            u:object_r:hci_attach_dev:s0
+/dev/stty_td[0-9]*       u:object_r:tty_device:s0
+/dev/stty_w[0-9]*       u:object_r:tty_device:s0
+/dev/Trout_FM            u:object_r:audio_device:s0
+/dev/vser               u:object_r:serial_device:s0
+
+#for modem_log_service
+/data/vendor/local/mlogservice(/.*)? u:object_r:mlogservice_config_file:s0
+#for sensor
+/sys/class/xr-gsensor/device/gsensor   u:object_r:sysfs_sensor:s0
+/sys/class/xr-gsensor/device/delay_acc   u:object_r:sysfs_sensor:s0
+/sys/class/xr-pls/device/als         u:object_r:sysfs_sensor:s0
+/sys/class/xr-pls/device/proximity   u:object_r:sysfs_sensor:s0
+/sys/class/sprd_sensorhub/sensor_hub/calibrator_cmd u:object_r:sysfs_sensor:s0
+/sys/devices/virtual/sprd_sensorhub/sensor_hub/calibrator_cmd u:object_r:sysfs_sensor:s0
+
+/sys/class/power_supply/sprdfgu/cc_test_cmd  u:object_r:sysfs_power:s0
+/sys/class/power_supply  u:object_r:sysfs_power:s0
+/sys/devices/virtual/misc/sprd_flash/test   u:object_r:sysfs_sensor:s0
+#/sys/kernel/debug/mmc0(/.*)? u:object_r:debugfs_tracing:s0
+
+/systeminfo(/.*)?       u:object_r:prod_file:s0
+
+# for Factory Reset Protection
+/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/persist u:object_r:frp_block_device:s0
+
+#add for gpu:gralloc
+/vendor/lib(64)?/hw/gralloc\.[0-9a-zA-Z]*\.so    u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libdrm\.so                      u:object_r:same_process_hal_file:s0
+
+
+#add for gpu:renderscript
+/vendor/lib(64)?/libIMGegl\.so                    u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libsrv_um\.so                    u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libpvrANDROID_WSEGL\.so          u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libPVRScopeServices\.so          u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libsutu_display\.so              u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libusc\.so                       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libtqvalidate\.so                u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libglslcompiler\.so              u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libcreatesurface\.so             u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libPVRRS\.so                     u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libPVRRS\.sha1\.so               u:object_r:same_process_hal_file:s0
+#/vendor/bin/rscompiler                           u:object_r:renderscript_exec:s0
+/vendor/lib(64)?/libbcc\.so                       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libLLVM\.so                      u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libbcinfo\.so                    u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libbokeh_gaussian_cap\.so        u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libBokeh2Frames\.so              u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libsprdbokeh\.so                 u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libSegLite\.so                   u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libjpeg_hw_sprd\.so              u:object_r:same_process_hal_file:s0
+/vendor/bin/bcc                                   u:object_r:bcc_exec:s0
+
+#add for log
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.log@1\.0-service u:object_r:hal_log_default_exec:s0
+/vendor/bin/yloglite           u:object_r:ylog_lite_exec:s0
+/vendor/bin/yloglitectl       u:object_r:ylog_lite_cli_exec:s0
+#/data/vendor/ylog(/.*)?           u:object_r:ylog_lite_file:s0
+/sys/kernel/debug/binder(/.*)?    u:object_r:debugfs_binder:s0
+
+
+#add for connmgr
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.connmgr@1\.0-service u:object_r:hal_connmgr_default_exec:s0
+
+#for USB vts1.1
+/(vendor|system/vendor)/bin/hw/android\.hardware\.usb@1\.1-service            u:object_r:hal_usb_default_exec:s0
+
+/(vendor|system/vendor)/bin/hw/android\.hardware\.bluetooth@1\.0-service\.unisoc      u:object_r:hal_bluetooth_default_exec:s0
+
+#add for kernel modules
+/vendor/lib/modules(/.*)?           u:object_r:vendor_file:s0
+
+
+#for healthd
+/sys/devices/platform/battery/power_supply(/.*)?  u:object_r:sysfs_power:s0
+/sys/devices/platform/charger-manager/power_supply(/.*)?  u:object_r:sysfs_power:s0
+/sys/devices/platform/soc/soc:aon/40380000.spi/spi_master/spi5/spi5.0/40380000.spi:pmic@0:audio-codec@700/power_supply/audio-ldo/type  u:object_r:sysfs_power:s0
+/sys/devices/platform/soc/soc:ap-apb/70900000.i2c/i2c-4/4-006a/power_supply/fan54015_charger(/.*)?  u:object_r:sysfs_power:s0
+
+#add for wifi
+/(vendor|system/vendor)/etc/wifi(/.*)? u:object_r:vendor_file:s0
+/vendor/etc/modules/sprdwl_ng.ko       u:object_r:vendor_file:s0
+
+#add for bluetooth
+/sys/devices/platform/wcn_bt/dumpmem       u:object_r:sysfs_bluetooth_file:s0
+
+#add for ims_bridged
+/sys/module/ims_bridge/parameters/tcpdump_enable	u:object_r:sysfs_imsbrd:s0
+/sys/module/ims_bridge/parameters/vowifi_in_mark	u:object_r:sysfs_imsbrd:s0
+/sys/module/ims_bridge/parameters/volte_video_apsk	u:object_r:sysfs_imsbrd:s0
+
+#add for face unlock
+/dev/map_user           u:object_r:map_device:s0
+
+#add for leds
+/sys/devices/platform/soc/soc:aon/41800000\.spi/spi_master/spi5/spi5\.0/41800000\.spi:pmic@0:bltc-rgb@180/leds/blue(/.*)?      u:object_r:sysfs_leds:s0
+/sys/devices/platform/soc/soc:aon/41800000\.spi/spi_master/spi5/spi5\.0/41800000\.spi:pmic@0:bltc-rgb@180/leds/green(/.*)?     u:object_r:sysfs_leds:s0
+/sys/devices/platform/soc/soc:aon/41800000\.spi/spi_master/spi5/spi5\.0/41800000\.spi:pmic@0:bltc-rgb@180/leds/red(/.*)?       u:object_r:sysfs_leds:s0
+
+#add for ota update emmc boot0&1 partition
+/sys/devices/platform/soc/soc:ap-ahb/20600000.sdio/mmc_host/mmc0/mmc0:0001/block/mmcblk0/mmcblk0boot0/force_ro u:object_r:sysfs_emmcboot_forcero:s0
+/sys/devices/platform/soc/soc:ap-ahb/20600000.sdio/mmc_host/mmc0/mmc0:0001/block/mmcblk0/mmcblk0boot1/force_ro u:object_r:sysfs_emmcboot_forcero:s0
+
+#add for drm clearkey
+#/vendor/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey          u:object_r:hal_drm_clearkey_exec:s0
+
+#add for rtc permission
+/sys/devices/platform/soc/soc:aon/41800000.spi/spi_master/spi4/spi4.0/sc27xx-rtc/rtc/rtc0(/.*)?     u:object_r:sysfs_rtc:s0
+
+#lcd for flash
+/sys/devices/platform/soc/soc:mm/63000000.dispc/display/dispc0/disable_timeout    u:object_r:sysfs_lcd:s0
+/sys/devices/platform/soc/soc:mm/63000000.dispc/display/dispc0/bg_color    u:object_r:sysfs_lcd:s0
+/sys/devices/platform/soc/soc:mm/63000000.dispc/display/dispc0/disable_flip    u:object_r:sysfs_lcd:s0
+
+#add for dpu:enhance
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.enhance@1\.0-service u:object_r:hal_enhance_default_exec:s0
+/mnt/vendor/enhance(/.*)?    u:object_r:prod_file:s0
+
+#add for broadcastradio
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.broadcastradio@2\.0-service u:object_r:hal_broadcastradio_ext_exec:s0
+
+#for sdcard
+/dev/block/mmcblk[0-3]     u:object_r:sdcard_device:s0
+
+#for charge
+/mnt/vendor/battery(/.*)?      u:object_r:battery_file:s0
+
+#for memtrack
+/sys/kernel/debug/ion(/.*)?	u:object_r:debugfs_ion:s0
+/sys/kernel/debug/pvr/driver_stats      u:object_r:debugfs_pvr:s0
+/sys/kernel/debug/pvr/memtrack_stats      u:object_r:debugfs_pvr:s0
+
+#add for network hidl
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.network@1\.0-service    u:object_r:hal_network_default_exec:s0
+
+#for Dyanmic Partitions
+/dev/block/platform/soc/soc:ap-ahb/20600000.sdio/by-name/super   u:object_r:super_block_device:s0
+
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.combined@1\.0-service u:object_r:hal_combined_default_exec:s0
+/vendor/bin/phasecheckserver u:object_r:phasecheckserver_exec:s0
+
+
+#add for ext_data
+/sys/module/seth/parameters/gro_enable                  u:object_r:sysfs_extdata:s0
+
+/sys/class/net/seth_lte0/queues(/.*)?                   u:object_r:sysfs_extdata:s0
+/sys/class/net/seth_lte1/queues(/.*)?                   u:object_r:sysfs_extdata:s0
+/sys/class/net/seth_lte2/queues(/.*)?                   u:object_r:sysfs_extdata:s0
+/sys/class/net/seth_lte3/queues(/.*)?                   u:object_r:sysfs_extdata:s0
+/sys/class/net/seth_lte4/queues(/.*)?                   u:object_r:sysfs_extdata:s0
+/sys/class/net/seth_lte5/queues(/.*)?                   u:object_r:sysfs_extdata:s0
+/sys/class/net/seth_lte6/queues(/.*)?                   u:object_r:sysfs_extdata:s0
+/sys/class/net/seth_lte7/queues(/.*)?                   u:object_r:sysfs_extdata:s0
+
+/sys/devices/virtual/net/seth_lte0/queues(/.*)?         u:object_r:sysfs_extdata:s0
+/sys/devices/virtual/net/seth_lte1/queues(/.*)?         u:object_r:sysfs_extdata:s0
+/sys/devices/virtual/net/seth_lte2/queues(/.*)?         u:object_r:sysfs_extdata:s0
+/sys/devices/virtual/net/seth_lte3/queues(/.*)?         u:object_r:sysfs_extdata:s0
+/sys/devices/virtual/net/seth_lte4/queues(/.*)?         u:object_r:sysfs_extdata:s0
+/sys/devices/virtual/net/seth_lte5/queues(/.*)?         u:object_r:sysfs_extdata:s0
+/sys/devices/virtual/net/seth_lte6/queues(/.*)?         u:object_r:sysfs_extdata:s0
+/sys/devices/virtual/net/seth_lte7/queues(/.*)?         u:object_r:sysfs_extdata:s0
+
+#add for netd
+/sys/class/net/seth_lte0/mtu(/.*)?          u:object_r:sysfs_netd:s0
+/sys/class/net/seth_lte1/mtu(/.*)?          u:object_r:sysfs_netd:s0
+/sys/class/net/seth_lte2/mtu(/.*)?          u:object_r:sysfs_netd:s0
+/sys/class/net/seth_lte3/mtu(/.*)?          u:object_r:sysfs_netd:s0
+/sys/class/net/seth_lte4/mtu(/.*)?          u:object_r:sysfs_netd:s0
+/sys/class/net/seth_lte5/mtu(/.*)?          u:object_r:sysfs_netd:s0
+/sys/class/net/seth_lte6/mtu(/.*)?          u:object_r:sysfs_netd:s0
+/sys/class/net/seth_lte7/mtu(/.*)?          u:object_r:sysfs_netd:s0
+/sys/class/net/wlan0/mtu(/.*)?              u:object_r:sysfs_netd:s0
+/sys/class/net/dummy0/mtu(/.*)?             u:object_r:sysfs_netd:s0
+
+/proc/sys/net/ipv6/conf/seth_lte0/mtu(/.*)?   u:object_r:sysfs_netd:s0
+/proc/sys/net/ipv6/conf/seth_lte1/mtu(/.*)?   u:object_r:sysfs_netd:s0
+/proc/sys/net/ipv6/conf/seth_lte2/mtu(/.*)?   u:object_r:sysfs_netd:s0
+/proc/sys/net/ipv6/conf/seth_lte3/mtu(/.*)?   u:object_r:sysfs_netd:s0
+/proc/sys/net/ipv6/conf/seth_lte4/mtu(/.*)?   u:object_r:sysfs_netd:s0
+/proc/sys/net/ipv6/conf/seth_lte5/mtu(/.*)?   u:object_r:sysfs_netd:s0
+/proc/sys/net/ipv6/conf/seth_lte6/mtu(/.*)?   u:object_r:sysfs_netd:s0
+/proc/sys/net/ipv6/conf/seth_lte7/mtu(/.*)?   u:object_r:sysfs_netd:s0
+/proc/sys/net/ipv6/conf/wlan0/mtu(/.*)?       u:object_r:sysfs_netd:s0
+/proc/sys/net/ipv6/conf/dummy0/mtu(/.*)?      u:object_r:sysfs_netd:s0
+
+# face hidl service
+/vendor/bin/hw/vendor\.sprd\.hardware\.face@1\.0-service u:object_r:hal_face_default_exec:s0
+
+/sys/devices/virtual/net/seth_lte0/mtu(/.*)?     u:object_r:sysfs_netd:s0
+/sys/devices/virtual/net/seth_lte1/mtu(/.*)?     u:object_r:sysfs_netd:s0
+/sys/devices/virtual/net/seth_lte2/mtu(/.*)?     u:object_r:sysfs_netd:s0
+/sys/devices/virtual/net/seth_lte3/mtu(/.*)?     u:object_r:sysfs_netd:s0
+/sys/devices/virtual/net/seth_lte4/mtu(/.*)?     u:object_r:sysfs_netd:s0
+/sys/devices/virtual/net/seth_lte5/mtu(/.*)?     u:object_r:sysfs_netd:s0
+/sys/devices/virtual/net/seth_lte6/mtu(/.*)?     u:object_r:sysfs_netd:s0
+/sys/devices/virtual/net/seth_lte7/mtu(/.*)?     u:object_r:sysfs_netd:s0
+/sys/devices/virtual/net/wlan0/mtu(/.*)?         u:object_r:sysfs_netd:s0
+/sys/devices/virtual/net/dummy0/mtu(/.*)?        u:object_r:sysfs_netd:s0
+
+#for factorytest
+/(vendor|system/vendor)/bin/factorytest    u:object_r:factorytest_exec:s0
+/data/cg(/.*)? u:object_r:cg_file:s0
+/data/local/factorytest_log(/.*)?    u:object_r:mmitest_file:s0

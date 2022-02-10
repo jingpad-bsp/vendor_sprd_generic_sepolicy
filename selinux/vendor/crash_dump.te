@@ -1,0 +1,1 @@
+allow crash_dump kmsg_debug_device:chr_file { append };

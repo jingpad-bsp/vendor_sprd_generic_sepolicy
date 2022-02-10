@@ -1,0 +1,702 @@
+
+allow cmd_services wifi_data_file:dir { search };
+allow cmd_services wifi_data_file:file { open read };
+allow cmd_services system_file:file { open read execute execute_no_trans getattr };
+allow cmd_services device:dir { open read write getattr };
+allow cmd_services rootfs:file { open read getattr };
+allow cmd_services rootfs:system { module_load };
+allow cmd_services storage_file:lnk_file { read };
+allow cmd_services storage_file:dir { search getattr };
+allow cmd_services fuse:dir { search write add_name create read open };
+allow cmd_services fuse:file { create write open append getattr };
+allow cmd_services logcat_exec:file { getattr execute read open execute_no_trans };
+allow cmd_services logdr_socket:sock_file { write };
+allow cmd_services logd:unix_stream_socket { connectto };
+allow cmd_services property_socket:sock_file { write };
+allow cmd_services init:unix_stream_socket { connectto };
+allow cmd_services dumpstate_socket:sock_file { write };
+allow cmd_services dumpstate:unix_stream_socket { connectto };
+allow cmd_services ctl_dumpstate_prop:property_service { set };
+#allow cmd_services self:capability { dac_override };
+
+# For launched through popen
+allow cmd_services shell_exec:file { read open execute execute_no_trans getattr rx_file_perms };
+allow cmd_services toolbox_exec:file { read open execute execute_no_trans getattr map };
+
+#add for sdcardfs
+allow cmd_services sdcardfs:dir {create write search add_name read remove_name open rmdir rename reparent setattr};
+allow cmd_services sdcardfs:file {read append create open getattr write unlink rename setattr};
+allow cmd_services vfat:dir create_dir_perms;
+allow cmd_services vfat:file create_file_perms;
+
+
+# add for cmd_service screencap cmd
+allow hwservicemanager cmd_services:dir { search };
+allow hwservicemanager cmd_services:file { read open };
+allow hwservicemanager cmd_services:process { getattr };
+allow hwservicemanager cmd_services:binder { transfer };
+
+allow servicemanager cmd_services:dir{ search };
+allow servicemanager cmd_services:file{ read open };
+allow servicemanager cmd_services:process{ getattr };
+
+# for cmd_services
+# allow system_server cmd_services:fd{ write use };
+allow system_server cmd_services:binder{ call };
+
+
+#
+allow cmd_services media_rw_data_file:dir {create write search add_name read remove_name open rmdir rename reparent setattr getattr};
+
+
+
+#============= cmd_services ==============
+#allow cmd_services app_data_file:dir { getattr open read };
+allow cmd_services app_data_file:file { getattr read };
+allow cmd_services audio_device:chr_file { ioctl open read write };
+allow cmd_services bluetooth_data_file:dir { getattr open read };
+allow cmd_services bluetooth_logs_data_file:dir { getattr open read };
+allow cmd_services cache_file:file { open read };
+#allow cmd_services default_prop:property_service set;
+#allow cmd_services gnss_file:dir { getattr open read };
+#allow cmd_services gnss_file:file getattr;
+allow cmd_services media_data_file:dir { getattr open read };
+allow cmd_services radio_data_file:dir { getattr open read };
+#allow cmd_services system_app_data_file:dir { getattr open read };
+allow cmd_services system_data_file:dir { open read };
+allow cmd_services system_data_file:file getattr;
+allow cmd_services wifi_data_file:dir { getattr open read };
+allow cmd_services wpa_socket:dir getattr;
+
+
+allow cmd_services adb_data_file:dir { getattr open read };
+allow cmd_services adb_data_file:file getattr;
+allow cmd_services cache_backup_file:dir { getattr open read };
+allow cmd_services cache_file:dir { getattr open read };
+allow cmd_services cache_file:file getattr;
+allow cmd_services cache_private_backup_file:dir { getattr open read };
+allow cmd_services cache_recovery_file:dir { getattr open read };
+#allow cmd_services default_prop:property_service set;
+#allow cmd_services fp_launchapp_file:dir { getattr open read };
+#allow cmd_services hostapd_socket:dir { getattr open read };
+
+allow cmd_services media_rw_data_file:file {read append create open getattr write unlink rename setattr};
+
+allow cmd_services mnt_user_file:lnk_file read;
+#allow cmd_services opengles_prop:file { getattr open };
+#allow cmd_services proc:file { getattr open read };
+allow cmd_services qemu_cmdline:file { getattr open };
+allow cmd_services radio_noril_prop:file { getattr open };
+#allow cmd_services system_app_data_file:dir { getattr open read };
+allow cmd_services wifi_data_file:file getattr;
+allow cmd_services wpa_socket:dir { open read };
+allow cmd_services ylog_file:dir { getattr open read };
+allow cmd_services ylog_lite_pprop:file { getattr open };
+allow cmd_services ylog_lite_prop:file { getattr open };
+
+
+
+
+allow cmd_services ylog:process {execmem};
+allow cmd_services shell_data_file:file {getattr write read create};
+allow cmd_services  shell_data_file:sock_file {unlink create};
+allow cmd_services rootfs:file {open execute read execute_no_trans getattr};
+#allow cmd_services debugfs_tracing:file {getattr open write read};
+allow cmd_services rootfs:file {open execute read getattr execute_no_trans};
+allow cmd_services rootfs:dir {open read};
+allow cmd_services rootfs:lnk_file {getattr};
+#allow cmd_services debugfs_tracing:file {open write read getattr};
+#allow cmd_services debugfs_tracing:dir {open read};
+allow cmd_services device_logging_prop:file {getattr open};
+
+allow cmd_services property_socket:sock_file write;
+allow cmd_services init:unix_stream_socket connectto;
+allow cmd_services storage_file:dir {search getattr};
+allow cmd_services shell_exec:file {read open execute getattr};
+
+allow cmd_services system_data_file:dir {create read write open remove_name add_name};
+allow cmd_services shell_exec:file execute_no_trans;
+allow cmd_services storage_file:lnk_file {read getattr};
+
+
+allow cmd_services fuse:dir {create write search add_name read remove_name open rmdir rename reparent setattr};
+allow cmd_services fuse:file {read append create open getattr write unlink rename setattr};
+#add for sdcardfs
+allow cmd_services vfat:dir create_dir_perms;
+allow cmd_services vfat:file create_file_perms;
+allow cmd_services sdcardfs:dir {create write search add_name read remove_name open rmdir rename reparent setattr};
+allow cmd_services sdcardfs:file {read append create open getattr write unlink rename setattr};
+allow cmd_services ylog_file:dir {reparent open write read search getattr remove_name rmdir rename add_name create};
+allow cmd_services ylog_file:file {create getattr write unlink read append open rename setattr};
+
+
+
+allow cmd_services anr_data_file:dir {search setattr read getattr write add_name open};
+allow cmd_services anr_data_file:file {read open getattr write create};
+ 
+allow cmd_services radio_data_file:dir {search setattr read getattr write add_name open};
+allow cmd_services radio_data_file:file {read open getattr write create};
+
+#allow cmd_services app_data_file:dir {search setattr read getattr write add_name open};
+allow cmd_services app_data_file:file {read getattr write };
+
+#allow cmd_services system_app_data_file:dir {search setattr read getattr write add_name };
+allow cmd_services system_app_data_file:file {read  getattr write };
+
+allow cmd_services apr_data_file:dir {search setattr read getattr write add_name open};
+allow cmd_services apr_data_file:file {read open getattr write create};
+
+allow cmd_services install_data_file:dir {search setattr read getattr write add_name open};
+allow cmd_services install_data_file:file {read open getattr write create};
+
+allow cmd_services mnt_user_file:dir {search setattr read getattr write add_name open};
+allow cmd_services mnt_user_file:file {read open getattr write create};
+
+allow cmd_services proc_asound:dir {search setattr read getattr   open};
+allow cmd_services proc_asound:file {read open getattr write create};
+
+allow cmd_services tombstone_data_file:dir {read setattr getattr write add_name search open};
+allow cmd_services tombstone_data_file:file {create write open read getattr};
+
+allow cmd_services coredump_file:dir {read setattr getattr write add_name search open};
+allow cmd_services coredump_file:file {create write open read getattr};
+
+allow cmd_services bluetooth_logs_data_file:dir {read setattr getattr write add_name search open};
+allow cmd_services bluetooth_logs_data_file:file {create write open read getattr};
+
+
+
+allow cmd_services bluetooth_data_file:dir search;
+allow cmd_services bluetooth_data_file:file {read write open getattr};
+
+allow cmd_services bluetooth:dir {getattr read search open};
+allow cmd_services bluetooth:file {read open};
+allow cmd_services bluetooth:lnk_file {getattr read};
+
+allow cmd_services tombstone_data_file:dir {read setattr getattr write add_name search};
+allow cmd_services tombstone_data_file:file {create write open read getattr};
+
+allow cmd_services system_data_file:file {open};
+
+allow cmd_services system_file:file execute_no_trans;
+
+allow cmd_services init:dir {getattr search read open};
+allow cmd_services init:file {read open};
+allow cmd_services init:lnk_file {getattr read};
+allow cmd_services kernel:dir {read search getattr open};
+allow cmd_services kernel:file {read open};
+allow cmd_services kernel:lnk_file {getattr read};
+allow cmd_services kernel:system {syslog_mod syslog_read};
+
+allow cmd_services ueventd:dir {open read getattr search};
+allow cmd_services ueventd:file {open read};
+allow cmd_services ueventd:lnk_file {getattr read};
+allow cmd_services logd:file {open read};
+allow cmd_services logd:dir {open read getattr search};
+allow cmd_services logd:lnk_file {getattr read};
+allow cmd_services vold:file {open read};
+allow cmd_services vold:dir {open read getattr search};
+allow cmd_services vold:lnk_file {read getattr};
+
+allow cmd_services gatekeeperd:file {open read};
+allow cmd_services gatekeeperd:dir {open read getattr search};
+allow cmd_services gatekeeperd:lnk_file {read getattr};
+
+allow cmd_services healthd:file {open read};
+allow cmd_services healthd:dir {open read search getattr};
+allow cmd_services healthd:lnk_file {getattr read };
+
+allow cmd_services surfaceflinger:dir {open read search getattr};
+allow cmd_services surfaceflinger:file {open read};
+allow cmd_services surfaceflinger:fd use;
+allow cmd_services surfaceflinger:lnk_file {read getattr};
+
+allow cmd_services lmkd:file {open read};
+allow cmd_services lmkd:dir {open read search getattr};
+allow cmd_services lmkd:lnk_file {getattr read};
+
+allow cmd_services servicemanager:dir {open read search getattr};
+allow cmd_services servicemanager:file {open read};
+#allow cmd_services servicemanager:binder call;
+allow cmd_services servicemanager:lnk_file {read getattr};
+
+#allow cmd_services surfaceflinger:binder {transfer call};
+
+allow cmd_services rild:dir {open read search getattr};
+allow cmd_services rild:file {open read};
+allow cmd_services rild:lnk_file {getattr read};
+allow cmd_services shell:file {open read};
+allow cmd_services shell:dir {open read search getattr};
+allow cmd_services shell:lnk_file {getattr read};
+
+allow cmd_services netd:file {open read};
+allow cmd_services netd:dir {open read search getattr};
+allow cmd_services netd:lnk_file {getattr read};
+allow cmd_services netd:unix_stream_socket {connectto};
+
+allow cmd_services drmserver:dir {open getattr search read};
+allow cmd_services drmserver:file {open read};
+allow cmd_services drmserver:lnk_file {read getattr};
+allow cmd_services mediaserver:dir {open getattr search read};
+allow cmd_services mediaserver:file {open read};
+allow cmd_services mediaserver:lnk_file {read getattr};
+allow cmd_services installd:dir {open getattr search read};
+allow cmd_services installd:file {open read};
+allow cmd_services installd:lnk_file {read getattr};
+allow cmd_services keystore:dir {open getattr search read};
+allow cmd_services keystore:file {open read};
+allow cmd_services keystore:lnk_file {getattr read};
+
+
+allow cmd_services zygote:dir {open read search getattr};
+allow cmd_services zygote:file {open read};
+allow cmd_services zygote:lnk_file {getattr read};
+
+allow cmd_services adbd:dir {open getattr read search};
+allow cmd_services adbd:file {open read};
+allow cmd_services adbd:lnk_file {getattr read};
+allow cmd_services bootanim:dir {read getattr search open};
+allow cmd_services bootanim:file {read open};
+
+allow cmd_services ctl_default_prop:property_service {set};
+allow cmd_services ylog:capability {chown sys_admin dac_override net_raw sys_nice setuid setgid sys_nice fsetid};
+
+
+allow cmd_services sysfs_lowmemorykiller:file {read open getattr};
+
+#allow cmd_services proc:file {write};
+
+allow cmd_services ylog:capability2 syslog;
+
+
+allow cmd_services system_server:dir {getattr search open read};
+allow cmd_services system_server:file {read open};
+allow cmd_services system_server:lnk_file {getattr read};
+
+allow cmd_services graphics_device:dir {getattr search};
+allow cmd_services graphics_device:chr_file read;
+
+allow cmd_services device:chr_file {getattr};
+allow cmd_services platform_app:dir {search getattr read open};
+allow cmd_services platform_app:file {read open};
+allow cmd_services platform_app:lnk_file {getattr read};
+allow cmd_services untrusted_app:dir {search getattr open read};
+allow cmd_services untrusted_app:file {read open};
+allow cmd_services untrusted_app:lnk_file {read getattr};
+allow cmd_services system_app:lnk_file {getattr read};
+allow cmd_services system_app:dir {getattr search open read};
+allow cmd_services system_app:file {read open};
+allow cmd_services sdcardd:dir {search getattr read open};
+allow cmd_services sdcardd:file {read open};
+allow cmd_services sdcardd:lnk_file {getattr read};
+
+allow cmd_services radio:dir {search getattr read open};
+allow cmd_services radio:file {read open};
+allow cmd_services radio:lnk_file {read getattr};
+
+
+allow cmd_services mnt_media_rw_file:dir search;
+
+allow cmd_services ylog:packet_socket {setopt create getopt read write};
+allow cmd_services proc_sysrq:file {getattr};
+allow cmd_services ylog:netlink_socket create;
+
+allow cmd_services pstorefs:dir search;
+
+allow cmd_services logdr_socket:sock_file {write};
+allow cmd_services logd:unix_stream_socket {connectto};
+
+allow cmd_services dnsproxyd_socket:sock_file {write};
+allow cmd_services devpts:chr_file {ioctl read write getattr};
+allow cmd_services audio_device:dir {getattr};
+allow cmd_services audio_device:chr_file {read open};
+
+allow cmd_services prod_file:dir {getattr};
+
+allow cmd_services init_exec:file {getattr};
+
+allow cmd_services block_device:dir {search getattr read open};
+allow cmd_services block_device:blk_file {getattr};
+allow cmd_services console_device:chr_file {getattr};
+allow cmd_services dm_device:chr_file {getattr};
+allow cmd_services fscklogs:dir {getattr};
+#allow cmd_services full_device:chr_file {getattr};
+allow cmd_services graphics_device:chr_file {getattr};
+allow cmd_services ppp_device:chr_file {getattr};
+allow cmd_services mtp_device:chr_file {getattr};
+allow cmd_services sensors_device:chr_file {getattr};
+allow cmd_services kmsg_device:chr_file {getattr read open write};
+allow cmd_services input_device:chr_file {getattr};
+allow cmd_services input_device:dir {getattr};
+allow cmd_services camera_device:chr_file {getattr};
+allow cmd_services qtaguid_device:chr_file {getattr};
+allow cmd_services usbaccessory_device:chr_file {getattr};
+allow cmd_services uhid_device:chr_file {getattr};
+allow cmd_services serial_device:chr_file {getattr};
+allow cmd_services hci_attach_dev:chr_file {getattr};
+allow cmd_services tty_device:chr_file {getattr open read write};
+allow cmd_services video_device:chr_file {getattr};
+allow cmd_services radio_device:chr_file {getattr};
+allow cmd_services tun_device:chr_file {getattr};
+allow cmd_services audio_device:chr_file {getattr};
+allow cmd_services gpu_device:dir {getattr};
+allow cmd_services gpu_device:chr_file {getattr};
+allow cmd_services null_device:chr_file {unlink};
+
+allow cmd_services ylog:udp_socket {create};
+allow cmd_services logd_socket:sock_file {write};
+
+#allow cmd_services proc:file {open read getattr};
+allow cmd_services proc_meminfo:file {read open getattr};
+allow cmd_services usermodehelper:file {read open};
+#allow cmd_services sysfs:file {getattr read write open};
+#allow cmd_services cpuctl_device:dir getattr;
+allow cmd_services ion_device:chr_file { open read write getattr };
+#allow cmd_services vcs_device:chr_file getattr;
+allow cmd_services cache_file:dir getattr;
+allow cmd_services unlabeled:dir getattr;
+allow cmd_services unlabeled:file getattr;
+allow cmd_services unlabeled:filesystem getattr;
+allow cmd_services safemode_prop:file {open getattr};
+allow cmd_services device_logging_prop:file {open getattr};
+allow cmd_services mmc_prop:file {open getattr};
+allow cmd_services rootfs:file {read open getattr execute execute_no_trans};
+allow cmd_services rootfs:dir {read open};
+allow cmd_services rootfs:lnk_file {getattr};
+allow cmd_services tmpfs:dir {search};
+#allow cmd_services debugfs_tracing:dir {open read};
+#allow cmd_services debugfs_tracing:file {getattr open read write};
+allow cmd_services dalvikcache_data_file:file { open lock getattr read };
+allow cmd_services ashmem_device:chr_file {execute};
+allow cmd_services proc_net:file {getattr read open};
+allow cmd_services cache_file:dir {getattr};
+allow cmd_services ion_device:chr_file {getattr};
+allow cmd_services tmpfs:dir {search};
+allow cmd_services debugfs_mmc:file { getattr read open };
+allow cmd_services debugfs_mmc:dir { search };
+allow cmd_services media_rw_data_file:dir {create write search add_name read remove_name open rmdir rename reparent setattr getattr};
+allow cmd_services media_rw_data_file:file {read append create open getattr write unlink rename setattr};
+allow cmd_services mnt_media_rw_file:dir {create write search add_name read remove_name open rmdir rename reparent setattr getattr};
+allow cmd_services mnt_media_rw_file:file {read append create open getattr write unlink rename setattr};
+allow cmd_services proc_modules:file {read open };
+allow cmd_services proc_interrupts:file {read open };
+allow cmd_services hwservicemanager:file {read open };
+allow cmd_services proc_stat:file {read open getattr };
+
+#============= ylog ============== 2017-08-02-13-24-29 added by genSepolicy script
+allow cmd_services file_contexts_file:file getattr;
+allow cmd_services hwservice_contexts_file:file getattr;
+allow cmd_services hwservicemanager:dir { getattr search };
+allow cmd_services hwservicemanager:lnk_file read;
+#allow cmd_services i2c_device:chr_file getattr;
+allow cmd_services iio_device:chr_file getattr;
+#allow cmd_services keychord_device:chr_file getattr;
+allow cmd_services proc_interrupts:file getattr;
+allow cmd_services proc_iomem:file getattr;
+allow cmd_services proc_misc:file getattr;
+allow cmd_services proc_modules:file getattr;
+allow cmd_services proc_timer:file getattr;
+allow cmd_services proc_zoneinfo:file { read getattr open };
+allow cmd_services runtime_event_log_tags_file:file getattr;
+allow cmd_services seapp_contexts_file:file getattr;
+allow cmd_services sepolicy_file:file getattr;
+allow cmd_services service_contexts_file:file getattr;
+allow cmd_services servicemanager:file getattr;
+allow cmd_services servicemanager:netlink_selinux_socket getattr;
+allow cmd_services servicemanager:unix_dgram_socket getattr;
+allow cmd_services servicemanager_exec:file getattr;
+allow cmd_services vndservice_contexts_file:file getattr;
+allow cmd_services vndservicemanager:file read;
+#============= ylog ============== 2017-08-02-15-13-07 added by genSepolicy script
+allow cmd_services boottime_prop:file { getattr open };
+allow cmd_services debugfs_trace_marker:file getattr;
+allow cmd_services fuse_device:chr_file getattr;
+allow cmd_services hwservicemanager:dir { read open };
+allow cmd_services hwservicemanager:file getattr;
+allow cmd_services hwservicemanager:netlink_selinux_socket getattr;
+allow cmd_services hwservicemanager:unix_dgram_socket getattr;
+allow cmd_services hwservicemanager_exec:file getattr;
+allow cmd_services hwservicemanager_prop:file getattr;
+allow cmd_services loop_control_device:chr_file getattr;
+allow cmd_services overlay_prop:file open;
+allow cmd_services persistent_properties_ready_prop:file { getattr open };
+allow cmd_services vndservicemanager:dir { read getattr open search };
+allow cmd_services vndservicemanager:file { getattr open };
+allow cmd_services vndservicemanager:lnk_file read;
+allow cmd_services vndservicemanager:unix_dgram_socket getattr;
+allow cmd_services wifi_prop:file { getattr open };
+#============= ylog ============== 2017-08-02-16-46-00 added by genSepolicy script
+allow cmd_services rild:fifo_file getattr;
+allow cmd_services rild:file getattr;
+allow cmd_services rild:unix_dgram_socket getattr;
+allow cmd_services rild:unix_stream_socket getattr;
+allow cmd_services storage_stub_file:dir search;
+allow cmd_services shell_exec:file {r_file_perms execute};
+
+allow cmd_services logcat_exec:file {  getattr execute read open execute_no_trans };   #call "logcat"
+allow cmd_services socket_device:sock_file {  write };   #call "ylog"
+allow cmd_services servicemanager:binder {  call };   #call "dumpsys"
+#allow cmd_services debugfs_tracing_debug:file {  write open };   #call "iosnoop.sh"
+#allow cmd_services ylog_prop:file { read open getattr };   #call "ylog_cli"
+allow cmd_services sysfs_lowmemorykiller:dir {  search };   #call "cat"
+allow cmd_services system_server:binder {  call };   #call "dumpsys"
+allowxperm ylog self:packet_socket  ioctl {SIOCGIFINDEX};
+#allow cmd_services ylog_prop:property_service {  set };
+allow cmd_services activity_service:service_manager {  find };
+allow cmd_services logd:unix_stream_socket { read write connectto sendto };
+allow cmd_services cmd_services:unix_stream_socket { connectto };
+allow cmd_services bluetooth:unix_stream_socket {  read write connectto sendto };
+allow cmd_services logd_prop:property_service {  set };
+allow cmd_services logd_prop:file { read open getattr };
+
+allow cmd_services cache_file:file {create getattr write unlink read append open rename setattr};
+allow cmd_services cache_file:dir {reparent open write read search getattr remove_name rmdir rename add_name create};
+
+
+allow cmd_services debugfs_binder:file { getattr  read  open};
+
+
+#allow cmd_services vendor_shell_exec:file {read open execute execute_no_trans getattr};
+allow cmd_services system_file:file { execute_no_trans };
+allow cmd_services srtd:capability { kill ipc_lock dac_override };
+allow cmd_services untrusted_app:process { signull };
+#allow cmd_services system_data_file:file { write open create setattr };
+allow cmd_services fuse:dir { search };
+allow cmd_services system_data_file:dir { write open add_name create setattr };
+allow cmd_services rootfs:file {read open execute execute_no_trans getattr};
+#allow cmd_services vendor_toolbox_exec:file {read open execute execute_no_trans getattr};
+#allow cmd_services vendor_file:file { execute_no_trans };
+
+
+
+allow cmd_services aprd:capability dac_override;
+allow cmd_services aprd:capability2 syslog;
+
+allow cmd_services property_socket:sock_file write;
+#allow cmd_services apr_prop:property_service set;
+
+#allow cmd_services init:unix_stream_socket connectto;
+#allow cmd_services rild:unix_stream_socket connectto;
+#allow cmd_services wcnd:unix_stream_socket connectto;
+#allow cmd_services logd:unix_stream_socket connectto ;
+
+allow cmd_services apr_data_file:file { create open read write getattr rename };
+allow cmd_services apr_data_file:dir { write search add_name remove_name };
+
+#allow cmd_services anr_data_file:dir {search setattr read};
+#allow cmd_services anr_data_file:file {create read open getattr};
+
+allow cmd_services tombstone_data_file:dir {read write search add_name remove_name};
+allow cmd_services tombstone_data_file:file { create open read write getattr rename};
+
+
+allow cmd_services system_data_file:dir {read open write add_name remove_name};
+allow cmd_services system_data_file:file {open};
+#allow cmd_services system_data_file:sock_file {create unlink};
+
+#allow cmd_services self_system_data_file:file {open read write create getattr rename};
+#allow cmd_services self_system_data_file:dir {read open write add_name remove_name search};
+#allow cmd_services self_system_data_file:sock_file {create unlink};
+
+allow cmd_services log_device:chr_file read;
+
+allow cmd_services logdr_socket:sock_file write;
+
+allow cmd_services tty_device:chr_file { open read write };
+
+#allow cmd_services shell_data_file:dir { add_name read open remove_name search write unlink };
+#allow cmd_services shell_data_file:file { create getattr open read write unlink };
+#allow cmd_services shell_data_file:sock_file { create open read write unlink };
+
+#allow cmd_services vendor_shell_exec:file {execute read open execute_no_trans getattr};
+#allow cmd_services vendor_shell_exec:dir {  read open  search };
+
+#allow cmd_services procrank_exec:file { getattr execute read open execute_no_trans};
+
+allow cmd_services kernel:dir {search read write open unlink};
+allow cmd_services kernel:file { create getattr open read write unlink };
+
+allow cmd_services system_prop:property_service set;
+
+allow cmd_services proc_meminfo:file {read open write getattr rename};
+
+allow cmd_services shell:file {open read getattr create write unlink};
+allow cmd_services shell:dir {open read search getattr};
+allow cmd_services shell:lnk_file {getattr read};
+
+allow cmd_services init:dir {getattr search read open};
+allow cmd_services init:file {read open getattr};
+allow cmd_services init:lnk_file {getattr read};
+
+allow cmd_services ueventd:dir {open read getattr search};
+allow cmd_services ueventd:file {open read getattr};
+allow cmd_services ueventd:lnk_file {getattr read};
+
+allow cmd_services logd:file {open read getattr};
+allow cmd_services logd:dir {open read getattr search};
+allow cmd_services logd:lnk_file {getattr read};
+
+allow cmd_services vold:file {open read};
+allow cmd_services vold:dir {open read getattr search};
+allow cmd_services vold:lnk_file {read getattr};
+
+allow cmd_services gatekeeperd:file {open read};
+allow cmd_services gatekeeperd:dir {open read getattr search};
+allow cmd_services gatekeeperd:lnk_file {read getattr};
+
+
+allow cmd_services lmkd:file {open read};
+allow cmd_services lmkd:dir {open read search getattr};
+allow cmd_services lmkd:lnk_file {getattr read};
+
+allow cmd_services servicemanager:dir {open read search getattr};
+allow cmd_services servicemanager:file {open read};
+#allow cmd_services servicemanager:binder call;
+allow cmd_services servicemanager:lnk_file {read getattr};
+
+allow cmd_services surfaceflinger:dir {open read search getattr};
+allow cmd_services surfaceflinger:file {open read};
+allow cmd_services surfaceflinger:fd use;
+allow cmd_services surfaceflinger:lnk_file {read getattr};
+allow cmd_services surfaceflinger:binder {transfer call};
+
+#allow cmd_services surfaceflinger_service:service_manager find;
+
+allow cmd_services modem_control:dir {getattr search read open};
+allow cmd_services modem_control:file {read open};
+allow cmd_services modem_control:lnk_file {getattr read};
+
+
+allow cmd_services rild:dir {open read search getattr};
+allow cmd_services rild:file {open read};
+allow cmd_services rild:lnk_file {getattr read};
+
+allow cmd_services batterysrv:file {open read};
+allow cmd_services batterysrv:dir {open read search getattr};
+allow cmd_services batterysrv:lnk_file {read getattr};
+
+allow cmd_services wcnd:dir {open getattr search read};
+allow cmd_services wcnd:file {open read};
+allow cmd_services wcnd:lnk_file {getattr read};
+
+allow cmd_services untrusted_app:dir {search getattr open read};
+allow cmd_services untrusted_app:file {read open};
+allow cmd_services untrusted_app:lnk_file {read getattr};
+
+allow cmd_services platform_app:dir {search getattr read open};
+allow cmd_services platform_app:file {read open};
+allow cmd_services platform_app:lnk_file {read getattr};
+
+#allow cmd_services aprd:capability sys_ptrace;
+allow cmd_services aprd:capability {sys_resource chown sys_admin dac_override net_raw sys_nice setuid setgid sys_nice fsetid};
+#allow cmd_services debugfs:file {read getattr};
+allow cmd_services system_file:file {execute_no_trans getattr execute read open};
+
+#allow cmd_services meminfo_service:service_manager find;
+
+allow cmd_services system_server:dir {getattr search open read};
+allow cmd_services system_server:file {read open};
+allow cmd_services system_server:lnk_file {getattr read};
+allow cmd_services system_server:binder call;
+#allow cmd_services proc:file { open read };
+#allow cmd_services apr_prop:file { open read getattr };
+
+allow cmd_services kernel:file { open read getattr };
+#allow cmd_services configfs:file { read open };
+#allow cmd_services configfs:dir { search };
+
+allow cmd_services mmcblk_device:blk_file { open read getattr };
+allow cmd_services block_device:dir { search };
+
+#============= aprd androido bringup==============
+#allow cmd_services gnss_download:file read;
+allow cmd_services gpsd:file read;
+#allow cmd_services hal_allocator_default:file read;
+allow cmd_services hal_audio_default:file read;
+allow cmd_services hal_camera_default:file read;
+allow cmd_services hal_configstore_default:file read;
+allow cmd_services hal_gatekeeper_default:file read;
+allow cmd_services hal_graphics_allocator_default:file read;
+allow cmd_services hal_light_default:file read;
+allow cmd_services hal_power_default:file read;
+allow cmd_services hal_sensors_default:file read;
+allow cmd_services hal_vibrator_default:file read;
+allow cmd_services hal_wifi_default:file read;
+allow cmd_services healthd:file read;
+allow cmd_services hwservicemanager:file read;
+allow cmd_services init:dir search;
+allow cmd_services init:file { read getattr open };
+allow cmd_services kernel:dir search;
+allow cmd_services lmfs:file read;
+allow cmd_services logd:file read;
+allow cmd_services netd:file read;
+#allow cmd_services self:capability sys_ptrace;
+#allow cmd_services serialno_prop:file { read getattr open };
+allow cmd_services servicemanager:file read;
+allow cmd_services tee:file read;
+allow cmd_services ueventd:file read;
+allow cmd_services vndservicemanager:file read;
+allow cmd_services vold:file read;
+allow cmd_services ylog:file read;
+allow cmd_services zygote:file read;
+
+
+allow cmd_services property_socket:sock_file { read write };
+allow cmd_services spipe_device:chr_file { read write open };
+allow cmd_services slog_device:chr_file { ioctl open read write };
+allow cmd_services audio_device:chr_file { ioctl open read write };
+allow cmd_services etb_device:chr_file { ioctl open read };
+
+allow cmd_services init:unix_stream_socket connectto;
+# MODEM state channel
+#allow cmd_services rild:unix_stream_socket { connectto read write };
+#allow cmd_services download:unix_stream_socket { connectto read write };
+#allow cmd_services wcnd:unix_stream_socket { connectto read write };
+#allow cmd_services refnotify:unix_stream_socket { connectto read write };
+allow cmd_services ctl_default_prop:property_service set;
+allow cmd_services system_prop:property_service set;
+#allow cmd_services proc:file { open read getattr write };
+allow cmd_services block_device:dir search;
+allow cmd_services mmcblk_device:blk_file { open read };
+allow cmd_services slogmodem:netlink_kobject_uevent_socket { create read bind getopt };
+allow cmd_services tty_device:chr_file { open read write };
+
+allow cmd_services storage_file:dir { search write unlink add_name };
+allow cmd_services storage_file:lnk_file { open read write create getattr unlink };
+allow cmd_services mnt_media_rw_file:dir { search open read write };
+allow cmd_services vfat:dir { add_name remove_name rmdir unlink getattr create search open read write };
+allow cmd_services vfat:file { rename getattr create open read write unlink};
+#allow cmd_services slogmodem_data:dir { add_name getattr create search open read remove_name rmdir write unlink };
+#allow cmd_services slogmodem_data:file { create getattr open read rename write unlink };
+allow cmd_services ylog_file:dir { add_name getattr create search open read remove_name rmdir write unlink };
+allow cmd_services ylog_file:file { create getattr open read rename write unlink };
+allow cmd_services fuse:dir { add_name create getattr open read remove_name rmdir search unlink write };
+allow cmd_services fuse:file { create getattr open read rename unlink write };
+#allow cmd_services slogmodem_config_file:dir { add_name search write unlink };
+#allow cmd_services slogmodem_config_file:file { create getattr open read write unlink };
+allow cmd_services tmpfs:dir {search};
+allow cmd_services rootfs:dir { read open };
+allow cmd_services debugfs_sipc:file { open write read getattr };
+allow cmd_services debugfs_sipc:dir { search getattr open read };
+#allow cmd_services gnss_file:dir { open read search };
+#allow cmd_services gnss_file:file { getattr open read };
+#allow cmd_services sysfs:file { open read };
+allow cmd_services media_data_file:dir { open read search getattr };
+allow cmd_services media_data_file:file { open read };
+
+# sdcardfs access
+allow cmd_services sdcardfs:dir { add_name create getattr open read remove_name rmdir search unlink write };
+allow cmd_services sdcardfs:file { create getattr open read rename unlink write };
+
+allow cmd_services media_rw_data_file:file { create open setattr getattr read write unlink };
+allow cmd_services media_rw_data_file:dir { add_name create open setattr getattr read write unlink search remove_name rmdir };
+
+allow cmd_services cmd_services:capability {chown sys_admin  net_raw sys_nice setuid setgid sys_nice fsetid  };
+
+#allow cmd_services sysfs_extdata:dir {add_name create open setattr getattr read write unlink search remove_name rmdir  };
+#allow cmd_services sysfs_extdata:file { create open setattr getattr read write unlink };
+
+allow cmd_services sysfs_extdata:dir { search };
+allow cmd_services sysfs_extdata:file { read open getattr};
+
+

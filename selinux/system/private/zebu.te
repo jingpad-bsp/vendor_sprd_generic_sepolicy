@@ -1,0 +1,2 @@
+typeattribute zebu coredomain;
+init_daemon_domain(zebu)

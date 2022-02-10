@@ -1,0 +1,2 @@
+persist.vendor.avc.               u:object_r:avc_prop:s0
+persist.vendor.cam.ip                      u:object_r:vendor_camera_prop:s0

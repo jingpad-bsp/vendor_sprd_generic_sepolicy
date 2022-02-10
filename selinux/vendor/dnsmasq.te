@@ -1,0 +1,5 @@
+
+allow dnsmasq proc_net:file { write open };
+allow dnsmasq netd:unix_stream_socket { getattr };
+allow dnsmasq netd:fifo_file { getattr };
+

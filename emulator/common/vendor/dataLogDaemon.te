@@ -1,0 +1,6 @@
+
+allow dataLogDaemon shell_exec:file { read open execute execute_no_trans getattr };
+allow dataLogDaemon self:capability { net_admin net_raw };
+allow dataLogDaemon self:rawip_socket { getopt create setopt };
+allow dataLogDaemon system_file:file { lock execute_no_trans };
+

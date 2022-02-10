@@ -1,0 +1,12 @@
+# All types used for apps with hwfeature access.
+attribute hwfeaturedomain;
+
+#####################################
+# hwfeature_domain(domain)
+# Allow a base set of permissions required for hwfeature access.
+define(`hwfeature_domain', `
+typeattribute $1 hwfeaturedomain;
+')
+
+allow hwfeaturedomain hwfeature:file rw_file_perms;
+allow hwfeaturedomain hwfeature:dir rw_dir_perms;

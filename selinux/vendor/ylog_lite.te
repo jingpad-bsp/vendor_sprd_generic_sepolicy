@@ -1,0 +1,500 @@
+type ylog_lite, domain, mlstrustedsubject;
+type ylog_lite_exec, exec_type,file_type,vendor_file_type;
+type ylog_lite_cli_exec, exec_type,file_type,vendor_file_type;
+
+
+
+#binder_use(ylog_lite)
+init_daemon_domain(ylog_lite)
+#typeattribute ylog_lite socket_between_core_and_vendor_violators;
+allow ylog_lite ylog_lite:process {execmem};
+#allow ylog_lite shell_data_file:file {getattr write read create};
+#allow ylog_lite shell_data_file:file {open execute_no_trans};
+#allow ylog_lite shell_data_file:dir {search remove_name add_name open write};
+#allow ylog_lite  shell_data_file:sock_file {unlink create};
+#allow ylog_lite mmcblk_device:dir {read write};
+#allow ylog_lite mmcblk_device:file {open execute_no_trans execute};
+#allow ylog_lite mmcblk_device:blk_file {getattr};
+allow ylog_lite rootfs:file {open execute read execute_no_trans getattr};
+allow ylog_lite debugfs_tracing:file {getattr open write read};
+allow ylog_lite rootfs:file {open execute read getattr execute_no_trans};
+allow ylog_lite rootfs:dir {open read};
+allow ylog_lite rootfs:lnk_file {getattr};
+allow ylog_lite debugfs_tracing:file {open write read getattr};
+allow ylog_lite debugfs_tracing:dir {open read};
+allow ylog_lite device_logging_prop:file {getattr open};
+#allow ylog_lite mmc_proc:file {open getattr};
+
+allow ylog safemode_prop:file {getattr open};
+allow ylog media_prop:file {getattr open};
+#allow ylog apr_prop:file {getattr open};
+#allow ylog wcn_device:chr_file {getattr};
+
+
+allow ylog_lite property_socket:sock_file write;
+allow ylog_lite init:unix_stream_socket connectto;
+allow ylog_lite storage_file:dir {search getattr};
+#allow ylog_lite default_prop:property_service set;
+allow ylog_lite vendor_shell_exec:file {read open execute getattr};
+
+#allow ylog_lite system_data_file:dir {create read write open remove_name add_name getattr};
+allow ylog_lite vendor_shell_exec:file execute_no_trans;
+allow ylog_lite storage_file:lnk_file {read getattr};
+
+
+allow ylog_lite fuse:dir {create write search add_name read remove_name open rmdir rename reparent setattr};
+allow ylog_lite fuse:file {read append create open getattr write unlink rename setattr};
+#add for sdcardfs
+allow ylog_lite vfat:dir create_dir_perms;
+allow ylog_lite vfat:file create_file_perms;
+allow ylog_lite sdcardfs:dir {create write search add_name read remove_name open rmdir rename reparent setattr};
+allow ylog_lite sdcardfs:file {read append create open getattr write unlink rename setattr};
+#allow ylog_lite ylog_lite_file:dir {reparent open write read search getattr remove_name rmdir rename add_name create};
+#allow ylog_lite ylog_lite_file:file {create getattr write unlink read append open rename setattr};
+
+#allow ylog_lite anr_data_file:dir {search setattr read getattr write add_name};
+#allow ylog_lite anr_data_file:file {read open getattr write create};
+
+#allow ylog_lite bluetooth_data_file:dir search;
+#allow ylog_lite bluetooth_data_file:file {read write open getattr};
+
+allow ylog_lite bluetooth:dir {getattr read search open};
+allow ylog_lite bluetooth:file {read open};
+allow ylog_lite bluetooth:lnk_file {getattr read};
+
+#allow ylog_lite tombstone_data_file:dir {read setattr getattr write add_name search};
+#allow ylog_lite tombstone_data_file:file {create write open read getattr};
+
+#allow ylog_lite system_data_file:file {open};
+
+#allow ylog_lite system_file:file execute_no_trans;
+
+allow ylog_lite init:dir {getattr search read open};
+allow ylog_lite init:file {read open};
+allow ylog_lite init:lnk_file {getattr read};
+allow ylog_lite kernel:dir {read search getattr open};
+allow ylog_lite kernel:file {read open};
+allow ylog_lite kernel:lnk_file {getattr read};
+allow ylog_lite kernel:system {syslog_mod syslog_read};
+
+allow ylog_lite ueventd:dir {open read getattr search};
+allow ylog_lite ueventd:file {open read};
+allow ylog_lite ueventd:lnk_file {getattr read};
+allow ylog_lite logd:file {open read};
+allow ylog_lite logd:dir {open read getattr search};
+allow ylog_lite logd:lnk_file {getattr read};
+allow ylog_lite vold:file {open read};
+allow ylog_lite vold:dir {open read getattr search};
+allow ylog_lite vold:lnk_file {read getattr};
+
+allow ylog_lite gatekeeperd:file {open read};
+allow ylog_lite gatekeeperd:dir {open read getattr search};
+allow ylog_lite gatekeeperd:lnk_file {read getattr};
+
+allow ylog_lite healthd:file {open read};
+allow ylog_lite healthd:dir {open read search getattr};
+allow ylog_lite healthd:lnk_file {getattr read };
+
+allow ylog_lite surfaceflinger:dir {open read search getattr};
+allow ylog_lite surfaceflinger:file {open read};
+allow ylog_lite surfaceflinger:fd use;
+allow ylog_lite surfaceflinger:lnk_file {read getattr};
+
+allow ylog_lite lmkd:file {open read};
+allow ylog_lite lmkd:dir {open read search getattr};
+allow ylog_lite lmkd:lnk_file {getattr read};
+
+allow ylog_lite servicemanager:dir {open read search getattr};
+allow ylog_lite servicemanager:file {open read};
+#allow ylog_lite servicemanager:binder call;
+allow ylog_lite servicemanager:lnk_file {read getattr};
+
+#allow ylog_lite surfaceflinger:binder {transfer call};
+
+allow ylog_lite rild:dir {open read search getattr};
+allow ylog_lite rild:file {open read};
+allow ylog_lite rild:lnk_file {getattr read};
+#allow ylog_lite batterysrv:file {open read};
+#allow ylog_lite batterysrv:dir {open read search getattr};
+#allow ylog_lite batterysrv:lnk_file {read getattr};
+allow ylog_lite shell:file {open read};
+allow ylog_lite shell:dir {open read search getattr};
+allow ylog_lite shell:lnk_file {getattr read};
+
+#allow ylog_lite netd:file {open read};
+#allow ylog_lite netd:dir {open read search getattr};
+#allow ylog_lite netd:lnk_file {getattr read};
+#allow ylog_lite netd:unix_stream_socket {connectto};
+
+#allow ylog_lite debuggerd:dir {search getattr read open};
+#allow ylog_lite debuggerd:file {read open};
+#allow ylog_lite debuggerd:lnk_file {read getattr};
+
+#allow ylog_lite engpc:file {open read};
+#allow ylog_lite engpc:dir {open read search getattr};
+#allow ylog_lite engpc:lnk_file {getattr read};
+allow ylog_lite drmserver:dir {open getattr search read};
+allow ylog_lite drmserver:file {open read};
+allow ylog_lite drmserver:lnk_file {read getattr};
+allow ylog_lite mediaserver:dir {open getattr search read};
+allow ylog_lite mediaserver:file {open read};
+allow ylog_lite mediaserver:lnk_file {read getattr};
+allow ylog_lite installd:dir {open getattr search read};
+allow ylog_lite installd:file {open read};
+allow ylog_lite installd:lnk_file {read getattr};
+allow ylog_lite keystore:dir {open getattr search read};
+allow ylog_lite keystore:file {open read};
+allow ylog_lite keystore:lnk_file {getattr read};
+#allow ylog_lite wcnd:dir {open getattr search read};
+#allow ylog_lite wcnd:file {open read};
+#allow ylog_lite wcnd:lnk_file {getattr read};
+
+
+allow ylog_lite zygote:dir {open read search getattr};
+allow ylog_lite zygote:file {open read};
+allow ylog_lite zygote:lnk_file {getattr read};
+##allow ylog_lite zygote_exec:file {execute getattr read open execute_no_trans};
+
+allow ylog_lite adbd:dir {open getattr read search};
+allow ylog_lite adbd:file {open read};
+allow ylog_lite adbd:lnk_file {getattr read};
+allow ylog_lite bootanim:dir {read getattr search open};
+allow ylog_lite bootanim:file {read open};
+
+allow ylog_lite ctl_default_prop:property_service {set};
+allow ylog_lite ylog_lite:capability {chown sys_admin  net_raw sys_nice setuid setgid sys_nice fsetid};
+
+
+allow ylog_lite sysfs_lowmemorykiller:file {read open getattr};
+
+allow ylog_lite proc:file {write};
+
+allow ylog_lite ylog_lite:capability2 syslog;
+
+#allow ylog_lite srtd:dir {open read getattr search};
+#allow ylog_lite srtd:file {open read};
+#allow ylog_lite srtd:lnk_file {getattr read};
+
+
+allow ylog_lite system_server:dir {getattr search open read};
+allow ylog_lite system_server:file {read open};
+allow ylog_lite system_server:lnk_file {getattr read};
+#allow ylog_lite system_server:binder {call transfer};
+
+#allow ylog_lite perfprofd:file {open read};
+#allow ylog_lite perfprofd:dir {open read getattr search};
+
+#allow ylog_lite surfaceflinger_service:service_manager find;
+
+allow ylog_lite graphics_device:dir {getattr search};
+allow ylog_lite graphics_device:chr_file read;
+
+allow ylog_lite device:chr_file {getattr};
+allow ylog_lite platform_app:dir {search getattr read open};
+allow ylog_lite platform_app:file {read open};
+allow ylog_lite platform_app:lnk_file {getattr read};
+allow ylog_lite untrusted_app:dir {search getattr open read};
+allow ylog_lite untrusted_app:file {read open};
+allow ylog_lite untrusted_app:lnk_file {read getattr};
+allow ylog_lite system_app:lnk_file {getattr read};
+allow ylog_lite system_app:dir {getattr search open read};
+allow ylog_lite system_app:file {read open};
+#allow ylog_lite wpa:dir {getattr search open read};
+#allow ylog_lite wpa:file {read open};
+#allow ylog_lite wpa:lnk_file {getattr read};
+allow ylog_lite sdcardd:dir {search getattr read open};
+allow ylog_lite sdcardd:file {read open};
+allow ylog_lite sdcardd:lnk_file {getattr read};
+#allow ylog_lite download:file {read open};
+#allow ylog_lite download:lnk_file {getattr read};
+
+allow ylog_lite radio:dir {search getattr read open};
+allow ylog_lite radio:file {read open};
+allow ylog_lite radio:lnk_file {read getattr};
+
+
+#allow ylog_lite slogmodem_vendor:dir {read search open getattr};
+#allow ylog_lite slogmodem_vendor:file {open read};
+#allow ylog_lite slogmodem_vendor:lnk_file {getattr read};
+
+#allow ylog_lite activity_service:service_manager find;
+
+allow ylog_lite mnt_media_rw_file:dir search;
+
+allow ylog_lite ylog_lite:packet_socket {setopt create getopt read write};
+#allow ylog_lite logcat_exec:file {getattr execute read open execute_no_trans};
+#allow ylog_lite logcat_exec:file {getattr  read open };
+allow ylog_lite proc_sysrq:file {getattr};
+allow ylog_lite ylog_lite:netlink_socket create;
+
+allow ylog_lite pstorefs:dir search;
+
+#allow ylog_lite modem_control:dir {getattr search read open};
+#allow ylog_lite modem_control:file {read open};
+#allow ylog_lite modem_control:lnk_file {getattr read};
+
+#allow ylog_lite aprd:dir {getattr search read open};
+#allow ylog_lite aprd:file {read open};
+#allow ylog_lite aprd:lnk_file {getattr read};
+#allow ylog_lite ip_monitor:dir {getattr search read open};
+#allow ylog_lite ip_monitor:file {read open };
+#allow ylog_lite ip_monitor:lnk_file {getattr read};
+
+allow ylog_lite logdr_socket:sock_file {write read};
+allow ylog_lite logd:unix_stream_socket {connectto};
+
+allow ylog_lite dnsproxyd_socket:sock_file {write};
+allow ylog_lite devpts:chr_file {ioctl read write getattr};
+allow ylog_lite audio_device:dir {getattr};
+allow ylog_lite audio_device:chr_file {read open};
+
+#allow ylog_lite prod_file:dir {getattr};
+
+#allow ylog_lite init_exec:file {getattr};
+
+allow ylog_lite block_device:dir {search getattr read open};
+allow ylog_lite block_device:blk_file {getattr};
+#allow ylog_lite gps_device:chr_file {getattr};
+allow ylog_lite console_device:chr_file {getattr};
+allow ylog_lite dm_device:chr_file {getattr};
+#allow ylog_lite fm_device:chr_file {getattr};
+#allow ylog_lite bm_device:chr_file {getattr};
+allow ylog_lite fscklogs:dir {getattr};
+#allow ylog_lite full_device:chr_file {getattr};
+#allow ylog_lite fuse_device:chr_file {getattr};
+allow ylog_lite graphics_device:chr_file {getattr};
+allow ylog_lite ppp_device:chr_file {getattr};
+allow ylog_lite mtp_device:chr_file {getattr};
+#allow ylog_lite kmem_device:chr_file {getattr};
+allow ylog_lite sensors_device:chr_file {getattr};
+allow ylog_lite kmsg_device:chr_file {getattr read open write};
+allow ylog_lite input_device:chr_file {getattr};
+allow ylog_lite input_device:dir {getattr};
+allow ylog_lite camera_device:chr_file {getattr};
+allow ylog_lite qtaguid_device:chr_file {getattr};
+allow ylog_lite usbaccessory_device:chr_file {getattr};
+allow ylog_lite uhid_device:chr_file {getattr};
+allow ylog_lite serial_device:chr_file {getattr};
+allow ylog_lite hci_attach_dev:chr_file {getattr};
+allow ylog_lite tty_device:chr_file {getattr open read write};
+allow ylog_lite video_device:chr_file {getattr};
+allow ylog_lite radio_device:chr_file {getattr open read write};
+allow ylog_lite tun_device:chr_file {getattr};
+#allow ylog_lite efuse_device:chr_file {getattr};
+allow ylog_lite audio_device:chr_file {getattr};
+allow ylog_lite gpu_device:dir {getattr};
+allow ylog_lite gpu_device:chr_file {getattr};
+allow ylog_lite null_device:chr_file {unlink};
+
+allow ylog_lite ylog_lite:udp_socket {create};
+allow ylog_lite logd_socket:sock_file {write};
+
+allow ylog_lite proc:file {open read getattr};
+allow ylog_lite proc_meminfo:file {read open getattr};
+allow ylog_lite usermodehelper:file {read open};
+allow ylog_lite sysfs:file {getattr read write open};
+#allow ylog_lite cpuctl_device:dir getattr;
+#allow ylog_lite i2c_device:chr_file getattr;
+#allow ylog_lite iio_device:chr_file getattr;
+#allow ylog_lite modemdriver_vpad_device:chr_file getattr;
+#allow ylog_lite fuse_device:chr_file { read write getattr open };
+allow ylog_lite ion_device:chr_file { open read write getattr };
+#allow ylog_lite vcs_device:chr_file getattr;
+#allow ylog_lite apr_prop:file {open getattr};
+#allow ylog_lite cache_file:dir getattr;
+allow ylog_lite unlabeled:dir getattr;
+allow ylog_lite unlabeled:filesystem getattr;
+#allow ylog_lite mmcblk_device:blk_file getattr;
+allow ylog_lite safemode_prop:file {open getattr};
+allow ylog_lite device_logging_prop:file {open getattr};
+#allow ylog_lite toolbox_exec:file {read open execute getattr execute_no_trans};
+allow ylog_lite vendor_toolbox_exec:file {read open execute getattr execute_no_trans};
+#allow ylog_lite media_prop:file {open getattr};
+allow ylog_lite mmc_prop:file {open getattr};
+allow ylog_lite rootfs:file {read open getattr execute execute_no_trans};
+allow ylog_lite rootfs:dir {read open};
+allow ylog_lite rootfs:lnk_file {getattr};
+allow ylog_lite tmpfs:dir {search};
+allow ylog_lite debugfs_tracing:dir {open read};
+allow ylog_lite debugfs_tracing:file {getattr open read write};
+#allow ylog_lite dalvikcache_data_file:file { open lock getattr read };
+#allow ylog_lite dalvikcache_data_file:file {execute};
+allow ylog_lite ashmem_device:chr_file {execute};
+#allow ylog_lite ylog_lite_tmpfs:file {execute};
+allow ylog_lite proc_net:file {getattr read open};
+
+#allow ylog_lite toolbox_exec:file {open read getattr execute execute_no_trans};
+#allow ylog_lite cache_file:dir {getattr};
+allow ylog_lite ion_device:chr_file {getattr};
+#allow ylog_lite toolbox_exec:file {getattr execute read open execute_no_trans};
+allow ylog_lite tmpfs:dir {search};
+#allow ylog_lite tracing_shell_writable:file {getattr open write read};
+#allow ylog_lite tracing_shell_writable_debug:file {open write};
+allow ylog_lite debugfs_mmc:file { getattr read open };
+allow ylog_lite debugfs_mmc:dir { search };
+#allow ylog_lite media_rw_data_file:dir {create write search add_name read remove_name open rmdir rename reparent setattr getattr};
+#allow ylog_lite media_rw_data_file:file {read append create open getattr write unlink rename setattr};
+allow ylog_lite mnt_media_rw_file:dir {create write search add_name read remove_name open rmdir rename reparent setattr getattr};
+allow ylog_lite mnt_media_rw_file:file {read append create open getattr write unlink rename setattr};
+allow ylog_lite proc_modules:file {read open };
+allow ylog_lite proc_interrupts:file {read open };
+allow ylog_lite hwservicemanager:file {read open };
+allow ylog_lite proc_stat:file {read open getattr };
+userdebug_or_eng(`
+  #allow ylog_lite debugfs:file {open read getattr};
+  allow ylog_lite perfprofd:file {open read};
+  allow ylog_lite perfprofd:dir {open read getattr search};
+  allow ylog_lite ylog_lite:netlink_socket {create bind write read getattr};
+  allow ylog_lite device:dir {open read create getattr remove_name write add_name};
+  allow ylog_lite device:file {open read create write unlink getattr append};
+  allow ylog_lite device:netlink_socket {create setopt bind getattr write read};
+  allow ylog_lite perfprofd:lnk_file {read getattr};
+  allow ylog_lite su:file {read open};
+  allow ylog_lite su:dir {getattr search read open};
+  allow ylog_lite su:lnk_file {getattr read};
+  ')
+#============= ylog_lite ============== 2017-08-02-13-24-29 added by genSepolicy script
+#allow ylog_lite debugfs:file { read open };
+allow ylog_lite file_contexts_file:file getattr;
+#allow ylog_lite hal_allocator_default:file read;
+#allow ylog_lite hw_random_device:chr_file getattr;
+#allow ylog_lite hwservice_contexts_file:file getattr;
+allow ylog_lite hwservicemanager:dir { getattr search };
+allow ylog_lite hwservicemanager:lnk_file read;
+#allow ylog_lite i2c_device:chr_file getattr;
+allow ylog_lite iio_device:chr_file getattr;
+allow ylog_lite proc_interrupts:file getattr;
+allow ylog_lite proc_iomem:file getattr;
+allow ylog_lite proc_misc:file getattr;
+allow ylog_lite proc_modules:file getattr;
+allow ylog_lite proc_timer:file getattr;
+allow ylog_lite proc_zoneinfo:file { read getattr open };
+allow ylog_lite runtime_event_log_tags_file:file getattr;
+#allow ylog_lite seapp_contexts_file:file getattr;
+#allow ylog_lite sepolicy_file:file getattr;
+#allow ylog_lite service_contexts_file:file getattr;
+allow ylog_lite servicemanager:file getattr;
+allow ylog_lite servicemanager:netlink_selinux_socket getattr;
+allow ylog_lite servicemanager:unix_dgram_socket getattr;
+#allow ylog_lite servicemanager_exec:file getattr;
+allow ylog_lite vndservice_contexts_file:file getattr;
+allow ylog_lite vndservicemanager:file read;
+#============= ylog_lite ============== 2017-08-02-15-13-07 added by genSepolicy script
+allow ylog_lite boottime_prop:file { getattr open };
+allow ylog_lite debugfs_trace_marker:file getattr;
+#allow ylog_lite firstboot_prop:file { getattr open };
+allow ylog_lite fuse_device:chr_file getattr;
+allow ylog_lite hwservicemanager:dir { read open };
+allow ylog_lite hwservicemanager:file getattr;
+allow ylog_lite hwservicemanager:netlink_selinux_socket getattr;
+allow ylog_lite hwservicemanager:unix_dgram_socket getattr;
+#allow ylog_lite hwservicemanager_exec:file getattr;
+allow ylog_lite hwservicemanager_prop:file getattr;
+allow ylog_lite loop_control_device:chr_file getattr;
+#allow ylog_lite opengles_prop:file { getattr open };
+allow ylog_lite overlay_prop:file open;
+allow ylog_lite persistent_properties_ready_prop:file { getattr open };
+#allow ylog_lite qemu_cmdline:file { getattr open };
+#allow ylog_lite radio_noril_prop:file { getattr open };
+#allow ylog_lite self:packet_socket ioctl;
+#allow ylog_lite serialno_prop:file { getattr open };
+allow ylog_lite vndservicemanager:dir { read getattr open search };
+allow ylog_lite vndservicemanager:file { getattr open };
+allow ylog_lite vndservicemanager:lnk_file read;
+allow ylog_lite vndservicemanager:unix_dgram_socket getattr;
+#allow ylog_lite wifi_prop:file { getattr open };
+#============= ylog_lite ============== 2017-08-02-16-46-00 added by genSepolicy script
+#allow ylog_lite rild:fifo_file getattr;
+#allow ylog_lite rild:file getattr;
+#allow ylog_lite rild:unix_dgram_socket getattr;
+#allow ylog_lite rild:unix_stream_socket getattr;
+#allow ylog_lite storage_stub_file:dir search;
+#allow ylog_lite shell_exec:file {r_file_perms execute};
+
+#allow ylog_lite logcat_exec:file {  getattr execute read open execute_no_trans };   #call "logcat"
+#allow ylog_lite socket_device:sock_file {  write };   #call "ylog"
+#allow ylog_lite ylog_lite:packet_socket {  ioctl };   #call "tcpdump"
+#allow ylog_lite servicemanager:binder {  call };   #call "dumpsys"
+#allow ylog_lite debugfs_tracing_debug:file {  write open };   #call "iosnoop.sh"
+#allow ylog_lite ylog_lite_prop:file { read open getattr };   #call "ylog_cli"
+#allow ylog_lite ylog_lite_prop:property_service {  set };
+#allow ylog_lite mmcblk_device:blk_file {  getattr };   #call "df"
+#allow ylog_lite sysfs_lowmemorykiller:dir {  search };   #call "cat"
+#allow ylog_lite debugfs:file {  read open };   #call "cat" never allow debugfs
+#allow ylog_lite system_server:binder {  call };   #call "dumpsys"
+#allowxperm ylog_lite self:packet_socket  ioctl {SIOCGIFINDEX};
+
+#allow ylog_lite activity_service:service_manager {  find };
+allow ylog_lite logd:unix_stream_socket { read write connectto sendto };
+get_prop(ylog, ylog_lite_pprop);
+get_prop(ylog, vold_prop);
+allow ylog proc_kmsg:file { read open getattr }; #"ylog"
+allow ylog_lite slogmodem_vendor_data:dir { open read create getattr remove_name write add_name };
+allow ylog_lite slogmodem_vendor_data:file { read append create open getattr write unlink rename setattr};
+
+
+###################
+###################
+allow shell ylog_lite_exec:file {getattr};
+allow shell ylog_lite_cli_exec:file {getattr execute read open    execute_no_trans };
+allow ylog_lite proc_kmsg:file { read open getattr }; #"ylog"
+
+##3.0
+allow ylog_lite vold_device:blk_file { getattr };
+allow ylog_lite proc_pagetypeinfo:file { open read};
+allow ylog_lite slogmodem_vendor_data:fifo_file { read append create open getattr write unlink rename setattr };
+
+allow ylog_lite ylog_lite:udp_socket { name_bind  create setopt bind getattr write read connect};
+#allow netd ylog_lite:udp_socket { create setopt bind getattr write read connect getopt};
+
+#allow ylog_lite fwmarkd_socket:sock_file { unlink  write };
+
+allow ylog_lite port:udp_socket { name_bind  create setopt bind read write getopt connect};
+
+#allow ylog_lite ylog_lite:packet_socket { ioctl};
+
+allow ylog_lite slogmodem_vendor_data:file { ioctl};
+
+allow netd ylog_lite:fd { use};
+
+allow ylog_lite node:udp_socket { create setopt bind getattr write read connect getopt node_bind};
+
+
+allow shell slogmodem_vendor_data:fifo_file  { read append create open getattr write unlink rename setattr };
+
+allow shell ylog_lite_exec:file {execute};
+#allow ylog_lite bluetooth:unix_stream_socket {connectto};
+
+#allow ylog_lite cache_file:fifo_file  {create getattr write unlink read append open rename setattr};
+#allow ylog_lite cache_file:file {ioctl};
+
+
+allow ylog_lite slogmodem_vendor_data:dir { add_name getattr create search open read remove_name rmdir write unlink };
+allow ylog_lite slogmodem_vendor_data:file { create getattr open read rename write unlink append };
+
+allow ylog_lite vendor_file:file {getattr  read open map  execute execute_no_trans};
+
+################
+allow vendor_shell ylog_lite_exec:file {getattr};
+allow vendor_shell ylog_lite_cli_exec:file {getattr execute read open map   execute_no_trans };
+allow vendor_shell slogmodem_vendor_data:fifo_file  { read append create open getattr write unlink rename setattr };
+allow vendor_shell ylog_lite_exec:file {execute};
+
+allow vendor_shell init:unix_stream_socket connectto;
+
+allow shell ylog_lite_cli_exec:file {getattr  read open map  execute execute_no_trans};
+
+allow vendor_shell init:unix_stream_socket { connectto read write };
+
+allow shell ylog_lite_cli_exec:file {getattr  read open map  execute execute_no_trans};
+allow vendor_shell init:unix_stream_socket { connectto read write };
+
+allow vendor_shell ylog_lite:unix_stream_socket { connectto read write };
+allow vendor_shell ylog_lite_exec:file {getattr execute};
+allow vendor_shell ylog_lite_cli_exec:file {getattr execute read open map   execute_no_trans };
+
+allow vendor_shell slogmodem_vendor_data:fifo_file  { read append create open getattr write unlink rename setattr };
+
+allow ylog_lite slogmodem_vendor_data:file {  map};
+allow ylog_lite ylog_lite_exec:file {open execute read getattr   execute_no_trans};
+

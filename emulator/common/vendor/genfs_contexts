@@ -1,0 +1,4 @@
+# proc for WCN BT Marlin
+genfscon proc /bluetooth/sleep/btwrite u:object_r:proc_bluetooth_writable:s0
+# exfat
+#genfscon exfat / u:object_r:vfat:s0

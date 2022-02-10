@@ -1,0 +1,19 @@
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.combined@1\.0-service u:object_r:hal_combined_default_exec:s0
+/vendor/bin/phasecheckserver u:object_r:phasecheckserver_exec:s0
+/(vendor|system/vendor)/bin/slogmodem_vendor u:object_r:slogmodem_vendor_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.sprd\.hardware\.cplog_connmgr@1\.0-service u:object_r:hal_cplog_connmgr_default_exec:s0
+
+/data/vendor/local/slogmodem(/.*)? u:object_r:slogmodem_vendor_config_file:s0
+/data/vendor/ylog(/.*)?   u:object_r:slogmodem_vendor_data:s0
+/data/local/slogmodem(/.*)?   u:object_r:slogmodem_config_file:s0
+
+# face hidl service
+/vendor/bin/hw/vendor\.sprd\.hardware\.face@1\.0-service u:object_r:hal_face_default_exec:s0
+
+
+#for factorytest
+/(vendor|system/vendor)/bin/factorytest    u:object_r:factorytest_exec:s0
+/data/cg(/.*)? u:object_r:cg_file:s0
+/data/local/factorytest_log(/.*)?    u:object_r:mmitest_file:s0
+
+/sys/kernel/debug/binder(/.*)?    u:object_r:debugfs_binder:s0

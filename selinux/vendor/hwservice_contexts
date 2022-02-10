@@ -1,0 +1,2 @@
+# face hidl service
+vendor.sprd.hardware.face::IExtBiometricsFace u:object_r:hal_face_hwservice:s0

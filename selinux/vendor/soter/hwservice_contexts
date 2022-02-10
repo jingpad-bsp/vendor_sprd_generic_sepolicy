@@ -1,0 +1,2 @@
+#soter
+vendor.sprd.hardware.soter::ISoter u:object_r:hal_soter_hwservice:s0

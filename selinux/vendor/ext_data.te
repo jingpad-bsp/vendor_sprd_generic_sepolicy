@@ -1,0 +1,46 @@
+net_domain(ext_data)
+
+allow ext_data shell_exec:file { read open execute getattr };
+allow ext_data kernel:system { module_request };
+allow ext_data ext_data:capability { net_admin net_raw sys_module };
+allow ext_data system_file:file { execute_no_trans lock };
+allow ext_data proc_net:file { read write open getattr };
+allow ext_data fs_bpf:dir { search };
+allow ext_data fs_bpf:file { read write };
+#allow ext_data bpfloader:bpf { prog_run };
+allow ext_data shell_exec:file { map execute_no_trans };
+allow ext_data servicemanager:binder { call };
+allow ext_data net_data_file:dir search;
+allow ext_data ext_data:netlink_route_socket { create setopt bind getattr write read nlmsg_read nlmsg_write };
+
+#allow ext_data netd_service:service_manager { find };
+#allow ext_data dnsresolver_service:service_manager { find };
+#allow ext_data ext_data:udp_socket { create ioctl };
+#allow ext_data vendor_shell_exec:file { execute read open execute_no_trans getattr };
+#allow ext_data dhcp_data_file:dir search;
+#allow ext_data dhcp_data_file:file { read getattr };
+#allow ext_data dhcp_data_file:file { open read getattr };
+
+#allow ext_data ext_data:netlink_xfrm_socket {create setopt bind getattr write read nlmsg_read nlmsg_write };
+#allow ext_data ext_data:rawip_socket { create getopt setopt };
+#allow ext_data netd_socket:sock_file write;
+#allow ext_data net_data_file:dir search;
+#allow ext_data net_data_file:file { open read getattr };
+#allow ext_data netd:unix_stream_socket connectto;
+#allow ext_data vendor_toolbox_exec:file { getattr execute read open execute_no_trans };
+#allow ext_data device:dir write;
+
+#add for accessing property
+#allow ext_data property_socket:sock_file {read write };
+allow ext_data init:unix_stream_socket connectto;
+allow ext_data system_server:unix_stream_socket connectto;
+#allow ext_data system_prop:property_service set;
+#allow ext_data sysfs_devices_system_cpu:file write;
+#allow ext_data sysfs:file {write open getattr read };
+#allow ext_data sysfs:dir {read open };
+#allow ext_data sysfs_devices_system_cpu:file setattr;
+#end
+
+
+
+#set_prop(ext_data, vendor_radio_prop)

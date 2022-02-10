@@ -1,0 +1,95 @@
+type sprd_validationtools_app, domain;
+app_domain(sprd_validationtools_app)
+
+set_prop(sprd_validationtools_app, ylog_prop)
+typeattribute sprd_validationtools_app mlstrustedsubject;
+#allow sprd_validationtools_app ylog_file:dir { getattr read open };
+allow sprd_validationtools_app vendor_file:file {r_file_perms execute execute_no_trans};
+allow sprd_validationtools_app prod_file:dir { search getattr setattr write add_name read open remove_name };
+allow sprd_validationtools_app prod_file:{file lnk_file} { open create_file_perms write read setattr getattr };
+allow sprd_validationtools_app sysfs_leds:dir { search };
+allow sprd_validationtools_app sysfs:file { getattr open read };
+allow sprd_validationtools_app sysfs:dir { search };
+allow sprd_validationtools_app proc:file { getattr open read };
+#system service
+allow sprd_validationtools_app activity_service:service_manager find;
+allow sprd_validationtools_app connectivity_service:service_manager find;
+allow sprd_validationtools_app display_service:service_manager find;
+allow sprd_validationtools_app network_management_service:service_manager find;
+allow sprd_validationtools_app accessibility_service:service_manager find;
+allow sprd_validationtools_app user_service:service_manager find;
+allow sprd_validationtools_app input_method_service:service_manager find;
+allow sprd_validationtools_app notification_service:service_manager find;
+allow sprd_validationtools_app graphicsstats_service:service_manager find;
+allow sprd_validationtools_app drmserver_service:service_manager find;
+allow sprd_validationtools_app radio_service:service_manager find;
+allow sprd_validationtools_app app_api_service:service_manager find;
+allow sprd_validationtools_app permission_service:service_manager find;
+allow sprd_validationtools_app power_service:service_manager find;
+allow sprd_validationtools_app appops_service:service_manager find;
+allow sprd_validationtools_app batterystats_service:service_manager find;
+allow sprd_validationtools_app surfaceflinger_service:service_manager find;
+allow sprd_validationtools_app audio_service:service_manager find;
+allow sprd_validationtools_app content_service:service_manager { find };
+allow sprd_validationtools_app mount_service:service_manager { find };
+allow sprd_validationtools_app bluetooth_manager_service:service_manager { find };
+allow sprd_validationtools_app textservices_service:service_manager { find };
+allow sprd_validationtools_app wifi_service:service_manager { find };
+allow sprd_validationtools_app hal_extRadio_hwservice:hwservice_manager { find };
+allow sprd_validationtools_app cameraserver_service:service_manager { find };
+allow sprd_validationtools_app audioserver_service:service_manager { find };
+allow sprd_validationtools_app mediaserver_service:service_manager { find };
+allow sprd_validationtools_app mediaextractor_service:service_manager { find };
+#other
+allow sprd_validationtools_app sprd_validationtools_app:netlink_kobject_uevent_socket { create setopt bind read };
+allow sprd_validationtools_app slogmodem:unix_stream_socket { connectto read write };
+allow sprd_validationtools_app wcnd:unix_stream_socket { connectto read write };
+allow sprd_validationtools_app phasecheckserver:unix_stream_socket { connectto };
+allow sprd_validationtools_app fm_device:chr_file { read write open ioctl };
+allow sprd_validationtools_app fingerprintd_data_file:dir { search open };
+allow sprd_validationtools_app fingerprintd_data_file:file { read write open getattr };
+allow sprd_validationtools_app block_device:dir { search open };
+allow sprd_validationtools_app system_data_file:dir { read open add_name};
+allow sprd_validationtools_app gnss_file:dir { create search add_name open read write remove_name };
+allow sprd_validationtools_app gnss_file:file { read write open create getattr setattr append unlink };
+allow sprd_validationtools_app gpsd:unix_stream_socket { connectto sendto getattr read write };
+allow sprd_validationtools_app rild:binder { call };
+allow sprd_validationtools_app system_prop:property_service { set };
+allow sprd_validationtools_app rild:unix_stream_socket { connectto };
+allow sprd_validationtools_app binder_device:chr_file { read write open ioctl };
+allow sprd_validationtools_app system_data_file:dir { getattr };
+allow sprd_validationtools_app mnt_expand_file:dir { getattr };
+allow sprd_validationtools_app system_data_file:lnk_file { getattr read };
+allow sprd_validationtools_app app_data_file:dir { getattr search };
+allow sprd_validationtools_app app_data_file:file { read write open};
+allow sprd_validationtools_app user_profile_data_file:file { getattr read open };
+allow sprd_validationtools_app zygote:fd { use };
+allow sprd_validationtools_app sprd_validationtools_app:binder { call };
+allow sprd_validationtools_app sprd_validationtools_app:process { execmem };
+allow sprd_validationtools_app ashmem_device:chr_file  { execute };
+allow sprd_validationtools_app tmpfs:file  { read execute };
+allow sprd_validationtools_app adbd:unix_stream_socket { connectto };
+allow sprd_validationtools_app servicemanager:service_manager { list };
+allow sprd_validationtools_app sysfs_sensor:file { open getattr write };
+allow sprd_validationtools_app vendor_product_prop:file { read };
+allow sprd_validationtools_app vendor_camera_prop:file{ read };
+allow sprd_validationtools_app proc_version:file { open read getattr };
+
+#androidP update
+set_prop(sprd_validationtools_app, vendor_sys_prop)
+set_prop(sprd_validationtools_app, vendor_radio_prop)
+set_prop(sprd_validationtools_app, vendor_product_prop)
+set_prop(sprd_validationtools_app, vendor_camera_prop)
+allow sprd_validationtools_app sysfs_power:dir { search };
+allow sprd_validationtools_app sysfs_power:file { read open getattr};
+allow sprd_validationtools_app system_app_data_file:dir { getattr search read open add_name remove_name create write setattr map rename};
+allow sprd_validationtools_app system_app_data_file:file { read write open create getattr setattr append unlink rename map};
+allow sprd_validationtools_app log_service:unix_stream_socket { connectto };
+allow sprd_validationtools_app cmd_services:unix_stream_socket { connectto };
+allow sprd_validationtools_app proc_stat:file { read };
+
+#add other context te
+allow system_server sprd_validationtools_app:file { write };
+allow sprd_validationtools_app vendor_default_prop:file { open read getattr map };
+allow sprd_validationtools_app cgroup:file { read write open getattr setattr append unlink };
+

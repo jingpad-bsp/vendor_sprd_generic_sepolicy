@@ -1,0 +1,26 @@
+
+# type for netd
+type sysfs_netd, fs_type,sysfs_type;
+# type system_file_netd, file_type, system_file_type;
+
+# type for ext_data
+#type sysfs_extdata, fs_type,sysfs_type;
+
+# Cellular MODEM I/Q Capture/Playback
+type sysfs_iq, fs_type, sysfs_type;
+
+type autotest_tmpfs, file_type;
+type gpsd_tmpfs, file_type;
+type sprd_coulomb_app_tmpfs, file_type;
+type sprd_engineermode_app_tmpfs, file_type;
+type sprd_radio_app_tmpfs, file_type;
+type sprd_sgps_app_tmpfs, file_type;
+type phasecheckserver_tmpfs, file_type;
+type sprd_autoslt_app_tmpfs, file_type;
+type sprd_logmanager_app_tmpfs, file_type;
+type sprd_validationtools_app_tmpfs, file_type;
+type unisoc_gnsstool_app_tmpfs, file_type;
+type slogmodem_config_file, file_type, data_file_type,core_data_file_type;
+
+# For hwfeature
+type hwfeature, fs_type, proc_type, sysfs_type;

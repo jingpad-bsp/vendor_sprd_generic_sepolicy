@@ -1,0 +1,203 @@
+type factorytest, domain;
+type factorytest_exec, exec_type, file_type, vendor_file_type;
+init_daemon_domain(factorytest)
+
+hwbinder_use(factorytest)
+get_prop(factorytest, hwservicemanager_prop);
+typeattribute factorytest netdomain;
+allow factorytest self:capability {  sys_nice fowner setgid setuid fsetid sys_module sys_admin chown net_admin net_raw sys_boot kill sys_resource};
+allow factorytest self:capability2 { block_suspend syslog wake_alarm};
+allow factorytest factorytest:process { execmem };
+allow factorytest factorytest:netlink_route_socket { create read bind write nlmsg_write };
+allow factorytest factorytest:netlink_socket { write read create getopt setopt bind getattr };
+allow factorytest factorytest:udp_socket { create ioctl };
+allow factorytest factorytest:tcp_socket { create bind listen setopt };
+allow factorytest factorytest:packet_socket { create bind read };
+
+allow factorytest proc:file { open read };
+
+#add for factorytest log save
+#allow factorytest ylog_file:dir { create search setattr write remove_name add_name read open};
+#allow factorytest ylog_file:file { rename create read write open setattr append getattr unlink};
+
+allow factorytest modem_control:unix_stream_socket { connectto };
+allow factorytest vendor_shell_exec:file { execute read open execute_no_trans getattr};
+#allow factorytest logcat_exec:file { getattr execute read open execute_no_trans };
+allow factorytest vendor_toolbox_exec:file { getattr execute read open execute_no_trans };
+allow factorytest tty_device:chr_file { open read write ioctl getattr };
+allow factorytest device:dir { open read };
+allow factorytest graphics_device:dir { search };
+allow factorytest graphics_device:chr_file { open read write ioctl getattr};
+allow factorytest sprd_img_device:chr_file { read write open ioctl };
+allow factorytest input_device:dir { open read search };
+allow factorytest input_device:chr_file { open read ioctl getattr };
+allow factorytest prod_file:dir { search open write add_name create setattr remove_name };
+allow factorytest prod_file:file { open write read create getattr unlink };
+allow factorytest mnt_vendor_file:dir { search open write add_name create setattr remove_name };
+allow factorytest mnt_vendor_file:file { open write read create getattr unlink };
+allow factorytest logdr_socket:sock_file write;
+allow factorytest logd:unix_stream_socket connectto;
+allow factorytest sysfs_leds:dir { search };
+allow factorytest sysfs_leds:lnk_file { read };
+allow factorytest sysfs:file { open read write getattr};
+allow factorytest sysfs_vibrator:file { open read write };
+allow factorytest block_device:dir { search };
+allow factorytest vfat :dir { read write add_name create remove_name open search mounton };
+allow factorytest vfat :file { read write rename create open };
+allow factorytest vfat :filesystem { mount };
+allow factorytest serial_device:chr_file { open read write ioctl };
+#allow factorytest system_data_file:dir { read open };
+
+#add for factory reset
+#allow factorytest cache_recovery_file:dir {write add_name search};
+#allow factorytest cache_recovery_file:file {create write open};
+#allow factorytest cache_file:dir { create read write add_name search open};
+#allow factorytest cache_file:file { create write open read getattr setattr };
+allow factorytest unlabeled:dir { search };
+allow factorytest powerctl_prop:property_service { set };
+
+#add for gps test
+allow factorytest gnss_file:dir { read open write create add_name };
+allow factorytest gnss_file:file { read open write create getattr setattr };
+allow factorytest wcn_device:file { open write read ioctl };
+allow factorytest wcn_device:chr_file { open write read ioctl };
+allow factorytest gpsd:unix_stream_socket { connectto };
+allow factorytest sysfs_gnss:dir { open read search};
+allow factorytest sysfs_gnss:file { write open read ioctl};
+allow factorytest sysfs_gnss:lnk_file { read };
+allow factorytest sensors_device:chr_file { rwx_file_perms };
+
+#add for nfc
+allow factorytest nfc_device:chr_file { read write open ioctl };
+allow factorytest sysfs_wake_lock:file { open read write };
+
+#add for sensor test
+typeattribute factorytest halclientdomain;
+typeattribute factorytest hal_sensors_client;
+allow factorytest hal_sensors_hwservice:hwservice_manager { find };
+allow factorytest hal_sensors_default:binder { call };
+
+#add for bt test
+allow factorytest bt_prop:file { read open getattr };
+allow factorytest hal_bluetooth_default:binder { call transfer };
+#allow factorytest hal_bluetooth_hwservice:hwservice_manager { find };
+#allow factorytest bluetooth_data_file:dir { read open write add_name remove_name };
+#allow factorytest bluetooth_data_file:file { create open write getattr setattr rename unlink read };
+allow hal_bluetooth_default factorytest:binder { call };
+#allow factorytest bluetooth_data_file:dir { search };
+
+#add for wifi test
+allow factorytest hal_wifi_default:binder { call };
+allow hal_wifi_default factorytest:binder { call transfer };
+#allow factorytest hal_wifi_hwservice:hwservice_manager { find };
+#allow factorytest servicemanager:binder { call };
+#allow factorytest wificond_service:service_manager { find };
+allow servicemanager factorytest:dir { search };
+allow wificond factorytest:binder { transfer };
+allow factorytest property_socket:sock_file { read write };
+allow factorytest rootfs:file {  open read getattr };
+allow factorytest rootfs:system { module_load };
+#allow factorytest wifi_data_file:dir { getattr setattr search create open read write add_name remove_name rmdir };
+#allow factorytest wifi_data_file:file { open read write getattr setattr create unlink append };
+#allow factorytest wpa_socket:file { setattr getattr open write };
+#allow factorytest wpa_socket:sock_file { create setattr write unlink };
+#allow factorytest wpa_socket:dir { getattr setattr search create open read write add_name remove_name rmdir };
+allow factorytest init:unix_stream_socket connectto;
+allow factorytest hal_wifi_supplicant_default_exec:file { execute getattr execute_no_trans open read };
+allow factorytest hal_wifi_supplicant_default:unix_dgram_socket { sendto };
+allow hal_wifi_supplicant_default factorytest:unix_dgram_socket { sendto };
+allow hal_wifi_supplicant_default vendor_data_file:sock_file { write read };
+allow factorytest factorytest:udp_socket create_socket_perms;
+allowxperm factorytest factorytest:udp_socket ioctl { SIOCSIFFLAGS };
+allow factorytest proc_modules:file { getattr open read };
+allow factorytest hal_wifi_supplicant:dir search;
+allow factorytest hal_wifi_supplicant:file { read open };
+allow factorytest hal_wifi_supplicant:process { signal };
+allow factorytest hal_wifi_supplicant_default:dir search;
+allow factorytest hal_wifi_supplicant_default:file { read open };
+allow factorytest hal_wifi_supplicant_default:process { signal };
+allow factorytest wpa_data_file:dir { create read write open remove_name add_name search getattr };
+allow factorytest wpa_data_file:file { create open read write getattr setattr };
+allow factorytest wpa_data_file:sock_file { unlink setattr write create };
+allow factorytest vendor_default_prop:file { open read getattr };
+allow factorytest vendor_data_file:dir { create read write open add_name search getattr };
+allow factorytest vendor_data_file:file { create open read write getattr setattr };
+allow factorytest wpa_socket:sock_file { write };
+
+#hostapd be removed in androidp
+#allow factorytest hostapd:dir search;
+#allow factorytest hostapd:file { read open };
+#allow factorytest hostapd:process { signal };
+
+allow factorytest proc_net:file {open getattr read write};
+allow factorytest ctl_default_prop:property_service { set };
+allow factorytest shell:file { read };
+#add for camera test and flash
+#allow factorytest camera_data_file:file { open read write getattr unlink create };
+#allow factorytest camera_data_file:dir { remove_name write add_name search };
+allow factorytest camera_device:chr_file { read write open ioctl getattr };
+allow factorytest sysfs_sensor:file { write open };
+allow factorytest ion_device:chr_file { read open ioctl };
+allow factorytest property_socket:sock_file{ write };
+
+#add for audio test
+typeattribute factorytest hal_audio_client;
+typeattribute factorytest halclientdomain;
+allow factorytest sprd_audio_file:dir { open write read search add_name remove_name };
+allow factorytest sprd_audio_file:fifo_file { write read open };
+allow factorytest sprd_audio_file:file { create open read write setattr getattr append unlink };
+allow factorytest hal_audio_hwservice:hwservice_manager { find };
+allow factorytest hal_audio_default:binder { call transfer };
+allow factorytest hal_audio_default:fd { use };
+
+#add for fm test
+allow factorytest fm_device:chr_file { read write open ioctl };
+allow factorytest mmcblk_device:blk_file { open read write ioctl getattr };
+
+#add for phasecheck
+allow factorytest mmcblk_device:blk_file { read };
+allow hal_wifi_supplicant_default factorytest :unix_dgram_socket {sendto  };
+allow factorytest hal_wifi_supplicant_default:unix_dgram_socket {sendto  };
+
+#add for cp2 log
+allow factorytest wcnd:unix_stream_socket { connectto };
+allow factorytest slogmodem_vendor:unix_stream_socket { connectto };
+allow factorytest hal_cplog_connmgr_default:unix_stream_socket { connectto };
+
+#add for recursive load so
+allow factorytest vendor_file:dir{ open read };
+
+#add for recursive load so
+allow factorytest vendor_camera_prop:file{ read };
+
+allow factorytest sysfs_leds:file { open read write };
+allow factorytest vendor_product_prop:file { read };
+
+#androidP update
+set_prop(factorytest, vendor_product_prop)
+set_prop(factorytest, vendor_sys_prop)
+set_prop(factorytest, vendor_radio_prop)
+set_prop(factorytest, vendor_camera_prop)
+set_prop(factorytest, media_prop)
+allow factorytest proc_cmdline:file { read open };
+allow factorytest rootfs:dir { mounton };
+allow factorytest sysfs_power:dir { search read };
+allow factorytest proc_version:file { getattr open ioctl read };
+allow factorytest bluetooth_data_file:file { getattr read };
+allow factorytest wifi_data_file:file { read };
+#allow factorytest system_file:file { read };
+allow factorytest sysfs_gnss:dir { search open ioctl read };
+allow factorytest sysfs_power:file { read open };
+allow factorytest vendor_file:system { module_load };
+allow factorytest gpu_device:chr_file { read write open ioctl map getattr };
+allow factorytest mnt_vendor_file:dir { search open ioctl read write };
+
+#androidP Q
+allow factorytest sysfs_sensor:file { getattr open ioctl read write };
+allow factorytest sprd_img_device:chr_file { read write open ioctl map getattr };
+allow factorytest storage_file:dir { search open ioctl read };
+allow factorytest sysfs_power:file { getattr open ioctl read write };
+allow factorytest input_device:chr_file { read write open ioctl map getattr };
+allow factorytest tmpfs:dir { search open ioctl read write add_name create mounton };
+allow factorytest sysfs:dir { read open };
+allow factorytest sdcard_device:blk_file { read open };

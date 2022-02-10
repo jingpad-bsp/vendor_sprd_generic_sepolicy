@@ -1,0 +1,13 @@
+# porting for double-Tcard move to /system
+persist.storage         u:object_r:vold_prop:s0
+sys.internal.emulated   u:object_r:vold_prop:s0
+
+persist.ylog.   u:object_r:ylog_prop:s0
+ylog.   u:object_r:ylog_prop:s0
+media. u:object_r:media_prop:s0
+
+apr.	u:object_r:system_prop:s0
+persist.apr.	u:object_r:system_prop:s0
+
+persist.sys.apr.	u:object_r:system_prop:s0
+

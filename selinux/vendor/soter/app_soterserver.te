@@ -1,0 +1,9 @@
+type app_soterserver, domain;
+
+app_domain(app_soterserver)
+
+allow app_soterserver activity_service:service_manager { find };
+allow app_soterserver vendor_sys_prop:file { open read getattr };
+allow app_soterserver system_app_data_file:dir { getattr search };
+allow app_soterserver cgroup:file { write };
+

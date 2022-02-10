@@ -1,0 +1,6 @@
+allow dexoptanalyzer { privapp_data_file app_data_file }:file { map };
+allow dexoptanalyzer apk_data_file:file { read map };
+allow dexoptanalyzer system_data_file:lnk_file { read };
+
+# Acquire advisory lock on /system/framework/arm/*
+allow dexoptanalyzer system_file:file lock;

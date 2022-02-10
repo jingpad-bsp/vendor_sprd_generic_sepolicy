@@ -1,0 +1,6 @@
+allow modemlog_connmgr_service hal_cplog_connmgr_hwservice:hwservice_manager {find};
+allow modemlog_connmgr_service slogmodem:unix_stream_socket {connectto read write};
+allow modemlog_connmgr_service hwservicemanager_prop:file {  read open getattr map};
+allow modemlog_connmgr_service hwservicemanager:binder {  call transfer };
+allow modemlog_connmgr_service system_data_file:dir { open read };
+allow modemlog_connmgr_service init:unix_stream_socket {  connectto };

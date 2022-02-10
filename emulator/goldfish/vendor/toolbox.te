@@ -1,0 +1,2 @@
+#ZRAM
+allow toolbox swap_block_device:blk_file { open read write getattr };

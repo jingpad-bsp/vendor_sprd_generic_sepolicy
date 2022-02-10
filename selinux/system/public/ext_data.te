@@ -1,0 +1,5 @@
+type ext_data, domain, mlstrustedsubject;
+type ext_data_exec, exec_type, file_type, system_file_type;
+
+
+

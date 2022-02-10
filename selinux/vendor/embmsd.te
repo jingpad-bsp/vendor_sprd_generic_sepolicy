@@ -1,0 +1,11 @@
+typeattribute embmsd mlstrustedsubject;
+
+allow embmsd property_socket:sock_file { write };
+allow embmsd embmsd:capability { setuid };
+allow embmsd init:unix_stream_socket { connectto };
+allow embmsd hal_extRadio_hwservice:hwservice_manager { find };
+allow embmsd rild:binder { call transfer };
+#allow embmsd vendor_file:file { read getattr };
+allow embmsd system_prop:property_service { set };
+allow embmsd hwservicemanager_prop:file { read open getattr };
+allow embmsd hwservicemanager:binder { call transfer };

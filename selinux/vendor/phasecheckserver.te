@@ -1,0 +1,38 @@
+type phasecheckserver,domain;
+type phasecheckserver_exec, exec_type,file_type, vendor_file_type;
+
+
+
+init_daemon_domain(phasecheckserver)
+
+vndbinder_use(phasecheckserver)
+#binder_service(phasecheckserver)
+binder_call(phasecheckserver, system_server)
+
+allow phasecheckserver phasecheckserver:netlink_kobject_uevent_socket { create setopt bind read };
+allow phasecheckserver self:capability { net_admin  };
+allow phasecheckserver prod_file:dir { rw_file_perms search add_name };
+allow phasecheckserver prod_file:file rw_file_perms;
+#allow phasecheckserver system_data_file:dir { rw_file_perms add_name };
+#allow phasecheckserver system_data_file:file { rw_file_perms create };
+allow phasecheckserver sysfs:file { open read write };
+#allow phasecheckserver servicemanager:binder { call transfer };
+#allow phasecheckserver phasecheck_service:service_manager find;
+#allow phasecheckserver phasecheck_service:service_manager add;
+allow phasecheckserver block_device:dir search;
+allow phasecheckserver tmpfs:dir { write add_name };
+allow phasecheckserver mmcblk_device:blk_file { open read write getattr};
+allow phasecheckserver phasecheckserver_tmpfs:file create;
+allow phasecheckserver sysfs_leds:dir search;
+allow phasecheckserver sysfs_leds:file { open read write };
+
+set_prop(phasecheckserver, vendor_product_prop)
+allow phasecheckserver vendor_product_prop:file { open read };
+allow phasecheckserver sysfs_power:dir { search };
+allow phasecheckserver sysfs_power:file { open write read };
+
+allow phasecheckserver vendor_file:file {execute_no_trans};
+allow phasecheckserver vendor_shell_exec:file { execute_no_trans };
+allow phasecheckserver camera_device:chr_file { open read write ioctl };
+allow phasecheckserver vendor_toolbox_exec:file {execute_no_trans};
+allow phasecheckserver prod_file:file { create };

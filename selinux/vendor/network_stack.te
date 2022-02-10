@@ -1,0 +1,2 @@
+allow network_stack system_data_file:dir { add_name };
+allow network_stack system_data_file:file { open ioctl lock };

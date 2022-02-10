@@ -1,0 +1,2 @@
+allow zygote media_prop:file { read open getattr map };
+allow zygote sprd_cameraipcontrol_app:process { dyntransition };

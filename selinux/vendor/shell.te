@@ -1,0 +1,6 @@
+allow shell sysfs_wake_lock:file { read };
+#allow shell avc_prop:property_service { set };
+allow shell tombstone_data_file:dir { getattr };
+
+#For faceid
+get_prop(shell, vendor_faceid_prop)

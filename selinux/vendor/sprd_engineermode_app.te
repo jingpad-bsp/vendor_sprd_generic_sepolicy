@@ -1,0 +1,9 @@
+allow sprd_engineermode_app vendor_power_prop:property_service { set };
+allow sprd_engineermode_app activity_task_service:service_manager { find };
+allow sprd_engineermode_app cgroup:file { write };
+allow sprd_engineermode_app vendor_power_prop:file { map };
+allow sprd_engineermode_app vendor_default_prop:file { map };
+allow sprd_engineermode_app vendor_radio_prop:file { open read getattr map };
+allow sprd_engineermode_app sysfs_power:dir { search };
+allow sprd_engineermode_app networkadapter_service:service_manager { find };
+allow sprd_engineermode_app usb_service:service_manager { find };

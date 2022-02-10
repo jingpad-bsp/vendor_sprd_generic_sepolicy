@@ -1,0 +1,18 @@
+type hal_soter_default, domain;
+type hal_soter_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_soter_default)
+
+attribute hal_soter;
+attribute hal_soter_client;
+attribute hal_soter_server;
+hal_client_domain(app_soterserver, hal_soter)
+hal_server_domain(hal_soter_default, hal_soter)
+
+add_hwservice(hal_soter_server, hal_soter_hwservice)
+
+allow hal_soter_client hal_soter_hwservice:hwservice_manager find;
+allow hal_soter_client hal_soter_default:binder call;
+
+# allow HAL module to open/read/write/ioctl trusty-dev
+allow hal_soter teetz_device:chr_file { open read write ioctl };
+

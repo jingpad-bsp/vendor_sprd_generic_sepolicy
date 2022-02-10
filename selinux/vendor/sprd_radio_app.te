@@ -1,0 +1,3 @@
+allow sprd_radio_app vendor_sys_prop:file map;
+allow sprd_radio_app vendor_radio_prop:file map;
+get_prop(sprd_radio_app, vendor_default_prop);

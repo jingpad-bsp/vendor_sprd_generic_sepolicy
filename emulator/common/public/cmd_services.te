@@ -1,0 +1,2 @@
+type cmd_services, domain, mlstrustedsubject;
+type cmd_services_exec, exec_type, file_type, system_file_type;

@@ -1,0 +1,742 @@
+
+
+#binder_use(ylog)
+allow ylog ylog:process {execmem};
+allow ylog shell_data_file:file {getattr write read create};
+#allow ylog shell_data_file:file {open execute_no_trans};
+#allow ylog shell_data_file:dir {search remove_name add_name open write};
+allow ylog  shell_data_file:sock_file {unlink create};
+#allow ylog mmcblk_device:dir {read write};
+#allow ylog mmcblk_device:file {open execute_no_trans execute};
+#allow ylog mmcblk_device:blk_file {getattr};
+allow ylog rootfs:file {open execute read execute_no_trans getattr};
+allow ylog rootfs:file {open execute read getattr execute_no_trans};
+allow ylog rootfs:dir {open read};
+allow ylog rootfs:lnk_file {getattr};
+allow ylog debugfs_tracing:dir {open read};
+
+allow ylog device_logging_prop:file {getattr open};
+#allow ylog mmc_proc:file {open getattr};
+
+allow ylog property_socket:sock_file write;
+allow ylog init:unix_stream_socket connectto;
+allow ylog storage_file:dir {search getattr};
+#allow ylog default_prop:property_service set;
+allow ylog shell_exec:file {read open execute getattr};
+
+allow ylog system_data_file:dir {create read write open remove_name add_name};
+allow ylog shell_exec:file execute_no_trans;
+allow ylog storage_file:lnk_file {read getattr};
+
+allow ylog fuse:dir {create write search add_name read remove_name open rmdir rename reparent setattr};
+allow ylog fuse:file {read append create open getattr write unlink rename setattr};
+#add for sdcardfs
+allow ylog vfat:dir create_dir_perms;
+allow ylog vfat:file create_file_perms;
+allow ylog sdcardfs:dir {create write search add_name read remove_name open rmdir rename reparent setattr};
+allow ylog sdcardfs:file {read append create open getattr write unlink rename setattr};
+allow ylog ylog_file:dir {reparent open write read search getattr remove_name rmdir rename add_name create};
+allow ylog ylog_file:file {create getattr write unlink read append open rename setattr};
+
+allow ylog anr_data_file:dir {search setattr read getattr write add_name};
+allow ylog anr_data_file:file {read open getattr write create};
+
+allow ylog bluetooth_data_file:dir search;
+allow ylog bluetooth_data_file:file {read write open getattr};
+
+allow ylog bluetooth:dir {getattr read search open};
+allow ylog bluetooth:file {read open};
+allow ylog bluetooth:lnk_file {getattr read};
+
+allow ylog tombstone_data_file:dir {read setattr getattr write add_name search};
+allow ylog tombstone_data_file:file {create write open read getattr};
+
+allow ylog system_data_file:file {open};
+
+allow ylog system_file:file execute_no_trans;
+
+allow ylog init:dir {getattr search read open};
+allow ylog init:file {read open};
+allow ylog init:lnk_file {getattr read};
+allow ylog kernel:dir {read search getattr open};
+allow ylog kernel:file {read open};
+allow ylog kernel:lnk_file {getattr read};
+allow ylog kernel:system {syslog_mod syslog_read};
+
+allow ylog ueventd:dir {open read getattr search};
+allow ylog ueventd:file {open read};
+allow ylog ueventd:lnk_file {getattr read};
+allow ylog logd:file {open read};
+allow ylog logd:dir {open read getattr search};
+allow ylog logd:lnk_file {getattr read};
+allow ylog vold:file {open read};
+allow ylog vold:dir {open read getattr search};
+allow ylog vold:lnk_file {read getattr};
+
+allow ylog gatekeeperd:file {open read};
+allow ylog gatekeeperd:dir {open read getattr search};
+allow ylog gatekeeperd:lnk_file {read getattr};
+
+allow ylog healthd:file {open read};
+allow ylog healthd:dir {open read search getattr};
+allow ylog healthd:lnk_file {getattr read };
+
+allow ylog surfaceflinger:dir {open read search getattr};
+allow ylog surfaceflinger:file {open read};
+allow ylog surfaceflinger:fd use;
+allow ylog surfaceflinger:lnk_file {read getattr};
+
+allow ylog lmkd:file {open read};
+allow ylog lmkd:dir {open read search getattr};
+allow ylog lmkd:lnk_file {getattr read};
+
+allow ylog servicemanager:dir {open read search getattr};
+allow ylog servicemanager:file {open read};
+#allow ylog servicemanager:binder call;
+allow ylog servicemanager:lnk_file {read getattr};
+
+#allow ylog surfaceflinger:binder {transfer call};
+
+allow ylog rild:dir {open read search getattr};
+allow ylog rild:file {open read};
+allow ylog rild:lnk_file {getattr read};
+#allow ylog batterysrv:file {open read};
+#allow ylog batterysrv:dir {open read search getattr};
+#allow ylog batterysrv:lnk_file {read getattr};
+allow ylog shell:file {open read};
+allow ylog shell:dir {open read search getattr};
+allow ylog shell:lnk_file {getattr read};
+
+allow ylog netd:file {open read};
+allow ylog netd:dir {open read search getattr};
+allow ylog netd:lnk_file {getattr read};
+allow ylog netd:unix_stream_socket {connectto};
+
+#allow ylog debuggerd:dir {search getattr read open};
+#allow ylog debuggerd:file {read open};
+#allow ylog debuggerd:lnk_file {read getattr};
+
+#allow ylog engpc:file {open read};
+#allow ylog engpc:dir {open read search getattr};
+#allow ylog engpc:lnk_file {getattr read};
+allow ylog drmserver:dir {open getattr search read};
+allow ylog drmserver:file {open read};
+allow ylog drmserver:lnk_file {read getattr};
+allow ylog mediaserver:dir {open getattr search read};
+allow ylog mediaserver:file {open read};
+allow ylog mediaserver:lnk_file {read getattr};
+allow ylog installd:dir {open getattr search read};
+allow ylog installd:file {open read};
+allow ylog installd:lnk_file {read getattr};
+allow ylog keystore:dir {open getattr search read};
+allow ylog keystore:file {open read};
+allow ylog keystore:lnk_file {getattr read};
+#allow ylog wcnd:dir {open getattr search read};
+#allow ylog wcnd:file {open read};
+#allow ylog wcnd:lnk_file {getattr read};
+
+
+allow ylog zygote:dir {open read search getattr};
+allow ylog zygote:file {open read};
+allow ylog zygote:lnk_file {getattr read};
+##allow ylog zygote_exec:file {execute getattr read open execute_no_trans};
+
+allow ylog adbd:dir {open getattr read search};
+allow ylog adbd:file {open read};
+allow ylog adbd:lnk_file {getattr read};
+allow ylog bootanim:dir {read getattr search open};
+allow ylog bootanim:file {read open};
+
+allow ylog ctl_default_prop:property_service {set};
+allow ylog ylog:capability {chown sys_admin  net_raw sys_nice setuid setgid sys_nice fsetid};
+
+
+allow ylog sysfs_lowmemorykiller:file {read open getattr};
+
+
+allow ylog ylog:capability2 syslog;
+
+#allow ylog srtd:dir {open read getattr search};
+#allow ylog srtd:file {open read};
+#allow ylog srtd:lnk_file {getattr read};
+
+
+allow ylog system_server:dir {getattr search open read};
+allow ylog system_server:file {read open};
+allow ylog system_server:lnk_file {getattr read};
+#allow ylog system_server:binder {call transfer};
+
+#allow ylog perfprofd:file {open read};
+#allow ylog perfprofd:dir {open read getattr search};
+
+#allow ylog surfaceflinger_service:service_manager find;
+
+allow ylog graphics_device:dir {getattr search};
+allow ylog graphics_device:chr_file read;
+
+allow ylog device:chr_file {getattr};
+allow ylog platform_app:dir {search getattr read open};
+allow ylog platform_app:file {read open};
+allow ylog platform_app:lnk_file {getattr read};
+allow ylog untrusted_app:dir {search getattr open read};
+allow ylog untrusted_app:file {read open};
+allow ylog untrusted_app:lnk_file {read getattr};
+allow ylog system_app:lnk_file {getattr read};
+allow ylog system_app:dir {getattr search open read};
+allow ylog system_app:file {read open};
+#allow ylog wpa:dir {getattr search open read};
+#allow ylog wpa:file {read open};
+#allow ylog wpa:lnk_file {getattr read};
+allow ylog sdcardd:dir {search getattr read open};
+allow ylog sdcardd:file {read open};
+allow ylog sdcardd:lnk_file {getattr read};
+#allow ylog download:file {read open};
+#allow ylog download:lnk_file {getattr read};
+
+allow ylog radio:dir {search getattr read open};
+allow ylog radio:file {read open};
+allow ylog radio:lnk_file {read getattr};
+
+
+#allow ylog slogmodem:dir {read search open getattr};
+#allow ylog slogmodem:file {open read};
+#allow ylog slogmodem:lnk_file {getattr read};
+
+#allow ylog activity_service:service_manager find;
+
+allow ylog mnt_media_rw_file:dir search;
+
+allow ylog ylog:packet_socket {ioctl setopt create getopt read write map };
+##allow ylog logcat_exec:file {getattr execute read open execute_no_trans};
+allow ylog proc_sysrq:file {getattr};
+allow ylog ylog:netlink_socket create;
+
+allow ylog pstorefs:dir search;
+
+#allow ylog modem_control:dir {getattr search read open};
+#allow ylog modem_control:file {read open};
+#allow ylog modem_control:lnk_file {getattr read};
+
+#allow ylog aprd:dir {getattr search read open};
+#allow ylog aprd:file {read open};
+#allow ylog aprd:lnk_file {getattr read};
+#allow ylog ip_monitor:dir {getattr search read open};
+#allow ylog ip_monitor:file {read open };
+#allow ylog ip_monitor:lnk_file {getattr read};
+
+allow ylog logdr_socket:sock_file {write};
+allow ylog logd:unix_stream_socket {connectto};
+
+allow ylog dnsproxyd_socket:sock_file {write};
+allow ylog devpts:chr_file {ioctl read write getattr};
+allow ylog audio_device:dir {getattr};
+allow ylog audio_device:chr_file {read open};
+
+allow ylog prod_file:dir {getattr};
+
+allow ylog init_exec:file {getattr};
+
+allow ylog block_device:dir {search getattr read open};
+allow ylog block_device:blk_file {getattr};
+#allow ylog gps_device:chr_file {getattr};
+allow ylog console_device:chr_file {getattr};
+allow ylog dm_device:chr_file {getattr};
+allow ylog fm_device:chr_file {getattr};
+#allow ylog bm_device:chr_file {getattr};
+allow ylog fscklogs:dir {getattr};
+#allow ylog full_device:chr_file {getattr};
+#allow ylog fuse_device:chr_file {getattr};
+allow ylog graphics_device:chr_file {getattr};
+allow ylog ppp_device:chr_file {getattr};
+allow ylog mtp_device:chr_file {getattr};
+#allow ylog kmem_device:chr_file {getattr};
+allow ylog sensors_device:chr_file {getattr};
+allow ylog kmsg_device:chr_file {getattr read open write};
+allow ylog input_device:chr_file {getattr};
+allow ylog input_device:dir {getattr};
+allow ylog camera_device:chr_file {getattr};
+allow ylog qtaguid_device:chr_file {getattr};
+allow ylog usbaccessory_device:chr_file {getattr};
+allow ylog uhid_device:chr_file {getattr};
+allow ylog serial_device:chr_file {getattr};
+allow ylog hci_attach_dev:chr_file {getattr};
+allow ylog tty_device:chr_file {getattr open read write};
+allow ylog video_device:chr_file {getattr};
+#allow ylog radio_device:chr_file {getattr open read write};
+allow ylog tun_device:chr_file {getattr};
+#allow ylog efuse_device:chr_file {getattr};
+allow ylog audio_device:chr_file {getattr};
+allow ylog gpu_device:dir {getattr};
+allow ylog gpu_device:chr_file {getattr};
+allow ylog null_device:chr_file {unlink};
+
+allow ylog ylog:udp_socket {create};
+allow ylog logd_socket:sock_file {write};
+
+allow ylog proc_meminfo:file {read open getattr};
+allow ylog usermodehelper:file {read open};
+allow ylog sysfs:file {getattr };
+#allow ylog cpuctl_device:dir getattr;
+#allow ylog i2c_device:chr_file getattr;
+#allow ylog iio_device:chr_file getattr;
+#allow ylog modemdriver_vpad_device:chr_file getattr;
+#allow ylog fuse_device:chr_file { read write getattr open };
+allow ylog ion_device:chr_file { open read write getattr };
+#allow ylog vcs_device:chr_file getattr;
+#allow ylog apr_prop:file {open getattr};
+allow ylog cache_file:dir getattr;
+allow ylog unlabeled:dir getattr;
+allow ylog unlabeled:filesystem getattr;
+#allow ylog mmcblk_device:blk_file getattr;
+allow ylog safemode_prop:file {open getattr};
+allow ylog device_logging_prop:file {open getattr};
+allow ylog toolbox_exec:file {read open execute getattr execute_no_trans map};
+#allow ylog media_prop:file {open getattr};
+allow ylog mmc_prop:file {open getattr};
+allow ylog rootfs:file {read open getattr execute execute_no_trans};
+allow ylog rootfs:dir {read open};
+allow ylog rootfs:lnk_file {getattr};
+allow ylog tmpfs:dir {search};
+allow ylog dalvikcache_data_file:file { open lock getattr read };
+#allow ylog dalvikcache_data_file:file {execute};
+allow ylog ashmem_device:chr_file {execute};
+#allow ylog ylog_tmpfs:file {execute};
+allow ylog proc_net:file {getattr read open};
+
+allow ylog toolbox_exec:file {open read getattr execute execute_no_trans};
+allow ylog cache_file:dir {getattr};
+allow ylog ion_device:chr_file {getattr};
+allow ylog toolbox_exec:file {getattr execute read open execute_no_trans};
+allow ylog tmpfs:dir {search};
+#allow ylog tracing_shell_writable:file {getattr open write read};
+#allow ylog tracing_shell_writable_debug:file {open write};
+allow ylog debugfs_mmc:file { getattr read open };
+allow ylog debugfs_mmc:dir { search };
+allow ylog media_rw_data_file:dir {create write search add_name read remove_name open rmdir rename reparent setattr getattr};
+allow ylog media_rw_data_file:file {read append create open getattr write unlink rename setattr};
+allow ylog mnt_media_rw_file:dir {create write search add_name read remove_name open rmdir rename reparent setattr getattr};
+allow ylog mnt_media_rw_file:file {read append create open getattr write unlink rename setattr};
+allow ylog proc_modules:file {read open };
+allow ylog proc_interrupts:file {read open };
+allow ylog hwservicemanager:file {read open };
+allow ylog proc_stat:file {read open getattr };
+userdebug_or_eng(`
+  #allow ylog debugfs:file {open read getattr};
+  allow ylog perfprofd:file {open read};
+  allow ylog perfprofd:dir {open read getattr search};
+  allow ylog ylog:netlink_socket {create bind write read getattr};
+  allow ylog device:dir {open read create getattr remove_name write add_name};
+  #allow ylog device:file {open read create write unlink getattr append};
+  allow ylog device:netlink_socket {create setopt bind getattr write read};
+  allow ylog perfprofd:lnk_file {read getattr};
+  allow ylog su:file {read open};
+  allow ylog su:dir {getattr search read open};
+  allow ylog su:lnk_file {getattr read};
+  ')
+#============= ylog ============== 2017-08-02-13-24-29 added by genSepolicy script
+#allow ylog debugfs:file { read open };
+allow ylog file_contexts_file:file getattr;
+#allow ylog hal_allocator_default:file read;
+#allow ylog hw_random_device:chr_file getattr;
+allow ylog hwservice_contexts_file:file getattr;
+allow ylog hwservicemanager:dir { getattr search };
+allow ylog hwservicemanager:lnk_file read;
+#allow ylog i2c_device:chr_file getattr;
+allow ylog iio_device:chr_file getattr;
+allow ylog proc_interrupts:file getattr;
+allow ylog proc_iomem:file getattr;
+allow ylog proc_misc:file getattr;
+allow ylog proc_modules:file getattr;
+allow ylog proc_timer:file getattr;
+allow ylog proc_zoneinfo:file { read getattr open };
+allow ylog runtime_event_log_tags_file:file getattr;
+allow ylog seapp_contexts_file:file getattr;
+allow ylog sepolicy_file:file getattr;
+allow ylog service_contexts_file:file getattr;
+allow ylog servicemanager:file getattr;
+allow ylog servicemanager:netlink_selinux_socket getattr;
+allow ylog servicemanager:unix_dgram_socket getattr;
+allow ylog servicemanager_exec:file getattr;
+allow ylog vndservice_contexts_file:file getattr;
+allow ylog vndservicemanager:file read;
+#============= ylog ============== 2017-08-02-15-13-07 added by genSepolicy script
+allow ylog boottime_prop:file { getattr open };
+allow ylog debugfs_trace_marker:file getattr;
+#allow ylog firstboot_prop:file { getattr open };
+allow ylog fuse_device:chr_file getattr;
+allow ylog hwservicemanager:dir { read open };
+allow ylog hwservicemanager:file getattr;
+allow ylog hwservicemanager:netlink_selinux_socket getattr;
+allow ylog hwservicemanager:unix_dgram_socket getattr;
+allow ylog hwservicemanager_exec:file getattr;
+allow ylog hwservicemanager_prop:file getattr;
+allow ylog loop_control_device:chr_file getattr;
+#allow ylog opengles_prop:file { getattr open };
+allow ylog overlay_prop:file open;
+allow ylog persistent_properties_ready_prop:file { getattr open };
+#allow ylog qemu_cmdline:file { getattr open };
+#allow ylog radio_noril_prop:file { getattr open };
+#allow ylog self:packet_socket ioctl;
+#allow ylog serialno_prop:file { getattr open };
+allow ylog vndservicemanager:dir { read getattr open search };
+allow ylog vndservicemanager:file { getattr open };
+allow ylog vndservicemanager:lnk_file read;
+allow ylog vndservicemanager:unix_dgram_socket getattr;
+allow ylog wifi_prop:file { getattr open };
+#============= ylog ============== 2017-08-02-16-46-00 added by genSepolicy script
+allow ylog rild:fifo_file getattr;
+allow ylog rild:file getattr;
+allow ylog rild:unix_dgram_socket getattr;
+allow ylog rild:unix_stream_socket getattr;
+allow ylog storage_stub_file:dir search;
+allow ylog shell_exec:file {r_file_perms execute};
+
+allow ylog logcat_exec:file {  getattr execute read open execute_no_trans map};   #call "logcat"
+allow ylog socket_device:sock_file {  write };   #call "ylog"
+#allow ylog ylog:packet_socket {  ioctl };   #call "tcpdump"
+allow ylog servicemanager:binder {  call };   #call "dumpsys"
+#allow ylog debugfs_tracing_debug:file {  write open };   #call "iosnoop.sh"
+allow ylog ylog_prop:file { read open getattr };   #call "ylog_cli"
+#allow ylog mmcblk_device:blk_file {  getattr };   #call "df"
+allow ylog sysfs_lowmemorykiller:dir {  search };   #call "cat"
+#allow ylog debugfs:file {  read open };   #call "cat" never allow debugfs
+allow ylog system_server:binder {  call };   #call "dumpsys"
+allowxperm ylog self:packet_socket  ioctl {SIOCGIFINDEX};
+#allow ylog ylog_prop:property_service {  set };
+allow ylog activity_service:service_manager {  find };
+allow ylog logd:unix_stream_socket { read write connectto sendto };
+allow ylog cmd_services:unix_stream_socket { connectto };
+allow ylog bluetooth:unix_stream_socket {  read write connectto sendto };
+allow ylog logd_prop:property_service {  set };
+allow ylog logd_prop:file { read open getattr };
+
+allow ylog cache_file:file {create getattr write unlink read append open rename setattr};
+allow ylog cache_file:dir {reparent open write read search getattr remove_name rmdir rename add_name create};
+allow ylog proc_kmsg:file {  read open getattr }; #"ylog"
+allow ylog proc_uptime:file {  read open }; #"vmstat"
+allow ylog proc:file { getattr };
+allow ylog proc_vmstat:file {  read open }; #"cat"
+allow ylog debugfs_wakeup_sources:file { read open };
+allow ylog mmcblk_device:blk_file { getattr };
+allow ylog proc_buddyinfo:file { open read };
+allow ylog proc_pagetypeinfo:file { open read };
+allow ylog proc_uptime:file { read };
+allow ylog proc_vmallocinfo:file { open read };
+
+allow ylog debugfs_binder:file { getattr  read  open};
+
+set_prop(ylog, system_prop);
+allow ylog exfat:dir {  read open write add_name create search remove_name rmdir rename};
+allow ylog exfat:file {  create read write open getattr unlink map rename};
+
+#######################
+#######################
+allow adbd ylog_file:dir {read getattr open search};
+allow adbd ylog_file:file {open read getattr};
+
+allow shell ylog_file:dir {search getattr read open write remove_name rmdir};
+allow shell ylog_file:file {getattr read write open unlink};
+
+allow shell ylog:unix_stream_socket connectto;
+allow shell ylog_exec:file {getattr};
+
+allow shell ylog_prop:file {read getattr open read};
+
+allow surfaceflinger ylog:binder { transfer call };
+
+allow system_server ylog:binder { call };
+allow ylog proc_version:file { open read };
+allow ylog dm_device:blk_file { getattr };
+allow ylog proc_cmdline:file { open read };
+allow ylog proc_diskstats:file { open read };
+allow ylog spipe_device:chr_file { getattr };
+allow ylog device:file { getattr };
+allow ylog volte_vtsp_device:chr_file { getattr };
+
+
+##ufs
+
+
+ifelse(BOARD_MEMORY_TYPE, `ufs',
+allow ylog ufsblk_device:blk_file { getattr };
+allow ylog vendor_agdsp_prop:file { open getattr map };
+allow ylog vendor_sp_prop:file { open getattr map };
+,)
+allow ylog avc_prop:file { open getattr map };
+allow ylog bluetooth_a2dp_offload_prop:file { open getattr map };
+allow ylog bluetooth_prop:file { open getattr map };
+#allow ylog bootloader_boot_reason_prop:file { open getattr map };
+allow ylog boottime_prop:file { map };
+allow ylog bt_prop:file { open getattr map };
+allow ylog ctl_bootanim_prop:file { open getattr map };
+allow ylog ctl_bugreport_prop:file { open getattr map };
+allow ylog ctl_console_prop:file { open getattr map };
+allow ylog ctl_default_prop:file { open getattr map };
+allow ylog ctl_dumpstate_prop:file { open getattr map };
+allow ylog ctl_fuse_prop:file { open getattr map };
+allow ylog ctl_interface_restart_prop:file { open getattr map };
+allow ylog ctl_interface_start_prop:file { open getattr map };
+allow ylog ctl_interface_stop_prop:file { open getattr map };
+allow ylog ctl_mdnsd_prop:file { open getattr map };
+allow ylog ctl_restart_prop:file { open getattr map };
+allow ylog ctl_rildaemon_prop:file { open getattr map };
+allow ylog ctl_sigstop_prop:file { open getattr map };
+allow ylog ctl_start_prop:file { open map getattr };
+allow ylog ctl_stop_prop:file { open getattr map };
+#allow ylog debugfs:file { read open };
+#allow ylog debugfs_tracing:file { read };
+allow ylog device_logging_prop:file { map };
+allow ylog dumpstate_options_prop:file { open getattr map };
+allow ylog etb_device:chr_file { getattr };
+allow ylog exported_bluetooth_prop:file { open getattr map };
+allow ylog exported_overlay_prop:file { open getattr map };
+allow ylog exported_wifi_prop:file { open getattr map };
+#allow ylog firstboot_prop:file { open getattr map };
+allow ylog hwservicemanager_prop:file { open map };
+#allow ylog keychord_device:chr_file { getattr };
+allow ylog kmsg_debug_device:chr_file { getattr };
+#allow ylog last_boot_reason_prop:file { open getattr map };
+allow ylog logpersistd_logging_prop:file { open getattr map };
+allow ylog lowpan_prop:file { open getattr map };
+allow ylog media_prop:file { map };
+allow ylog mmc_prop:file { map };
+allow ylog net_dns_prop:file { open getattr map };
+allow ylog net_eth0_prop:file { open getattr map };
+allow ylog net_share_prop:file { open getattr map };
+#allow ylog netd_stable_secret_prop:file { open getattr map };
+allow ylog overlay_prop:file { getattr map };
+allow ylog persistent_properties_ready_prop:file { map };
+#allow ylog port_device:chr_file { getattr };
+#allow ylog proc:file { read open };
+allow ylog qemu_cmdline:file { open getattr map };
+allow ylog radio_noril_prop:file { open getattr map };
+allow ylog refnotify_device:chr_file { getattr };
+allow ylog safemode_prop:file { map };
+#allow ylog serialno_prop:file { open getattr map };
+allow ylog slog_device:chr_file { getattr };
+allow ylog sprd_img_device:chr_file { getattr };
+#allow ylog storageproxyd_default_prop:file { open getattr map };
+#allow ylog sysfs:file { read open };
+allow ylog system_boot_reason_prop:file { open getattr map };
+#allow ylog teetz_device:chr_file { getattr };
+allow ylog test_boot_reason_prop:file { open getattr map };
+allow ylog traced_enabled_prop:file { open getattr map };
+allow ylog vendor_aprd_prop:file { open getattr map };
+allow ylog vendor_camera_prop:file { open getattr map };
+allow ylog vendor_default_prop:file { open getattr map };
+allow ylog vendor_eng_prop:file { getattr map };
+allow ylog vendor_engpc_prop:file { open getattr map };
+allow ylog vendor_faceid_prop:file { open getattr map };
+allow ylog vendor_modem_prop:file { open getattr map };
+allow ylog vendor_power_prop:file { open getattr map };
+allow ylog vendor_product_prop:file { open getattr map };
+allow ylog vendor_radio_prop:file { open getattr map };
+allow ylog vendor_security_patch_level_prop:file { open getattr map };
+allow ylog vendor_sys_prop:file { open getattr map };
+allow ylog vendor_systemdebuggerd_prop:file { open getattr map };
+allow ylog vendor_thermald_prop:file { open getattr map };
+allow ylog vendor_video_prop:file { open getattr map };
+allow ylog vendor_wcnd_prop:file { open getattr map };
+#allow ylog vndbinder_device:chr_file { getattr };
+allow ylog wcn_device:chr_file { getattr };
+allow ylog wifi_prop:file { map };
+allow ylog ylog_lite_prop:file { open getattr map };
+allow ylog ylog_prop:file { map };
+allow log_service hwservicemanager_prop:file { map };
+
+##3.0
+allow ylog vold_device:blk_file { getattr };
+allow ylog proc_pagetypeinfo:file { open read};
+allow ylog ylog_file:fifo_file { read append create open getattr write unlink rename setattr };
+
+allow ylog ylog:udp_socket { name_bind  create setopt bind getattr write read connect};
+allow netd ylog:udp_socket { create setopt bind getattr write read connect getopt};
+
+allow ylog fwmarkd_socket:sock_file { unlink  write };
+
+allow ylog port:udp_socket { name_bind  create setopt bind read write getopt connect};
+
+allow ylog ylog:packet_socket { ioctl};
+
+allow ylog ylog_file:file { ioctl};
+
+allow netd ylog:fd { use};
+
+allow ylog node:udp_socket { create setopt bind getattr write read connect getopt node_bind};
+
+
+allow shell ylog_file:fifo_file  { read append create open getattr write unlink rename setattr };
+
+allow shell ylog_exec:file {execute};
+allow ylog bluetooth:unix_stream_socket {connectto};
+
+allow ylog cache_file:fifo_file  {create getattr write unlink read append open rename setattr};
+allow ylog cache_file:file {ioctl};
+
+allow system_server ylog:fifo_file { write };
+allow servicemanager ylog:dir { search };
+allow servicemanager ylog:file { read open };
+allow servicemanager ylog:process { getattr };
+allow logd kmsg_device:chr_file { getattr };
+allow log_service hwservicemanager_prop:file { map };
+allow hal_log_default hwservicemanager_prop:file { map };
+
+
+allow ylog cpu_variant_prop:file { getattr };
+allow ylog tcpdump_exec:file { execute_no_trans };
+#allow ylog vendor_hwc_prop:file { getattr };
+allow ylog tcpdump_exec:file { execute };
+allow ylog heapprofd_enabled_prop:file { getattr };
+#allow ylog power_device:chr_file { getattr };
+allow ylog lpdumpd_prop:file { getattr };
+allow ylog dynamic_system_prop:file { open };
+allow ylog system_trace_prop:file { getattr };
+allow ylog anr_data_file:dir { open };
+allow ylog device_config_reset_performed_prop:file { open };
+allow ylog metadata_file:dir { getattr };
+allow ylog device_config_runtime_native_prop:file { getattr };
+allow ylog teetz_device:chr_file { getattr };
+allow ylog heapprofd_enabled_prop:file { map };
+allow ylog device_config_activity_manager_native_boot_prop:file { getattr };
+allow ylog system_lmk_prop:file { getattr };
+allow ylog ctl_gsid_prop:file { map };
+allow ylog tcpdump_exec:file { getattr };
+allow ylog vendor_eng_prop:file { open };
+allow ylog nnapi_ext_deny_product_prop:file { open };
+#allow ylog proc:file { open };
+allow ylog dynamic_system_prop:file { getattr };
+#allow ylog serialno_prop:file { map };
+allow ylog bluetooth_audio_hal_prop:file { map };
+allow ylog vendor_hwui_prop:file { map };
+allow ylog device_config_runtime_native_prop:file { open };
+allow ylog tcpdump_exec:file { map };
+#allow ylog bootloader_boot_reason_prop:file { map };
+allow ylog device_config_netd_native_prop:file { open };
+allow ylog nnapi_ext_deny_product_prop:file { map };
+allow ylog storageproxyd_default_prop:file { open };
+allow ylog device_config_netd_native_prop:file { map };
+allow ylog heapprofd_enabled_prop:file { open };
+allow ylog llkd_prop:file { getattr };
+allow ylog time_prop:file { open };
+allow ylog device_config_activity_manager_native_boot_prop:file { open };
+allow ylog ctl_gsid_prop:file { open };
+allow ylog cgroup_rc_file:dir { getattr };
+allow ylog bpf_progs_loaded_prop:file { map };
+allow ylog system_trace_prop:file { open };
+allow ylog device_config_media_native_prop:file { open };
+allow ylog ctl_adbd_prop:file { open };
+allow ylog traced_lazy_prop:file { getattr };
+allow ylog exported_audio_prop:file { open };
+allow ylog llkd_prop:file { map };
+allow ylog storageproxyd_default_prop:file { read };
+allow ylog tcpdump_exec:file { read };
+allow ylog bpf_progs_loaded_prop:file { getattr };
+#allow ylog last_boot_reason_prop:file { open };
+allow ylog tcpdump_exec:file { read };
+allow ylog system_lmk_prop:file { open };
+allow ylog device_config_input_native_boot_prop:file { map };
+allow ylog bluetooth_audio_hal_prop:file { open };
+allow ylog traced_lazy_prop:file { open };
+allow ylog gsid_prop:file { open };
+allow ylog sdcardfs:file { ioctl };
+allow ylog bpf_progs_loaded_prop:file { open };
+allow ylog lpdumpd_prop:file { map };
+allow ylog lpdumpd_prop:file { read };
+allow ylog bluetooth_audio_hal_prop:file { getattr };
+#allow ylog serialno_prop:file { getattr };
+allow ylog apexd_prop:file { getattr };
+allow ylog test_harness_prop:file { getattr };
+allow ylog device_config_media_native_prop:file { getattr };
+allow ylog cpu_variant_prop:file { open };
+allow ylog apexd_prop:file { map };
+allow ylog proc_vmstat:file { getattr };
+allow ylog storageproxyd_default_prop:file { getattr };
+#allow ylog vendor_hwc_prop:file { map };
+allow ylog init_exec:lnk_file { getattr };
+#allow ylog bootloader_boot_reason_prop:file { open };
+allow ylog ctl_adbd_prop:file { map };
+allow ylog system_lmk_prop:file { map };
+allow ylog device_config_runtime_native_boot_prop:file { open };
+allow ylog device_config_media_native_prop:file { map };
+allow ylog llkd_prop:file { open };
+allow ylog device_config_boot_count_prop:file { open };
+allow ylog device_config_boot_count_prop:file { map };
+allow ylog gsid_prop:file { getattr };
+#allow ylog proc:file { read };
+#allow ylog vndbinder_device:chr_file { getattr };
+allow ylog test_harness_prop:file { open };
+allow ylog vendor_hwui_prop:file { open };
+allow ylog test_harness_prop:file { map };
+allow ylog system_lmk_prop:file { read };
+allow ylog tcpdump_exec:file { execute };
+allow ylog ctl_gsid_prop:file { getattr };
+allow ylog device_config_input_native_boot_prop:file { getattr };
+#allow ylog netd_stable_secret_prop:file { getattr };
+allow ylog device_config_input_native_boot_prop:file { open };
+#allow ylog last_boot_reason_prop:file { getattr };
+allow ylog time_prop:file { getattr };
+allow ylog gsid_prop:file { map };
+allow ylog apexd_prop:file { open };
+allow ylog exported_audio_prop:file { map };
+allow ylog dynamic_system_prop:file { map };
+allow ylog device_config_netd_native_prop:file { getattr };
+allow ylog lpdumpd_prop:file { open };
+allow ylog storageproxyd_default_prop:file { map };
+allow ylog device_config_activity_manager_native_boot_prop:file { map };
+allow ylog nnapi_ext_deny_product_prop:file { getattr };
+allow ylog device_config_reset_performed_prop:file { getattr };
+allow ylog device_config_input_native_boot_prop:file { read };
+#allow ylog bootloader_boot_reason_prop:file { getattr };
+allow ylog init_exec:lnk_file { read };
+allow ylog cpu_variant_prop:file { map };
+#allow ylog last_boot_reason_prop:file { map };
+#allow ylog firstboot_prop:file { map };
+allow ylog ctl_adbd_prop:file { getattr };
+allow ylog system_trace_prop:file { map };
+allow ylog exported_audio_prop:file { getattr };
+allow ylog vendor_hwui_prop:file { getattr };
+#allow ylog firstboot_prop:file { getattr };
+allow ylog exported_overlay_prop:file { read };
+allow ylog device_config_runtime_native_boot_prop:file { getattr };
+allow ylog device_config_reset_performed_prop:file { map };
+allow ylog traced_lazy_prop:file { map };
+#allow ylog firstboot_prop:file { open };
+#allow ylog netd_stable_secret_prop:file { open };
+allow ylog device_config_runtime_native_boot_prop:file { map };
+allow ylog device_config_runtime_native_prop:file { map };
+allow ylog cpu_variant_prop:file { read };
+allow ylog metadata_file:dir { getattr };
+#allow ylog vendor_hwc_prop:file { open };
+allow ylog device_config_boot_count_prop:file { getattr };
+allow ylog time_prop:file { map };
+#allow ylog netd_stable_secret_prop:file { map };
+#allow ylog serialno_prop:file { open };
+allow ylog tcpdump_exec:file { read open };
+
+allow ylog package_service:service_manager { find };
+
+
+
+#allow ylog bootloader_boot_reason_prop:file { getattr};
+
+allow logd shell_exec:file { execute read open getattr execute_no_trans map};
+
+allow logd logcat_exec:file { execute read open getattr execute_no_trans map};
+
+allow logd ylogbuffer_device:chr_file {open ioctl read write getattr map};
+
+#============= slabinfo ==============
+allow ylog proc_slabinfo:file { read open };
+
+allow ylog ubootlog_block_device:file { read open };
+allow ylog ubootlog_block_device:lnk_file { read  };
+
+allow ueventd ubootlog_block_device:blk_file { create getattr setattr };
+
+allow ylog ubootlog_block_device:blk_file { open read getattr};
+allow shell ubootlog_block_device:blk_file { open  getattr read };
+
+allow ylog ylog_file:file {  map};
+allow ylog ylog_exec:file {open execute read getattr   execute_no_trans};
+
+

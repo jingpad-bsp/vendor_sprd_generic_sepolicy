@@ -1,0 +1,4 @@
+type modemlog_connmgr_service, domain, mlstrustedsubject;
+type modemlog_connmgr_service_exec, exec_type,file_type, system_file_type;
+
+

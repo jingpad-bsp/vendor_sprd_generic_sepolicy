@@ -1,0 +1,28 @@
+type hal_aprd_default, domain;
+type hal_aprd_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_aprd_default);
+
+set_prop(hal_aprd_default_exec, system_prop);
+
+binder_call(aprd, hal_aprd_default)
+binder_call(hal_aprd_default, aprd)      
+              
+allow  hal_aprd_default  gnss_file:dir  {read  open  search};    
+allow  hal_aprd_default  gnss_file:file  {open  read  getattr};    
+allow  hal_aprd_default  hal_aprd_hwservice:hwservice_manager  {find  add};      
+allow  hal_aprd_default  hal_extRadio_hwservice:hwservice_manager  {find  add};      
+allow  hal_aprd_default  hidl_base_hwservice:hwservice_manager  {  add  };    
+allow  hal_aprd_default  hwservicemanager:binder  {  call  transfer  };  
+allow  hal_aprd_default  hwservicemanager_prop:file  {  read  open  getattr  map};
+allow  hal_aprd_default  modem_control:dir  {open  read  search  getattr};  
+allow  hal_aprd_default  modem_control:file  {open  read};      
+allow  hal_aprd_default  modem_control:lnk_file  {getattr  read};      
+allow  hal_aprd_default  modem_control:unix_stream_socket  {connectto  read  write};    
+allow  hal_aprd_default  rild:binder  call;        
+#??#allow  hal_aprd_default  tty_device:chr_file  {  open  read  write  };
+allow  hal_aprd_default  vendor_radio_prop:file  {open  read  getattr  map};  
+allow  hal_aprd_default  wcnd:dir  {open  getattr  search  read};  
+allow  hal_aprd_default  wcnd:file  {open  read};      
+allow  hal_aprd_default  wcnd:lnk_file  {getattr  read};      
+allow  hal_aprd_default  wcnd:unix_stream_socket  connectto;        
+

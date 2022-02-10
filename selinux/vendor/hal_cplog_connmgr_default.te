@@ -1,0 +1,16 @@
+type hal_cplog_connmgr_default, domain;
+type hal_cplog_connmgr_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_cplog_connmgr_default)
+
+
+binder_call(modemlog_connmgr_service, hal_cplog_connmgr_default)
+binder_call(hal_cplog_connmgr_default, modemlog_connmgr_service)
+
+allow hal_cplog_connmgr_default hal_cplog_connmgr_hwservice:hwservice_manager {find add};
+allow hal_cplog_connmgr_default hwservicemanager_prop:file {  read open getattr map };
+allow hal_cplog_connmgr_default hwservicemanager:binder {  call transfer };
+allow hal_cplog_connmgr_default modem_control:unix_stream_socket { connectto read write };
+allow hal_cplog_connmgr_default wcnd:unix_stream_socket { connectto read write };
+allow hal_cplog_connmgr_default refnotify:unix_stream_socket { connectto read write };
+allow hal_cplog_connmgr_default hidl_base_hwservice:hwservice_manager {  add };
+allow hal_cplog_connmgr_default system_file:dir { read };
